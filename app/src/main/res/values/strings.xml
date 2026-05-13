@@ -3,4 +3,23 @@
     <string name="rate_experience">Rate your experience</string>
     <string name="finish">Finish</string>
     <string name="rating_thanks">Cảm ơn bạn đã đánh giá %1$.1f sao!</string>
+
+    <!-- Dashboard Strings -->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="notification_badge">9+</string>
+    <string name="daily_workout">Daily Workout</string>
+    <string name="calendar">Calendar</string>
+    <string name="to_be_completed">To be Completed</string>
+    <string name="stats_likes">9.7k</string>
+    <string name="workout_name">Quad Crusher</string>
+    <string name="workout_date">May 13, 2026</string>
+    <string name="workout_duration">54 Minutes</string>
+    <string name="workout_level">For All Levels</string>
+
+    <!-- Bottom Nav -->
+    <string name="nav_community">Community</string>
+    <string name="nav_explore">Explore</string>
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_progress">My Progress</string>
+    <string name="nav_premium">Premium</string>
 </resources>

@@ -4,39 +4,96 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bg_dark"
-    android:padding="16dp">
+    android:background="@color/bg_dark">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp">
+        android:layout_height="300dp">
+
+        <ImageView
+            android:id="@+id/ivTrainingHeader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@color/card_dark" /> <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000" />
 
         <TextView
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="&lt; QUAY LẠI"
-            android:textColor="@color/accent_color"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:paddingEnd="16dp"/>
+            android:text="←"
+            android:textColor="@color/text_white"
+            android:textSize="30sp"
+            android:padding="16dp" />
 
         <TextView
             android:id="@+id/tvCategoryName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DANH SÁCH BÀI TẬP"
+            android:layout_gravity="center"
+            android:text="QUAD CRUSHER"
             android:textColor="@color/text_white"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textSize="28sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/btnBeginner"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Beginner"
+            android:textAllCaps="false"
+            android:textColor="@color/text_grey" />
+
+        <Button
+            android:id="@+id/btnIntermediate"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Intermediate"
+            android:textColor="@color/accent_color"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btnAdvanced"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Advanced"
+            android:textAllCaps="false"
+            android:textColor="@color/text_grey" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvExercises"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp" />
+
+    <Button
+        android:id="@+id/btnStartWorkout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:text="START WORKOUT"
+        android:textStyle="bold"
+        android:backgroundTint="@color/accent_color"
+        android:textColor="@color/bg_dark"
+        app:cornerRadius="30dp" />
+
 </LinearLayout>
