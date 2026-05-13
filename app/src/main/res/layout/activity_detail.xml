@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_dark"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvDetailName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TÊN BÀI TẬP"
+        android:textColor="@color/text_white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/tvDetailReps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3 Sets x 15 Reps"
+        android:textColor="@color/accent_color"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HƯỚNG DẪN KỸ THUẬT:"
+        android:textColor="@color/text_grey"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"/>
+
+    <TextView
+        android:id="@+id/tvDetailDesc"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Mô tả chi tiết cách thực hiện bài tập sẽ hiển thị ở đây..."
+        android:textColor="@color/text_white"
+        android:textSize="16sp"
+        android:lineSpacingExtra="5dp"
+        android:layout_marginTop="12dp"/>
+
+    <Button
+        android:id="@+id/btnStartWorkout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="BẮT ĐẦU LUYỆN TẬP"
+        android:backgroundTint="@color/accent_color"
+        android:textColor="@color/bg_dark"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+</LinearLayout>
