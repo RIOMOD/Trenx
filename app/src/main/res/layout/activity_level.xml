@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/bg_dark"
-    tools:context=".MainActivity">
+    tools:context=".LevelActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -43,10 +43,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Theo độ tuổi và chỉ số BMI của bạn"
+        android:text="chọn mức độ tập"
         android:textSize="14sp"
         android:textColor="@color/text_grey"
-        android:layout_marginStart="120dp"
+        android:layout_marginStart="160dp"
         android:layout_marginBottom="24dp"/>
 
     <ScrollView
@@ -60,7 +60,7 @@
             android:padding="16dp">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardAge18_29"
+                android:id="@+id/cardEasy"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="16dp"
@@ -71,15 +71,6 @@
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground">
 
-                <ImageView
-                    android:id="@+id/imgAge18_29"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/age18_29"
-                    android:scaleType="centerCrop"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="18dp"/>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -88,7 +79,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tuổi: 18-29"
+                        android:text="DỄ"
                         android:textColor="@color/text_white"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
@@ -96,7 +87,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardAge30_39"
+                android:id="@+id/cardNormal"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="16dp"
@@ -107,15 +98,6 @@
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground">
 
-                <ImageView
-                    android:id="@+id/imgAge30_39"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/age30_39"
-                    android:scaleType="centerCrop"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="18dp"/>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -124,7 +106,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tuổi: 30-39"
+                        android:text="TRUNG BÌNH"
                         android:textColor="@color/text_white"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
@@ -132,7 +114,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardAge40_49"
+                android:id="@+id/cardHard"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="16dp"
@@ -143,15 +125,6 @@
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground">
 
-                <ImageView
-                    android:id="@+id/imgAge40_49"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/age40_49"
-                    android:scaleType="centerCrop"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="18dp"/>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -160,43 +133,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tuổi: 40-49"
-                        android:textColor="@color/text_white"
-                        android:textSize="20sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardAge50"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/card_dark"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:id="@+id/imgAge50"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/age50"
-                    android:scaleType="centerCrop"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="18dp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tuổi: 50+"
+                        android:text="KHÓ"
                         android:textColor="@color/text_white"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
