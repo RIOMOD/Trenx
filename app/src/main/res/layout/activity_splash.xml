@@ -6,13 +6,19 @@
     android:gravity="center">
 
     <TextView
+        android:id="@+id/txtLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="450dp"
+        android:layout_marginLeft="60dp"
+        android:letterSpacing="0.3"
         android:text="TRENX"
         android:textColor="@color/accent_color"
         android:textSize="50sp"
         android:textStyle="bold"
-        android:letterSpacing="0.3"/>
+        android:alpha="0"
+        android:scaleX="0.5"
+        android:scaleY="0.5"/>
 
     <TextView
         android:layout_width="wrap_content"
