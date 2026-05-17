@@ -8,13 +8,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class ExrciselistActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_Exlist);
 
         // 1. Ánh xạ (Tìm các CardView trên giao diện thông qua ID)
         androidx.cardview.widget.CardView cardChest = findViewById(R.id.cardChest);
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(android.view.View v) {
                 // Sử dụng Intent để chuyển từ MainActivity sang ExerciseActivity
-                android.content.Intent intent = new android.content.Intent(MainActivity.this, ExerciseActivity.class);
+                android.content.Intent intent = new android.content.Intent(ExrciselistActivity.this, ExerciseActivity.class);
                 // Gửi theo một thông điệp để màn hình kia biết bạn chọn nhóm cơ nào
                 intent.putExtra("NHOM_CO", "Ngực & Tay sau");
                 // Thực hiện chuyển màn hình
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         cardBack.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
-                android.content.Intent intent = new android.content.Intent(MainActivity.this, ExerciseActivity.class);
+                android.content.Intent intent = new android.content.Intent(ExrciselistActivity.this, ExerciseActivity.class);
                 intent.putExtra("NHOM_CO", "Lưng & Tay trước");
                 startActivity(intent);
             }
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         cardCore.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
-                android.content.Intent intent = new android.content.Intent(MainActivity.this, ExerciseActivity.class);
+                android.content.Intent intent = new android.content.Intent(ExrciselistActivity.this, ExerciseActivity.class);
                 intent.putExtra("NHOM_CO", "Cơ bụng (Core)");
                 startActivity(intent);
             }
