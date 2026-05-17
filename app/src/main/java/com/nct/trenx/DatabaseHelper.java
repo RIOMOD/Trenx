@@ -10,77 +10,134 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    // Tăng version lên 4 để cập nhật cấu trúc bảng có thêm cột image_name
+    // Nâng version lên 12 để cập nhật kho bài tập khổng lồ cho cả tuần
     public DatabaseHelper(Context context) {
-        super(context, "TrenxDB", null, 4);
+        super(context, "TrenxDB", null, 12);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Cập nhật câu lệnh SQL: thêm cột image_name TEXT
         db.execSQL("CREATE TABLE exercises (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "name TEXT, reps TEXT, category TEXT, description TEXT, image_name TEXT)");
+                "name TEXT, reps TEXT, category TEXT, description TEXT, " +
+                "image_name TEXT, day TEXT, difficulty TEXT, is_liked INTEGER DEFAULT 0)");
 
-        // --- NHÓM NGỰC & TAY SAU ---
-        insertSample(db, "Standard Push-ups", "3 Sets x 15 Reps", "Ngực & Tay sau",
-                "Chống hai tay xuống sàn rộng bằng vai, giữ lưng thẳng và hạ người xuống.", "img_pushup");
-        insertSample(db, "Diamond Push-ups", "3 Sets x 12 Reps", "Ngực & Tay sau",
-                "Chụm tay hình kim cương để tập trung tối đa vào cơ tay sau.", "img_diamond");
-        insertSample(db, "Incline Push-ups", "3 Sets x 15 Reps", "Ngực & Tay sau",
-                "Đặt tay lên bục cao để tập trung vào phần ngực dưới.", "img_incline");
-        insertSample(db, "Dips", "3 Sets x 10 Reps", "Ngực & Tay sau",
-                "Sử dụng xà kép hoặc ghế để đẩy người lên, tác động sâu vào cơ ngực và tay sau.", "img_dips");
-        insertSample(db, "Archer Push-ups", "3 Sets x 8 Reps", "Ngực & Tay sau",
-                "Dồn trọng tâm sang từng bên tay để tăng độ khó và sức mạnh đơn phương.", "img_archer");
+        // --- LINK ẢNH MẪU CHẤT LƯỢNG CAO ---
+        String imgAbs = "https://i.ytimg.com/vi/pd3-q2U7JXk/maxresdefault.jpg";
+        String imgPushup = "https://i.ytimg.com/vi/srj94JCeuWw/maxresdefault.jpg";
+        String imgLegs = "https://thenx.com/cdn/shop/articles/legsandglutes.jpg?v=1610420442";
+        String imgPull = "https://chrisheria.com/cdn/shop/articles/main-qimg-84869695d7b5d92823071857945d812d.jpg?v=1555624187";
+        String imgFullBody = "https://i.ytimg.com/vi/G5nxGTFBauM/maxresdefault.jpg";
 
-        // --- NHÓM LƯNG & TAY TRƯỚC ---
-        insertSample(db, "Pull-ups", "4 Sets x 8 Reps", "Lưng & Tay trước",
-                "Nắm xà rộng hơn vai, kéo người lên đến khi cằm vượt xà.", "img_pullup");
-        insertSample(db, "Chin-ups", "3 Sets x 10 Reps", "Lưng & Tay trước",
-                "Nắm ngược xà hướng vào lòng bàn tay để ăn nhiều vào bắp tay trước.", "img_chinup");
-        insertSample(db, "Australian Pull-ups", "3 Sets x 12 Reps", "Lưng & Tay trước",
-                "Kéo xà thấp khi chân vẫn chạm đất, bài tập tuyệt vời để xây dựng cơ lưng cơ bản.", "img_australian");
-        insertSample(db, "Close Grip Pull-ups", "3 Sets x 8 Reps", "Lưng & Tay trước",
-                "Nắm xà hẹp để tập trung vào cơ xô và giữa lưng.", "img_close_pullup");
-        insertSample(db, "Muscle-up Prep", "4 Sets x 5 Reps", "Lưng & Tay trước",
-                "Kéo xà cao hết mức có thể (kéo nổ) để chuẩn bị cho kỹ thuật Muscle-up.", "img_muscle_prep");
+        // ==========================================
+        // THỨ 2: CORE SHREDDER (BỤNG)
+        // ==========================================
+        insertEx(db, "Plank", "3 Sets x 60s", "Bụng", "Giữ người thẳng.", imgAbs, "Monday", "Beginner", 1);
+        insertEx(db, "Leg Raises", "3 Sets x 15 Reps", "Bụng", "Nâng chân vuông góc.", imgAbs, "Monday", "Beginner", 0);
+        insertEx(db, "Flutter Kicks", "3 Sets x 40s", "Bụng", "Đá chân liên tục.", imgAbs, "Monday", "Beginner", 0);
+        insertEx(db, "Hollow Body", "3 Sets x 45s", "Bụng", "Gồng bụng giữ thế thuyền.", imgAbs, "Monday", "Intermediate", 1);
+        insertEx(db, "Russian Twists", "3 Sets x 20 Reps", "Bụng", "Xoay người tập cơ liên sườn.", imgAbs, "Monday", "Intermediate", 0);
+        insertEx(db, "V-Ups", "3 Sets x 12 Reps", "Bụng", "Gập bụng hình chữ V.", imgAbs, "Monday", "Intermediate", 0);
+        insertEx(db, "L-Sit Hold", "4 Sets x 15s", "Bụng", "Nâng người giữ chân thẳng.", imgAbs, "Monday", "Advanced", 1);
+        insertEx(db, "Hanging Leg Raises", "4 Sets x 10 Reps", "Bụng", "Treo người nâng chân.", imgAbs, "Monday", "Advanced", 0);
 
-        // --- NHÓM CƠ BỤNG (CORE) ---
-        insertSample(db, "Plank", "3 Sets x 60 Sec", "Cơ bụng (Core)",
-                "Giữ người thẳng trên khuỷu tay, siết chặt cơ bụng và hít thở đều.", "img_plank");
-        insertSample(db, "Leg Raises", "3 Sets x 15 Reps", "Cơ bụng (Core)",
-                "Nằm ngửa và nâng chân thẳng lên vuông góc, sau đó hạ xuống chậm rãi.", "img_legraise");
-        insertSample(db, "Hanging Leg Raises", "3 Sets x 10 Reps", "Cơ bụng (Core)",
-                "Treo mình trên xà và nâng chân thẳng lên, tác động cực mạnh vào bụng dưới.", "img_hanging_leg");
-        insertSample(db, "Russian Twists", "3 Sets x 20 Reps", "Cơ bụng (Core)",
-                "Xoay người sang hai bên khi ngồi hổng chân để tập cơ bụng xiên.", "img_russian_twist");
-        insertSample(db, "L-Sit Hold", "3 Sets x 15 Sec", "Cơ bụng (Core)",
-                "Dùng tay đẩy người lên và giữ chân thẳng tạo thành hình chữ L.", "img_lsit");
+        // ==========================================
+        // THỨ 3: CHEST & TRICEPS (NGỰC & TAY SAU)
+        // ==========================================
+        insertEx(db, "Incline Push-ups", "3 Sets x 15 Reps", "Ngực", "Chống đẩy dốc lên.", imgPushup, "Tuesday", "Beginner", 0);
+        insertEx(db, "Knee Push-ups", "3 Sets x 15 Reps", "Ngực", "Chống đẩy bằng đầu gối.", imgPushup, "Tuesday", "Beginner", 0);
+        insertEx(db, "Standard Push-ups", "4 Sets x 15 Reps", "Ngực", "Chống đẩy cơ bản.", imgPushup, "Tuesday", "Intermediate", 1);
+        insertEx(db, "Diamond Push-ups", "4 Sets x 12 Reps", "Ngực", "Chống đẩy hẹp tay.", imgPushup, "Tuesday", "Intermediate", 0);
+        insertEx(db, "Dips", "3 Sets x 10 Reps", "Ngực", "Xà kép tập tay sau.", imgPushup, "Tuesday", "Intermediate", 0);
+        insertEx(db, "Explosive Push-ups", "4 Sets x 10 Reps", "Ngực", "Chống đẩy bùng nổ.", imgPushup, "Tuesday", "Advanced", 1);
+        insertEx(db, "Archer Push-ups", "4 Sets x 8 Reps", "Ngực", "Chống đẩy kiểu bắn cung.", imgPushup, "Tuesday", "Advanced", 0);
+
+        // ==========================================
+        // THỨ 4: QUAD CRUSHER (CHÂN)
+        // ==========================================
+        insertEx(db, "Air Squats", "3 Sets x 20 Reps", "Chân", "Squat cơ bản.", imgLegs, "Wednesday", "Beginner", 1);
+        insertEx(db, "Walking Lunges", "3 Sets x 16 Reps", "Chân", "Bước gập gối.", imgLegs, "Wednesday", "Beginner", 0);
+        insertEx(db, "Calf Raises", "3 Sets x 20 Reps", "Chân", "Nhón gót.", imgLegs, "Wednesday", "Beginner", 0);
+        insertEx(db, "Bulgarian Split Squat", "3 Sets x 12 Reps", "Chân", "Squat 1 chân gác ghế.", imgLegs, "Wednesday", "Intermediate", 1);
+        insertEx(db, "Jump Squats", "4 Sets x 15 Reps", "Chân", "Squat nhảy.", imgLegs, "Wednesday", "Intermediate", 0);
+        insertEx(db, "Sumo Squats", "3 Sets x 20 Reps", "Chân", "Squat rộng chân.", imgLegs, "Wednesday", "Intermediate", 0);
+        insertEx(db, "Pistol Squats", "4 Sets x 8 Reps", "Chân", "Squat 1 chân.", imgLegs, "Wednesday", "Advanced", 1);
+        insertEx(db, "Shrimp Squats", "4 Sets x 10 Reps", "Chân", "Squat kiểu tôm.", imgLegs, "Wednesday", "Advanced", 0);
+
+        // ==========================================
+        // THỨ 5: SHOULDER POWER (VAI)
+        // ==========================================
+        insertEx(db, "Scapular Shrugs", "3 Sets x 15 Reps", "Vai", "Nhún vai tập bả vai.", imgPushup, "Thursday", "Beginner", 0);
+        insertEx(db, "Pike Push-ups", "3 Sets x 10 Reps", "Vai", "Chống đẩy hình chữ V.", imgPushup, "Thursday", "Beginner", 0);
+        insertEx(db, "Pseudo Push-ups", "3 Sets x 12 Reps", "Vai", "Chống đẩy đổ người tới.", imgPushup, "Thursday", "Intermediate", 1);
+        insertEx(db, "Handstand Hold", "3 Sets x 30s", "Vai", "Trồng chuối dựa tường.", imgPushup, "Thursday", "Intermediate", 0);
+        insertEx(db, "Handstand Push-ups", "4 Sets x 5 Reps", "Vai", "Chống đẩy trồng chuối.", imgPushup, "Thursday", "Advanced", 1);
+        insertEx(db, "90 Degree Hold", "4 Sets x 10s", "Vai", "Giữ người góc 90 độ.", imgPushup, "Thursday", "Advanced", 0);
+
+        // ==========================================
+        // THỨ 6: BACK & BICEPS (LƯNG & TAY TRƯỚC)
+        // ==========================================
+        insertEx(db, "Scapular Pull-ups", "3 Sets x 12 Reps", "Lưng", "Gồng bả vai trên xà.", imgPull, "Friday", "Beginner", 0);
+        insertEx(db, "Australian Pull-ups", "3 Sets x 12 Reps", "Lưng", "Hít xà nghiêng.", imgPull, "Friday", "Beginner", 0);
+        insertEx(db, "Standard Pull-ups", "4 Sets x 10 Reps", "Lưng", "Hít xà tiêu chuẩn.", imgPull, "Friday", "Intermediate", 1);
+        insertEx(db, "Chin-ups", "4 Sets x 10 Reps", "Lưng", "Hít xà ngược tay.", imgPull, "Friday", "Intermediate", 0);
+        insertEx(db, "Muscle-up", "4 Sets x 5 Reps", "Lưng", "Lên xà bùng nổ.", imgPull, "Friday", "Advanced", 1);
+        insertEx(db, "Front Lever Hold", "4 Sets x 10s", "Lưng", "Giữ người song song mặt đất.", imgPull, "Friday", "Advanced", 0);
+
+        // ==========================================
+        // THỨ 7: ACTIVE RECOVERY (PHỤC HỒI)
+        // ==========================================
+        insertEx(db, "Cat-Cow Stretch", "3 Sets x 15 Reps", "Giãn cơ", "Uốn lưng kiểu mèo.", imgFullBody, "Saturday", "Beginner", 0);
+        insertEx(db, "Downward Dog", "3 Sets x 45s", "Giãn cơ", "Tư thế chữ V ngược.", imgFullBody, "Saturday", "Beginner", 0);
+        insertEx(db, "Cobra Stretch", "3 Sets x 30s", "Giãn cơ", "Tư thế rắn hổ mang.", imgFullBody, "Saturday", "Intermediate", 1);
+
+        // ==========================================
+        // CHỦ NHẬT: FULL BODY MASTER (TOÀN THÂN)
+        // ==========================================
+        insertEx(db, "Jumping Jacks", "3 Sets x 50 Reps", "Toàn thân", "Nhảy vung tay.", imgFullBody, "Sunday", "Beginner", 0);
+        insertEx(db, "Mountain Climbers", "3 Sets x 40s", "Toàn thân", "Leo núi tại chỗ.", imgFullBody, "Sunday", "Beginner", 0);
+        insertEx(db, "Burpees", "3 Sets x 15 Reps", "Toàn thân", "Hít đất kết hợp nhảy.", imgFullBody, "Sunday", "Intermediate", 1);
+        insertEx(db, "Plank Jacks", "3 Sets x 20 Reps", "Toàn thân", "Plank kết hợp nhảy chân.", imgFullBody, "Sunday", "Intermediate", 0);
+        insertEx(db, "Navy Seal Burpees", "4 Sets x 10 Reps", "Toàn thân", "Biến thể Burpees khó.", imgFullBody, "Sunday", "Advanced", 1);
     }
 
-    private void insertSample(SQLiteDatabase db, String name, String reps, String category, String description, String imageName) {
+    private void insertEx(SQLiteDatabase db, String name, String reps, String category, String desc, String img, String day, String diff, int isLiked) {
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("reps", reps);
         values.put("category", category);
-        values.put("description", description);
-        values.put("image_name", imageName); // Lưu tên file ảnh đại diện
+        values.put("description", desc);
+        values.put("image_name", img);
+        values.put("day", day);
+        values.put("difficulty", diff);
+        values.put("is_liked", isLiked);
         db.insert("exercises", null, values);
     }
 
-    public List<Exercise> getExercisesByCategory(String cat) {
+    public List<Exercise> getExercisesByDayAndDifficulty(String day, String difficulty) {
         List<Exercise> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM exercises WHERE category = ?", new String[]{cat});
+        Cursor cursor = db.rawQuery("SELECT * FROM exercises WHERE day = ? AND difficulty = ?", new String[]{day, difficulty});
         if (cursor.moveToFirst()) {
             do {
-                // Lấy thêm cột số 5 (image_name) để truyền vào constructor của Exercise
                 list.add(new Exercise(
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getString(4),
-                        cursor.getString(5)
+                        cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                        cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7)
+                ));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
+    public List<Exercise> getLikedExercises() {
+        List<Exercise> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM exercises WHERE is_liked = 1", null);
+        if (cursor.moveToFirst()) {
+            do {
+                list.add(new Exercise(
+                        cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                        cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7)
                 ));
             } while (cursor.moveToNext());
         }
@@ -90,7 +147,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
-        // Xóa bảng cũ và tạo lại khi nâng cấp version
         db.execSQL("DROP TABLE IF EXISTS exercises");
         onCreate(db);
     }

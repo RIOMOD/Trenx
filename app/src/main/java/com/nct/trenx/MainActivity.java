@@ -17,52 +17,39 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 1. Ánh xạ (Tìm các CardView trên giao diện thông qua ID)
-        androidx.cardview.widget.CardView cardAge18_29 = findViewById(R.id.cardAge18_29);
-        androidx.cardview.widget.CardView cardAge30_39 = findViewById(R.id.cardAge30_39);
-        androidx.cardview.widget.CardView cardAge40_49 = findViewById(R.id.cardAge40_49);
-        androidx.cardview.widget.CardView cardAge50 = findViewById(R.id.cardAge50);
+        androidx.cardview.widget.CardView cardChest = findViewById(R.id.cardChest);
+        androidx.cardview.widget.CardView cardBack = findViewById(R.id.cardBack);
+        androidx.cardview.widget.CardView cardCore = findViewById(R.id.cardCore);
 
         // 2. Bắt sự kiện Click cho thẻ "Ngực & Tay sau"
-        cardAge18_29.setOnClickListener(new android.view.View.OnClickListener() {
+        cardChest.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
                 // Sử dụng Intent để chuyển từ MainActivity sang ExerciseActivity
-                android.content.Intent intent = new android.content.Intent(MainActivity.this, LevelActivity.class);
+                android.content.Intent intent = new android.content.Intent(MainActivity.this, ExerciseActivity.class);
                 // Gửi theo một thông điệp để màn hình kia biết bạn chọn nhóm cơ nào
-                intent.putExtra("LEVEL1", "LEVEL");
-                // Thực hiện chuyển màn hình
-                startActivity(intent);
-            }
-        });
-
-        cardAge30_39.setOnClickListener(new android.view.View.OnClickListener() {
-            @Override
-            public void onClick(android.view.View v) {
-                // Sử dụng Intent để chuyển từ MainActivity sang ExerciseActivity
-                android.content.Intent intent = new android.content.Intent(MainActivity.this, LevelActivity.class);
-                // Gửi theo một thông điệp để màn hình kia biết bạn chọn nhóm cơ nào
-                intent.putExtra("LEVEL2", "LEVEL");
+                intent.putExtra("NHOM_CO", "Ngực & Tay sau");
                 // Thực hiện chuyển màn hình
                 startActivity(intent);
             }
         });
 
         // 3. Bắt sự kiện Click cho thẻ "Lưng & Tay trước"
-        cardAge40_49.setOnClickListener(new android.view.View.OnClickListener() {
+        cardBack.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
-                android.content.Intent intent = new android.content.Intent(MainActivity.this, LevelActivity.class);
-                intent.putExtra("LEVEL3", "LEVEL");
+                android.content.Intent intent = new android.content.Intent(MainActivity.this, ExerciseActivity.class);
+                intent.putExtra("NHOM_CO", "Lưng & Tay trước");
                 startActivity(intent);
             }
         });
 
         // 4. Bắt sự kiện Click cho thẻ "Cơ bụng (Core)"
-        cardAge50.setOnClickListener(new android.view.View.OnClickListener() {
+        cardCore.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
-                android.content.Intent intent = new android.content.Intent(MainActivity.this, LevelActivity.class);
-                intent.putExtra("LEVEL4", "LEVEL");
+                android.content.Intent intent = new android.content.Intent(MainActivity.this, ExerciseActivity.class);
+                intent.putExtra("NHOM_CO", "Cơ bụng (Core)");
                 startActivity(intent);
             }
         });

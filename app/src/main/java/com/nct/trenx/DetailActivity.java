@@ -27,7 +27,7 @@ public class DetailActivity extends AppCompatActivity {
         tvDesc.setText(desc);
 
         btnStart.setOnClickListener(v -> {
-            Intent intent = new Intent(DetailActivity.this, TimerActivity.class);
+            Intent intent = new Intent(DetailActivity.this, TrainingActivity.class);
             startActivity(intent);
         });
     }

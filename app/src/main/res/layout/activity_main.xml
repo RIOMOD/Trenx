@@ -33,20 +33,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="XÂY DỰNG CƠ THỂ HOÀN HẢO CỦA BẠN"
-        android:textSize="18sp"
-        android:textColor="@color/accent_color"
-        android:textStyle="bold"
-        android:layout_marginStart="70dp"
-        android:layout_marginBottom="8dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Theo độ tuổi và chỉ số BMI của bạn"
+        android:text="Chọn nhóm cơ bạn muốn tập hôm nay"
         android:textSize="14sp"
         android:textColor="@color/text_grey"
-        android:layout_marginStart="120dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="24dp"/>
 
     <ScrollView
@@ -60,25 +50,13 @@
             android:padding="16dp">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardAge18_29"
+                android:id="@+id/cardChest"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/card_dark"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:id="@+id/imgAge18_29"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/age18_29"
-                    android:scaleType="centerCrop"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="18dp"/>
+                app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -88,33 +66,27 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tuổi: 18-29"
+                        android:text="NGỰC &amp; TAY SAU"
                         android:textColor="@color/text_white"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Push-ups, Dips..."
+                        android:textColor="@color/text_grey"
+                        android:layout_marginTop="4dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardAge30_39"
+                android:id="@+id/cardBack"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/card_dark"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:id="@+id/imgAge30_39"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/age30_39"
-                    android:scaleType="centerCrop"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="18dp"/>
+                app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -124,33 +96,27 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tuổi: 30-39"
+                        android:text="LƯNG &amp; TAY TRƯỚC"
                         android:textColor="@color/text_white"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pull-ups, Chin-ups..."
+                        android:textColor="@color/text_grey"
+                        android:layout_marginTop="4dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardAge40_49"
+                android:id="@+id/cardCore"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/card_dark"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:id="@+id/imgAge40_49"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/age40_49"
-                    android:scaleType="centerCrop"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="18dp"/>
+                app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -160,46 +126,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tuổi: 40-49"
+                        android:text="CƠ BỤNG (CORE)"
                         android:textColor="@color/text_white"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardAge50"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/card_dark"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:id="@+id/imgAge50"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/age50"
-                    android:scaleType="centerCrop"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="18dp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tuổi: 50+"
-                        android:textColor="@color/text_white"
-                        android:textSize="20sp"
-                        android:textStyle="bold"/>
+                        android:text="Crunches, Leg Raises..."
+                        android:textColor="@color/text_grey"
+                        android:layout_marginTop="4dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
