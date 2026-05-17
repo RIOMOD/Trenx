@@ -4,20 +4,24 @@
         android:id="@+id/nav_community"
         android:icon="@drawable/ic_community"
         android:title="Community" />
+
     <item
         android:id="@+id/nav_explore"
         android:icon="@drawable/ic_explore"
         android:title="Explore" />
+
     <item
         android:id="@+id/nav_dashboard"
         android:icon="@drawable/ic_dashboard_grid"
         android:title="Dashboard" />
+
     <item
         android:id="@+id/nav_progress"
         android:icon="@drawable/ic_timer"
         android:title="My Progress" />
+
     <item
         android:id="@+id/nav_premium"
-        android:icon="@drawable/ic_muscle"
+        android:icon="@drawable/ic_heart"
         android:title="Premium" />
 </menu>

@@ -13,35 +13,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Trenx">
+
         <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ExrciselistActivity"
-            android:exported="false"/>
-        <activity android:name=".LevelActivity"
-            android:exported="false"/>
-        <activity
-            android:name=".DetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TrainingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ExerciseActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
 
+        <activity android:name=".ExrciselistActivity" android:exported="false"/>
+        <activity android:name=".LevelActivity" android:exported="false"/>
+        <activity android:name=".DetailActivity" android:exported="false" />
+        <activity android:name=".TrainingActivity" android:exported="false" />
+        <activity android:name=".ExerciseActivity" android:exported="false" />
+        <activity android:name=".MainActivity" android:exported="false" />
         <activity android:name=".ReviewActivity" android:exported="false" />
-        <activity android:name=".LikedWorkoutsActivity" />
-        <activity android:name=".LikedProgramsActivity" />
+        <activity android:name=".LikedWorkoutsActivity" android:exported="false" />
+        <activity android:name=".LikedProgramsActivity" android:exported="false" />
+
+        <activity
+            android:name=".PremiumActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
