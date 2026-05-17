@@ -30,7 +30,7 @@ public class ExerciseActivity extends AppCompatActivity {
         rvExercises = findViewById(R.id.rvExercises);
         tvCategoryName = findViewById(R.id.tvCategoryName);
 
-        btnBeginner = findViewById(R.id.btnBeginner);
+        btnBeginner = findViewById(R.id .btnBeginner);
         btnIntermediate = findViewById(R.id.btnIntermediate);
         btnAdvanced = findViewById(R.id.btnAdvanced);
         Button btnStartWorkout = findViewById(R.id.btnStartWorkout);

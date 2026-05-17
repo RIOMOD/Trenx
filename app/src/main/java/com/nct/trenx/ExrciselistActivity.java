@@ -14,7 +14,7 @@ public class ExrciselistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_Exlist);
+        setContentView(R.layout.activity_exlist);
 
         // 1. Ánh xạ (Tìm các CardView trên giao diện thông qua ID)
         androidx.cardview.widget.CardView cardChest = findViewById(R.id.cardChest);
