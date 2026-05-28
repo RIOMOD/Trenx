@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="180dp"
+    android:height="340dp"
+    android:viewportWidth="500"
+    android:viewportHeight="840">
+    <!-- Left Quad (Vastus Lateralis) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M185,375 L178,402 L172,438 L168,478 L166,515 L168,542 L176,560 L192,564 L196,538 L198,502 L198,468 L196,434 L192,402 L188,380 Z" />
+    <!-- Left Quad (Inner) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M200,390 L196,418 L196,452 L198,488 L196,525 L192,558 L206,570 L222,562 L232,538 L236,508 L238,478 L236,448 L230,418 L222,398 L208,388 Z" />
+    <!-- Right Quad (Vastus Lateralis) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M312,380 L308,402 L304,434 L302,468 L302,502 L304,538 L308,564 L324,560 L332,542 L334,515 L332,478 L328,438 L322,402 L315,375 Z" />
+    <!-- Right Quad (Inner) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M292,388 L278,398 L270,418 L264,448 L262,478 L264,508 L268,538 L278,562 L294,570 L308,558 L304,525 L302,488 L304,452 L304,418 L300,390 Z" />
+    <!-- Left Tibialis -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M170,600 L166,628 L163,668 L162,708 L165,740 L180,750 L190,742 L192,712 L190,672 L188,638 L184,608 Z" />
+    <!-- Left Calf -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M202,600 L208,628 L212,668 L212,708 L208,742 L196,754 L186,748 L190,712 L194,672 L196,638 L200,608 Z" />
+    <!-- Right Tibialis -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M316,608 L312,638 L310,672 L308,712 L310,742 L320,750 L335,740 L338,708 L337,668 L334,628 L330,600 Z" />
+    <!-- Right Calf -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M300,608 L304,638 L306,672 L310,712 L314,748 L304,754 L292,742 L288,708 L288,668 L292,628 L298,600 Z" />
+</vector>

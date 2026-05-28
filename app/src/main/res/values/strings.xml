@@ -3,6 +3,9 @@
     <string name="rate_experience">Rate your experience</string>
     <string name="finish">Finish</string>
     <string name="rating_thanks">Cảm ơn bạn đã đánh giá %1$.1f sao!</string>
+    <string name="author_credit">BY NGUYEN CONG TRU</string>
+    <string name="liked_programs_title">Liked Programs</string>
+    <string name="all_liked_workouts_title">All Liked Workouts</string>
 
     <!-- Dashboard Strings -->
     <string name="dashboard_title">Dashboard</string>

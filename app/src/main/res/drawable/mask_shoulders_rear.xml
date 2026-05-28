@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="180dp"
+    android:height="340dp"
+    android:viewportWidth="500"
+    android:viewportHeight="840">
+    <!-- Trapezius -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M232,92 L218,118 L195,128 L168,142 L145,158 L160,188 L188,212 L238,226 L250,230 L262,226 L312,212 L340,188 L355,158 L332,142 L305,128 L282,118 L268,92 Z" />
+    <!-- Left Rear Deltoid -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M145,155 L118,170 L108,192 L114,212 L140,208 L158,192 L165,172 L155,155 Z" />
+    <!-- Right Rear Deltoid -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M345,155 L335,172 L342,192 L360,208 L386,212 L392,192 L382,170 L355,155 Z" />
+</vector>

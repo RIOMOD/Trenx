@@ -7,14 +7,14 @@
     android:background="@color/bg_black">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutHeader"
+        android:id="@+id/layout_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/btnClose"
+            android:id="@+id/btn_close"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/ic_close"
@@ -32,7 +32,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tvTrainingTitle"
+                android:id="@+id/tv_training_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Strength Building"
@@ -41,7 +41,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvTimer"
+                android:id="@+id/tv_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00:06"
@@ -59,21 +59,21 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:id="@+id/layoutProgress"
+        android:id="@+id/layout_progress"
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/layoutHeader" />
+        app:layout_constraintTop_toBottomOf="@id/layout_header" />
 
     <ScrollView
-        android:id="@+id/svMainContent"
+        android:id="@+id/sv_main_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@id/tvRoundInfo"
-        app:layout_constraintTop_toBottomOf="@id/layoutProgress">
+        app:layout_constraintBottom_toTopOf="@id/tv_round_info"
+        app:layout_constraintTop_toBottomOf="@id/layout_progress">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,7 +82,7 @@
             android:paddingBottom="20dp">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardRepsInfo"
+                android:id="@+id/card_reps_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -99,7 +99,7 @@
                     android:paddingVertical="12dp">
 
                     <TextView
-                        android:id="@+id/tvRepsCount"
+                        android:id="@+id/tv_reps_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="8"
@@ -124,28 +124,28 @@
                 android:paddingHorizontal="16dp">
 
                 <TextView
-                    android:id="@+id/tvCurrentExName"
+                    android:id="@+id/tv_current_ex_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Assisted Pistol Squat"
                     android:textColor="@color/text_white"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/layoutLike"
+                    app:layout_constraintEnd_toStartOf="@id/layout_like"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
-                    android:id="@+id/layoutLike"
+                    android:id="@+id/layout_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_tag"
                     android:gravity="center"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="8dp"
-                    app:layout_constraintBottom_toBottomOf="@id/tvCurrentExName"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_current_ex_name"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tvCurrentExName">
+                    app:layout_constraintTop_toTopOf="@id/tv_current_ex_name">
 
                     <ImageView
                         android:layout_width="16dp"
@@ -164,7 +164,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardMainMedia"
+                android:id="@+id/card_main_media"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
                 android:layout_margin="16dp"
@@ -172,7 +172,7 @@
                 app:cardElevation="0dp">
 
                 <ImageView
-                    android:id="@+id/vvTrainingVideo"
+                    android:id="@+id/vv_training_video"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -180,7 +180,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardNext"
+                android:id="@+id/card_next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -201,7 +201,7 @@
                         android:layout_height="60dp"
                         app:cardCornerRadius="12dp">
                         <ImageView
-                            android:id="@+id/ivNextExThumb"
+                            android:id="@+id/iv_next_ex_thumb"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop" />
@@ -220,7 +220,7 @@
                             android:textColor="@color/text_grey"
                             android:textSize="12sp" />
                         <TextView
-                            android:id="@+id/tvNextExDesc"
+                            android:id="@+id/tv_next_ex_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Alternating Side Lunges"
@@ -240,19 +240,19 @@
     </ScrollView>
 
     <TextView
-        android:id="@+id/tvRoundInfo"
+        android:id="@+id/tv_round_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Round 1  |  1st set"
         android:textColor="@color/text_grey"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/btnComplete"
+        app:layout_constraintBottom_toTopOf="@id/btn_complete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnComplete"
+        android:id="@+id/btn_complete"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginHorizontal="16dp"
@@ -266,28 +266,28 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutRest"
+        android:id="@+id/layout_rest"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#333333"
         android:visibility="gone"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutProgress"> <TextView
-        android:id="@+id/tvRestCount"
+        app:layout_constraintTop_toBottomOf="@id/layout_progress"> <TextView
+        android:id="@+id/tv_rest_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="42"
         android:textColor="@color/text_white"
         android:textSize="90sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/cardRestNext"
+        app:layout_constraintBottom_toTopOf="@id/card_rest_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardRestNext"
+            android:id="@+id/card_rest_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -295,7 +295,7 @@
             app:cardBackgroundColor="#1A1A1A"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
-            app:layout_constraintBottom_toTopOf="@id/layoutRestButtons">
+            app:layout_constraintBottom_toTopOf="@id/layout_rest_buttons">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -309,7 +309,7 @@
                     android:layout_height="60dp"
                     app:cardCornerRadius="12dp">
                     <ImageView
-                        android:id="@+id/ivRestNextThumb"
+                        android:id="@+id/iv_rest_next_thumb"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop" />
@@ -328,7 +328,7 @@
                         android:textColor="@color/text_grey"
                         android:textSize="12sp" />
                     <TextView
-                        android:id="@+id/tvRestNextName"
+                        android:id="@+id/tv_rest_next_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Alternating Side Lunges"
@@ -336,7 +336,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
                     <TextView
-                        android:id="@+id/tvRestNextInfo"
+                        android:id="@+id/tv_rest_next_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="15 reps each • Rest 45 seconds"
@@ -347,7 +347,7 @@
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
-            android:id="@+id/layoutRestButtons"
+            android:id="@+id/layout_rest_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
@@ -357,7 +357,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <Button
-                android:id="@+id/btnMinus10"
+                android:id="@+id/btn_minus_10"
                 android:layout_width="74dp"
                 android:layout_height="74dp"
                 android:backgroundTint="#444444"
@@ -367,7 +367,7 @@
                 app:cornerRadius="37dp" />
 
             <Button
-                android:id="@+id/btnSkipRest"
+                android:id="@+id/btn_skip_rest"
                 android:layout_width="0dp"
                 android:layout_height="64dp"
                 android:layout_marginHorizontal="16dp"
@@ -380,7 +380,7 @@
                 app:cornerRadius="32dp" />
 
             <Button
-                android:id="@+id/btnPlus10"
+                android:id="@+id/btn_plus_10"
                 android:layout_width="74dp"
                 android:layout_height="74dp"
                 android:backgroundTint="#444444"

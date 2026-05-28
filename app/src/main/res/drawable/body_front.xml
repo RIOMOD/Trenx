@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="180dp"
+    android:height="340dp"
+    android:viewportWidth="500"
+    android:viewportHeight="840">
+
+    <!-- ============ HEAD ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M250,18 C275,18 293,32 293,54 C293,76 275,90 250,90 C225,90 207,76 207,54 C207,32 225,18 250,18 Z" />
+
+    <!-- ============ NECK ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M230,88 L220,102 L218,120 L282,120 L280,102 L270,88" />
+
+    <!-- ============ LEFT TRAPEZIUS (front visible) ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M218,118 L195,128 L168,140 L155,150 L170,146 L200,134 L218,124 Z" />
+
+    <!-- ============ RIGHT TRAPEZIUS (front visible) ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M282,124 L300,134 L330,146 L345,150 L332,140 L305,128 L282,118 Z" />
+
+    <!-- ============ LEFT DELTOID ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M155,148 L130,160 L112,178 L108,198 L115,212 L138,206 L154,190 L160,168 L158,152 Z" />
+
+    <!-- ============ RIGHT DELTOID ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M342,152 L340,168 L346,190 L362,206 L385,212 L392,198 L388,178 L370,160 L345,148 Z" />
+
+    <!-- ============ LEFT PECTORAL ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M195,130 L170,145 L158,162 L154,188 L158,210 L182,224 L238,228 L242,200 L240,168 L232,148 L212,134 Z" />
+
+    <!-- ============ RIGHT PECTORAL ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M288,134 L268,148 L260,168 L258,200 L262,228 L318,224 L342,210 L346,188 L342,162 L330,145 L305,130 Z" />
+
+    <!-- ============ RECTUS ABDOMINIS (6-pack) ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M236,228 L264,228 L268,255 L270,285 L268,315 L264,342 L258,358 L250,364 L242,358 L236,342 L232,315 L230,285 L232,255 Z" />
+
+    <!-- Abs internal lines (6-pack grid + center line) -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#C8C8C8"
+        android:strokeWidth="0.8"
+        android:pathData="
+            M250,228 L250,358
+            M234,252 L266,252
+            M233,280 L267,280
+            M233,308 L267,308
+            M235,335 L265,335" />
+
+    <!-- V-cut lower abs lines -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#C8C8C8"
+        android:strokeWidth="0.8"
+        android:pathData="M242,335 L248,360 M258,335 L252,360" />
+
+    <!-- ============ LEFT OBLIQUE / SERRATUS ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M158,212 L182,224 L236,228 L232,255 L230,285 L232,315 L236,342 L218,358 L198,348 L182,318 L172,280 L165,248 L158,225 Z" />
+
+    <!-- Serratus anterior finger-like lines (left) -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#C8C8C8"
+        android:strokeWidth="0.7"
+        android:pathData="M162,220 L180,228 M164,232 L178,240 M166,244 L176,252 M168,256 L175,264" />
+
+    <!-- ============ RIGHT OBLIQUE / SERRATUS ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M342,225 L335,248 L328,280 L318,318 L302,348 L282,358 L264,342 L268,315 L270,285 L268,255 L264,228 L318,224 L342,212 Z" />
+
+    <!-- Serratus anterior finger-like lines (right) -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#C8C8C8"
+        android:strokeWidth="0.7"
+        android:pathData="M338,220 L320,228 M336,232 L322,240 M334,244 L324,252 M332,256 L325,264" />
+
+    <!-- ============ LEFT BICEP ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M115,214 L108,235 L104,262 L106,286 L118,296 L136,290 L142,268 L144,242 L142,220 L138,210 Z" />
+
+    <!-- ============ RIGHT BICEP ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M362,210 L358,220 L356,242 L358,268 L364,290 L382,296 L394,286 L396,262 L392,235 L385,214 Z" />
+
+    <!-- ============ LEFT FOREARM ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M106,290 L98,318 L92,350 L88,382 L86,402 L96,406 L110,400 L118,372 L124,342 L128,314 L122,295 Z" />
+
+    <!-- ============ RIGHT FOREARM ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M378,295 L372,314 L376,342 L382,372 L390,400 L404,406 L414,402 L412,382 L408,350 L402,318 L394,290 Z" />
+
+    <!-- Forearm internal lines left -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#C8C8C8"
+        android:strokeWidth="0.6"
+        android:pathData="M112,300 L100,360 M118,298 L108,348" />
+
+    <!-- Forearm internal lines right -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#C8C8C8"
+        android:strokeWidth="0.6"
+        android:pathData="M388,300 L400,360 M382,298 L392,348" />
+
+    <!-- ============ LEFT HAND ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.2"
+        android:pathData="M86,402 L79,425 L76,442 L84,448 L94,438 L100,420 L96,406 Z" />
+
+    <!-- ============ RIGHT HAND ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.2"
+        android:pathData="M404,406 L400,420 L406,438 L416,448 L424,442 L421,425 L414,402 Z" />
+
+    <!-- ============ LOWER ABS / HIP CONNECTOR ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M198,348 L218,358 L242,358 L250,364 L258,358 L282,358 L302,348 L315,372 L300,390 L250,398 L200,390 L185,372 Z" />
+
+    <!-- Hip internal inguinal lines -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#C8C8C8"
+        android:strokeWidth="0.7"
+        android:pathData="M210,358 L195,385 M290,358 L305,385" />
+
+    <!-- ============ LEFT QUAD — Vastus Lateralis (outer) ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M185,375 L178,402 L172,438 L168,478 L166,515 L168,542 L176,560 L192,564 L196,538 L198,502 L198,468 L196,434 L192,402 L188,380 Z" />
+
+    <!-- ============ LEFT QUAD — Rectus Femoris + Vastus Medialis (inner) ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M200,390 L196,418 L196,452 L198,488 L196,525 L192,558 L206,570 L222,562 L232,538 L236,508 L238,478 L236,448 L230,418 L222,398 L208,388 Z" />
+
+    <!-- Left quad internal line (rectus femoris separation) -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#C8C8C8"
+        android:strokeWidth="0.7"
+        android:pathData="M196,400 L192,475 L192,550" />
+
+    <!-- ============ RIGHT QUAD — Vastus Lateralis (outer) ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M312,380 L308,402 L304,434 L302,468 L302,502 L304,538 L308,564 L324,560 L332,542 L334,515 L332,478 L328,438 L322,402 L315,375 Z" />
+
+    <!-- ============ RIGHT QUAD — Rectus Femoris + Vastus Medialis (inner) ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M292,388 L278,398 L270,418 L264,448 L262,478 L264,508 L268,538 L278,562 L294,570 L308,558 L304,525 L302,488 L304,452 L304,418 L300,390 Z" />
+
+    <!-- Right quad internal line -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#C8C8C8"
+        android:strokeWidth="0.7"
+        android:pathData="M304,400 L308,475 L308,550" />
+
+    <!-- ============ LEFT KNEE (patella) ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.2"
+        android:pathData="M168,558 L165,578 L170,596 L184,604 L202,600 L214,592 L218,576 L214,562 L202,556 Z" />
+
+    <!-- ============ RIGHT KNEE ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.2"
+        android:pathData="M298,556 L286,562 L282,576 L286,592 L298,600 L316,604 L330,596 L335,578 L332,558 Z" />
+
+    <!-- ============ LEFT TIBIALIS (shin) ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M170,600 L166,628 L163,668 L162,708 L165,740 L180,750 L190,742 L192,712 L190,672 L188,638 L184,608 Z" />
+
+    <!-- ============ LEFT CALF (front lateral view) ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M202,600 L208,628 L212,668 L212,708 L208,742 L196,754 L186,748 L190,712 L194,672 L196,638 L200,608 Z" />
+
+    <!-- ============ RIGHT TIBIALIS (shin) ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M316,608 L312,638 L310,672 L308,712 L310,742 L320,750 L335,740 L338,708 L337,668 L334,628 L330,600 Z" />
+
+    <!-- ============ RIGHT CALF ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.3"
+        android:pathData="M300,608 L304,638 L306,672 L310,712 L314,748 L304,754 L292,742 L288,708 L288,668 L292,628 L298,600 Z" />
+
+    <!-- Calf internal lines left -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#C8C8C8"
+        android:strokeWidth="0.6"
+        android:pathData="M190,605 L192,700" />
+
+    <!-- Calf internal lines right -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#C8C8C8"
+        android:strokeWidth="0.6"
+        android:pathData="M310,605 L308,700" />
+
+    <!-- ============ LEFT FOOT ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.2"
+        android:pathData="M162,745 L156,765 L154,782 L162,794 L188,800 L208,794 L212,780 L210,760 L202,750 Z" />
+
+    <!-- ============ RIGHT FOOT ============ -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:strokeColor="#C0C0C0"
+        android:strokeWidth="1.2"
+        android:pathData="M298,750 L290,760 L288,780 L292,794 L312,800 L338,794 L346,782 L344,765 L338,745 Z" />
+
+</vector>
