@@ -56,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivSearch">
 
         <LinearLayout
@@ -80,7 +80,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
                 <TextView
-                    android:id="@+id/btnCalendar"
+                    android:id="@+id/btn_calendar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_tag"
@@ -102,17 +102,17 @@
                 android:background="@drawable/bg_tag"
                 android:gravity="center"
                 android:orientation="horizontal">
-                <TextView android:id="@+id/tvMo" style="@style/DayTextStyle" android:text="Mo" />
-                <TextView android:id="@+id/tvTu" style="@style/DayTextStyle" android:text="Tu" />
-                <TextView android:id="@+id/tvWe" style="@style/DayTextStyle" android:text="We" />
-                <TextView android:id="@+id/tvTh" style="@style/DayTextStyle" android:text="Th" />
-                <TextView android:id="@+id/tvFr" style="@style/DayTextStyle" android:text="Fr" />
-                <TextView android:id="@+id/tvSa" style="@style/DayTextStyle" android:text="Sa" />
-                <TextView android:id="@+id/tvSu" style="@style/DayTextStyle" android:text="Su" />
+                <TextView android:id="@+id/tv_day_mon" style="@style/DayTextStyle" android:text="Mo" />
+                <TextView android:id="@+id/tv_day_tue" style="@style/DayTextStyle" android:text="Tu" />
+                <TextView android:id="@+id/tv_day_wed" style="@style/DayTextStyle" android:text="We" />
+                <TextView android:id="@+id/tv_day_thu" style="@style/DayTextStyle" android:text="Th" />
+                <TextView android:id="@+id/tv_day_fri" style="@style/DayTextStyle" android:text="Fr" />
+                <TextView android:id="@+id/tv_day_sat" style="@style/DayTextStyle" android:text="Sa" />
+                <TextView android:id="@+id/tv_day_sun" style="@style/DayTextStyle" android:text="Su" />
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardWorkout"
+                android:id="@+id/card_today_workout"
                 android:layout_width="match_parent"
                 android:layout_height="480dp"
                 android:layout_margin="16dp"
@@ -125,7 +125,7 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/ivTodayWorkout"
+                        android:id="@+id/iv_today_workout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop" />
@@ -192,7 +192,7 @@
                         android:padding="20dp">
 
                         <TextView
-                            android:id="@+id/tvTodayTitle"
+                            android:id="@+id/tv_today_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Core Shredder"
@@ -203,14 +203,14 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/tvTodayDay"
+                            android:id="@+id/tv_today_day"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="May 13, 2026"
                             android:textColor="@color/text_grey"
                             android:textSize="16sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvTodayTitle" />
+                            app:layout_constraintTop_toBottomOf="@id/tv_today_title" />
 
                         <LinearLayout
                             android:id="@+id/llStats"
@@ -220,7 +220,7 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvTodayDay">
+                            app:layout_constraintTop_toBottomOf="@id/tv_today_day">
                             <ImageView
                                 android:layout_width="16dp"
                                 android:layout_height="16dp"
@@ -249,7 +249,7 @@
                         </LinearLayout>
 
                         <ImageView
-                            android:id="@+id/btnExploreToday"
+                            android:id="@+id/btn_explore_today"
                             android:layout_width="56dp"
                             android:layout_height="56dp"
                             android:background="@drawable/bg_selected_day"
@@ -271,7 +271,7 @@
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardLikedWorkouts"
+                    android:id="@+id/card_liked_workouts"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
@@ -307,7 +307,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardLikedPrograms"
+                    android:id="@+id/card_liked_programs"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"

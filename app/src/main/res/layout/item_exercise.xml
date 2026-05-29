@@ -23,7 +23,7 @@
             app:cardBackgroundColor="#2A2A2A">
 
             <ImageView
-                android:id="@+id/ivExerciseThumb"
+                android:id="@+id/iv_thumb"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -38,7 +38,7 @@
             android:layout_marginStart="16dp">
 
             <TextView
-                android:id="@+id/tvItemName"
+                android:id="@+id/tv_exercise_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tên bài tập"
@@ -48,7 +48,7 @@
                 android:letterSpacing="0.02"/>
 
             <TextView
-                android:id="@+id/tvItemReps"
+                android:id="@+id/tv_exercise_reps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3 Sets x 12 Reps"

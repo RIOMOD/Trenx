@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="180dp"
+    android:height="340dp"
+    android:viewportWidth="500"
+    android:viewportHeight="840">
+    <!-- Rectus Abdominis -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M236,228 L264,228 L268,255 L270,285 L268,315 L264,342 L258,358 L250,364 L242,358 L236,342 L232,315 L230,285 L232,255 Z" />
+    <!-- Left Oblique -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M158,212 L182,224 L236,228 L232,255 L230,285 L232,315 L236,342 L218,358 L198,348 L182,318 L172,280 L165,248 L158,225 Z" />
+    <!-- Right Oblique -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M342,225 L335,248 L328,280 L318,318 L302,348 L282,358 L264,342 L268,315 L270,285 L268,255 L264,228 L318,224 L342,212 Z" />
+    <!-- Lower Abs/Hip Connector -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M198,348 L218,358 L242,358 L250,364 L258,358 L282,358 L302,348 L315,372 L300,390 L250,398 L200,390 L185,372 Z" />
+</vector>

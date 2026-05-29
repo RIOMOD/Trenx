@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Trenx">
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,18 +23,18 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ExrciselistActivity" android:exported="false"/>
-        <activity android:name=".LevelActivity" android:exported="false"/>
-        <activity android:name=".DetailActivity" android:exported="false" />
-        <activity android:name=".TrainingActivity" android:exported="false" />
-        <activity android:name=".ExerciseActivity" android:exported="false" />
-        <activity android:name=".MainActivity" android:exported="false" />
-        <activity android:name=".ReviewActivity" android:exported="false" />
-        <activity android:name=".LikedWorkoutsActivity" android:exported="false" />
-        <activity android:name=".LikedProgramsActivity" android:exported="false" />
+        <activity android:name=".activity.ExrciselistActivity" android:exported="false"/>
+        <activity android:name=".activity.LevelActivity" android:exported="false"/>
+        <activity android:name=".activity.DetailActivity" android:exported="false" />
+        <activity android:name=".activity.TrainingActivity" android:exported="false" />
+        <activity android:name=".activity.ExerciseActivity" android:exported="false" />
+        <activity android:name=".activity.MainActivity" android:exported="false" />
+        <activity android:name=".activity.ReviewActivity" android:exported="false" />
+        <activity android:name=".activity.LikedWorkoutsActivity" android:exported="false" />
+        <activity android:name=".activity.LikedProgramsActivity" android:exported="false" />
 
         <activity
-            android:name=".PremiumActivity"
+            android:name=".activity.PremiumActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
