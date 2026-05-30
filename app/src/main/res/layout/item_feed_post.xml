@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bg_black"
+    android:background="?attr/colorSurface"
     android:paddingBottom="16dp">
 
     <!-- Header Section -->
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:textColor="@color/text_white"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/cvAvatar"
@@ -44,11 +44,11 @@
         android:id="@+id/tvStatusFeeling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/text_grey"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="@id/tvUserName"
         app:layout_constraintTop_toBottomOf="@id/tvUserName"
-        tools:text="Is feeling Pumped" />
+        tools:text="@string/feeling_pumped" />
 
     <ImageView
         android:id="@+id/ivMore"
@@ -56,7 +56,7 @@
         android:layout_height="24dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/ic_more_horiz"
-        app:tint="@color/text_white"
+        app:tint="?android:attr/textColorPrimary"
         app:layout_constraintBottom_toBottomOf="@id/cvAvatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/cvAvatar" />
@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:textColor="@color/text_grey"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/ivMore"
         app:layout_constraintEnd_toStartOf="@id/ivMore"
@@ -107,7 +107,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/llStats"
         app:layout_constraintStart_toStartOf="@id/ivMainImage"
-        tools:text="Completed a Workout" />
+        tools:text="@string/completed_workout" />
 
     <LinearLayout
         android:id="@+id/llStats"
@@ -200,7 +200,7 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_heart"
-                    app:tint="@color/text_white" />
+                    app:tint="?android:attr/textColorPrimary" />
             </FrameLayout>
 
             <TextView
@@ -208,7 +208,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textColor="@color/text_white"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="14sp"
                 tools:text="1 Likes" />
         </LinearLayout>
@@ -229,11 +229,12 @@
                 android:layout_height="36dp"
                 android:background="@drawable/bg_interaction_button">
                 <ImageView
+                    android:id="@+id/ivCommentIcon"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_comment"
-                    app:tint="@color/text_white" />
+                    app:tint="?android:attr/textColorPrimary" />
             </FrameLayout>
 
             <TextView
@@ -241,7 +242,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textColor="@color/text_white"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="14sp"
                 tools:text="0 Comments" />
         </LinearLayout>
@@ -255,13 +256,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:textColor="@color/text_white"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="14sp"
         android:maxLines="3"
         android:ellipsize="end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/llInteractions"
-        tools:text="one of the beautiful little friends from nearby zoo 😄👏 happy Sunday to you all 🤩" />
+        tools:text="Sample caption text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

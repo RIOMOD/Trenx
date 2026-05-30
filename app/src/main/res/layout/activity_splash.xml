@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_dark"
+    android:background="?android:attr/windowBackground"
     android:gravity="center">
 
     <TextView
@@ -27,7 +27,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
         android:text="@string/author_credit"
-        android:textColor="@color/text_grey"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="14sp"
         android:letterSpacing="0.1"/>
 </RelativeLayout>

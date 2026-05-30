@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_black">
+    android:background="?android:attr/windowBackground">
 
     <ImageView
         android:id="@+id/ivSearch"
@@ -14,13 +14,13 @@
         android:src="@drawable/ic_search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/text_white" />
+        app:tint="?android:attr/textColorPrimary" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dashboard"
-        android:textColor="@color/text_white"
+        android:text="@string/dashboard_title"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/ivSearch"
@@ -39,17 +39,20 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/ic_notification"
-            app:tint="@color/text_white" />
+            app:tint="?android:attr/textColorPrimary" />
         <TextView
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_gravity="end|top"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/bg_selected_day"
             android:backgroundTint="#444444"
             android:gravity="center"
             android:text="2"
-            android:textColor="@color/text_white"
-            android:textSize="8sp" />
+            android:textColor="#FFFFFF"
+            android:textSize="8sp"
+            tools:ignore="SmallSp" />
     </FrameLayout>
 
     <ScrollView
@@ -73,8 +76,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Daily Workout"
-                    android:textColor="@color/text_white"
+                    android:text="@string/daily_workout"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -86,8 +89,8 @@
                     android:background="@drawable/bg_tag"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
-                    android:text="Calendar"
-                    android:textColor="@color/text_white"
+                    android:text="@string/calendar"
+                    android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -102,13 +105,13 @@
                 android:background="@drawable/bg_tag"
                 android:gravity="center"
                 android:orientation="horizontal">
-                <TextView android:id="@+id/tv_day_mon" style="@style/DayTextStyle" android:text="Mo" />
-                <TextView android:id="@+id/tv_day_tue" style="@style/DayTextStyle" android:text="Tu" />
-                <TextView android:id="@+id/tv_day_wed" style="@style/DayTextStyle" android:text="We" />
-                <TextView android:id="@+id/tv_day_thu" style="@style/DayTextStyle" android:text="Th" />
-                <TextView android:id="@+id/tv_day_fri" style="@style/DayTextStyle" android:text="Fr" />
-                <TextView android:id="@+id/tv_day_sat" style="@style/DayTextStyle" android:text="Sa" />
-                <TextView android:id="@+id/tv_day_sun" style="@style/DayTextStyle" android:text="Su" />
+                <TextView android:id="@+id/tv_day_mon" style="@style/DayTextStyle" android:text="@string/day_mon" />
+                <TextView android:id="@+id/tv_day_tue" style="@style/DayTextStyle" android:text="@string/day_tue" />
+                <TextView android:id="@+id/tv_day_wed" style="@style/DayTextStyle" android:text="@string/day_wed" />
+                <TextView android:id="@+id/tv_day_thu" style="@style/DayTextStyle" android:text="@string/day_thu" />
+                <TextView android:id="@+id/tv_day_fri" style="@style/DayTextStyle" android:text="@string/day_fri" />
+                <TextView android:id="@+id/tv_day_sat" style="@style/DayTextStyle" android:text="@string/day_sat" />
+                <TextView android:id="@+id/tv_day_sun" style="@style/DayTextStyle" android:text="@string/day_sun" />
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
@@ -116,7 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="480dp"
                 android:layout_margin="16dp"
-                app:cardBackgroundColor="@color/surface_dark"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="30dp"
                 app:cardElevation="0dp">
 
@@ -128,7 +131,8 @@
                         android:id="@+id/iv_today_workout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop" />
+                        android:scaleType="centerCrop"
+                        tools:src="@color/card_dark" />
 
                     <View
                         android:layout_width="match_parent"
@@ -151,13 +155,13 @@
                                 android:layout_width="14dp"
                                 android:layout_height="14dp"
                                 android:src="@drawable/ic_hourglass"
-                                app:tint="@color/text_white" />
+                                app:tint="#FFFFFF" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="To be Completed"
-                                android:textColor="@color/text_white"
+                                android:text="@string/to_be_completed"
+                                android:textColor="#FFFFFF"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -173,13 +177,13 @@
                                 android:layout_width="14dp"
                                 android:layout_height="14dp"
                                 android:src="@drawable/ic_heart"
-                                app:tint="@color/text_white" />
+                                app:tint="#FFFFFF" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:text="2,142"
-                                android:textColor="@color/text_white"
+                                android:textColor="#FFFFFF"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -195,22 +199,24 @@
                             android:id="@+id/tv_today_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Core Shredder"
-                            android:textColor="@color/text_white"
+                            android:text="@string/core_shredder"
+                            android:textColor="#FFFFFF"
                             android:textSize="28sp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Core Shredder" />
 
                         <TextView
                             android:id="@+id/tv_today_day"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="May 13, 2026"
-                            android:textColor="@color/text_grey"
+                            android:text="@string/workout_date_default"
+                            android:textColor="#CCCCCC"
                             android:textSize="16sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tv_today_title" />
+                            app:layout_constraintTop_toBottomOf="@id/tv_today_title"
+                            tools:text="May 13, 2026" />
 
                         <LinearLayout
                             android:id="@+id/llStats"
@@ -225,27 +231,29 @@
                                 android:layout_width="16dp"
                                 android:layout_height="16dp"
                                 android:src="@drawable/ic_timer"
-                                app:tint="@color/text_white" />
+                                app:tint="#FFFFFF" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="6dp"
-                                android:text="54 Minutes"
-                                android:textColor="@color/text_white"
-                                android:textStyle="bold" />
+                                android:text="@string/workout_duration_default"
+                                android:textColor="#FFFFFF"
+                                android:textStyle="bold"
+                                tools:text="54 Minutes" />
                             <ImageView
                                 android:layout_width="16dp"
                                 android:layout_height="16dp"
                                 android:layout_marginStart="16dp"
                                 android:src="@drawable/ic_muscle"
-                                app:tint="@color/text_white" />
+                                app:tint="#FFFFFF" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="6dp"
-                                android:text="For All Levels"
-                                android:textColor="@color/text_white"
-                                android:textStyle="bold" />
+                                android:text="@string/workout_level_default"
+                                android:textColor="#FFFFFF"
+                                android:textStyle="bold"
+                                tools:text="For All Levels" />
                         </LinearLayout>
 
                         <ImageView
@@ -253,12 +261,12 @@
                             android:layout_width="56dp"
                             android:layout_height="56dp"
                             android:background="@drawable/bg_selected_day"
-                            android:backgroundTint="@color/surface_dark"
+                            android:backgroundTint="?attr/colorSurface"
                             android:padding="16dp"
                             android:src="@drawable/ic_arrow_forward"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:tint="@color/text_white" />
+                            app:tint="?android:attr/textColorPrimary" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </FrameLayout>
@@ -276,7 +284,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="@color/surface_dark"
+                    app:cardBackgroundColor="?attr/colorSurface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -293,12 +301,12 @@
                             android:src="@drawable/ic_arrow_forward"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/text_white" />
+                            app:tint="#FFFFFF" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Liked\nWorkouts"
-                            android:textColor="@color/text_white"
+                            android:text="@string/liked_workouts_card"
+                            android:textColor="?android:attr/textColorPrimary"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -312,7 +320,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="@color/surface_dark"
+                    app:cardBackgroundColor="?attr/colorSurface"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -329,12 +337,12 @@
                             android:src="@drawable/ic_arrow_forward"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/text_white" />
+                            app:tint="#FFFFFF" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Liked\nPrograms"
-                            android:textColor="@color/text_white"
+                            android:text="@string/liked_programs_card"
+                            android:textColor="?android:attr/textColorPrimary"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"

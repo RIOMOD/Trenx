@@ -1,5 +1,7 @@
 package com.nct.trenx.utils;
 
+import android.content.Context;
+import com.nct.trenx.R;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -15,25 +17,22 @@ public final class DateUtils {
         return String.format(Locale.getDefault(), "%02d:%02d", mins, secs);
     }
 
-    /**
-     * Ví dụ: "Wednesday, 13 May"
-     */
-    public static String formatDisplayDate(Calendar calendar) {
+    public static String formatDisplayDate(Context context, Calendar calendar) {
         return String.format(Locale.getDefault(), "%s, %d %s",
-                getDayOfWeekName(calendar.get(Calendar.DAY_OF_WEEK)),
+                getDayOfWeekName(context, calendar.get(Calendar.DAY_OF_WEEK)),
                 calendar.get(Calendar.DAY_OF_MONTH),
                 getMonthShortName(calendar.get(Calendar.MONTH)));
     }
 
-    private static String getDayOfWeekName(int calendarDayOfWeek) {
+    private static String getDayOfWeekName(Context context, int calendarDayOfWeek) {
         switch (calendarDayOfWeek) {
-            case Calendar.MONDAY: return "Monday";
-            case Calendar.TUESDAY: return "Tuesday";
-            case Calendar.WEDNESDAY: return "Wednesday";
-            case Calendar.THURSDAY: return "Thursday";
-            case Calendar.FRIDAY: return "Friday";
-            case Calendar.SATURDAY: return "Saturday";
-            default: return "Sunday";
+            case Calendar.MONDAY: return context.getString(R.string.day_mon);
+            case Calendar.TUESDAY: return context.getString(R.string.day_tue);
+            case Calendar.WEDNESDAY: return context.getString(R.string.day_wed);
+            case Calendar.THURSDAY: return context.getString(R.string.day_thu);
+            case Calendar.FRIDAY: return context.getString(R.string.day_fri);
+            case Calendar.SATURDAY: return context.getString(R.string.day_sat);
+            default: return context.getString(R.string.day_sun);
         }
     }
 
@@ -46,9 +45,6 @@ public final class DateUtils {
         return "";
     }
 
-    /**
-     * Trả về tên tháng đầy đủ: "January", "February", ...
-     */
     public static String getMonthFullName(int month) {
         String[] months = {"January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"};
@@ -58,9 +54,6 @@ public final class DateUtils {
         return "";
     }
 
-    /**
-     * Format Calendar thành date key "yyyy-MM-dd".
-     */
     public static String formatDateKey(Calendar calendar) {
         return String.format(Locale.getDefault(), "%04d-%02d-%02d",
                 calendar.get(Calendar.YEAR),
@@ -68,18 +61,16 @@ public final class DateUtils {
                 calendar.get(Calendar.DAY_OF_MONTH));
     }
 
-    /**
-     * Hiển thị ngày dạng "Today, 28 May" hoặc "Wednesday, 13 May".
-     */
-    public static String getDayDisplayText(Calendar calendar) {
+    public static String getDayDisplayText(Context context, Calendar calendar) {
         Calendar today = Calendar.getInstance();
         if (today.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)
                 && today.get(Calendar.MONTH) == calendar.get(Calendar.MONTH)
                 && today.get(Calendar.DAY_OF_MONTH) == calendar.get(Calendar.DAY_OF_MONTH)) {
-            return String.format(Locale.getDefault(), "Today, %d %s",
+            return String.format(Locale.getDefault(), "%s, %d %s",
+                    context.getString(R.string.today),
                     calendar.get(Calendar.DAY_OF_MONTH),
                     getMonthShortName(calendar.get(Calendar.MONTH)));
         }
-        return formatDisplayDate(calendar);
+        return formatDisplayDate(context, calendar);
     }
 }

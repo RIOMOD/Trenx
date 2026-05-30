@@ -1,0 +1,173 @@
+<resources>
+    <string name="app_name">TRENX</string>
+    <string name="rate_experience">Đánh giá trải nghiệm của bạn</string>
+    <string name="finish">Hoàn tất</string>
+    <string name="rating_thanks">Cảm ơn bạn đã đánh giá %1$.1f sao!</string>
+    <string name="author_credit">BỞI NGUYÊN CÔNG TRỨ</string>
+    <string name="liked_programs_title">Chương trình đã thích</string>
+    <string name="all_liked_workouts_title">Tất cả bài tập đã thích</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">Bảng điều khiển</string>
+    <string name="daily_workout">Bài tập hàng ngày</string>
+    <string name="calendar">Lịch</string>
+    <string name="to_be_completed">Cần hoàn thành</string>
+    <string name="core_shredder">Core Shredder</string>
+    <string name="quad_crusher">Quad Crusher</string>
+    <string name="active_recovery">Phục hồi tích cực</string>
+    <string name="workout_date_default">13 tháng 5, 2026</string>
+    <string name="workout_duration_default">54 Phút</string>
+    <string name="workout_level_default">Cho mọi cấp độ</string>
+    <string name="liked_workouts_card">Bài tập\nđã thích</string>
+    <string name="liked_programs_card">Chương trình\nđã thích</string>
+
+    <!-- Explore & Community -->
+    <string name="explore_title">Khám phá</string>
+    <string name="community_title">Cộng đồng</string>
+    <string name="community_feed">Bảng tin cộng đồng</string>
+    <string name="personal_feed">Bảng tin cá nhân</string>
+    <string name="likes_count_format">%1$d Lượt thích</string>
+    <string name="comments_count_format">%1$d Bình luận</string>
+    <string name="feeling_pumped">Đang cảm thấy hưng phấn</string>
+    <string name="completed_workout">Đã hoàn thành một bài tập</string>
+    <string name="minutes_ago_format">%1$d phút trước</string>
+
+    <!-- Progress -->
+    <string name="progress_title">Tiến độ của tôi</string>
+    <string name="workouts_count_format">%1$d Bài tập</string>
+    <string name="followers_count_format">%1$d Người theo dõi</string>
+    <string name="following_count_format">Đang theo dõi %1$d</string>
+    <string name="tab_previous_workouts">Bài tập trước đó</string>
+    <string name="tab_personal_heatmap">Bản đồ nhiệt cá nhân</string>
+    <string name="today">Hôm nay</string>
+    <string name="daily_streak">Chuỗi hàng ngày</string>
+    <string name="streak_current">Hiện tại</string>
+    <string name="streak_longest">Dài nhất</string>
+    <string name="days_count_format">%1$d Ngày</string>
+    <string name="day_ago_format">%1$d ngày trước</string>
+    <string name="days_ago_format">%1$d ngày trước</string>
+    <string name="no_workouts_today">Không có bài tập hôm nay</string>
+    <string name="progress_pct_format">%1$d%% Tiến độ</string>
+    <string name="time_spent_format">%1$sm Thời gian</string>
+    <string name="muscle_groups_title">Nhóm cơ</string>
+    <string name="heatmap_recent">Gần đây</string>
+    <string name="heatmap_normal">Bình thường</string>
+    <string name="heatmap_inactive">Không hoạt động</string>
+    <string name="not_trained">Chưa tập luyện</string>
+
+    <!-- Muscles -->
+    <string name="muscle_abs">Cơ bụng (Core)</string>
+    <string name="muscle_chest">Cơ ngực</string>
+    <string name="muscle_legs">Cơ chân</string>
+    <string name="muscle_shoulders">Cơ vai</string>
+    <string name="muscle_back">Cơ lưng</string>
+
+    <!-- Days of Week -->
+    <string name="day_mon">T2</string>
+    <string name="day_tue">T3</string>
+    <string name="day_wed">T4</string>
+    <string name="day_thu">T5</string>
+    <string name="day_fri">T6</string>
+    <string name="day_sat">T7</string>
+    <string name="day_sun">CN</string>
+
+    <!-- Muscle Groups Selection -->
+    <string name="ready_to_breakout">SẴN SÀNG ĐỂ BỨT PHÁ?</string>
+    <string name="choose_muscle_group">Chọn nhóm cơ bạn muốn tập hôm nay</string>
+    <string name="chest_triceps">NGỰC &amp; TAY SAU</string>
+    <string name="chest_triceps_desc">Hít đất, Xà kép...</string>
+    <string name="back_biceps">LƯNG &amp; TAY TRƯỚC</string>
+    <string name="back_biceps_desc">Hít xà đơn, Hít xà ngửa tay...</string>
+    <string name="core_abs">CƠ BỤNG (CORE)</string>
+    <string name="core_abs_desc">Gập bụng, Nâng chân...</string>
+
+    <!-- Exercise List -->
+    <string name="go_back">&lt; QUAY LẠI</string>
+    <string name="exercise_list">DANH SÁCH BÀI TẬP</string>
+    <string name="beginner">CƠ BẢN</string>
+    <string name="intermediate">TRUNG BÌNH</string>
+    <string name="advanced">NÂNG CAO</string>
+    <string name="start_workout">BẮT ĐẦU LUYỆN TẬP</string>
+    <string name="exercise_name_placeholder">Tên bài tập</string>
+    <string name="exercise_reps_placeholder">3 Hiệp x 12 Lần</string>
+
+    <!-- Training -->
+    <string name="strength_building">Xây dựng sức mạnh</string>
+    <string name="reps_each">Lần mỗi hiệp</string>
+    <string name="next_exercise">Bài tập tiếp theo</string>
+    <string name="complete_exercise">Hoàn thành bài tập</string>
+    <string name="skip_rest">Bỏ qua nghỉ</string>
+    <string name="back_to_current">Quay lại bài hiện tại</string>
+    <string name="workout_finished">Tập luyện hoàn tất!</string>
+    <string name="round_info_format">Vòng %1$d  |  Bài tập thứ %2$d</string>
+    <string name="rest_info_format">%1$s • Nghỉ %2$d giây</string>
+    <string name="no_exercises_toast">Không có bài tập nào!</string>
+    <string name="plus_10">+ 10</string>
+    <string name="minus_10">- 10</string>
+
+    <!-- Level Selection -->
+    <string name="build_perfect_body">XÂY DỰNG CƠ THỂ HOÀO HẢO</string>
+    <string name="choose_level">chọn mức độ tập</string>
+    <string name="easy">DỄ</string>
+    <string name="medium">TRUNG BÌNH</string>
+    <string name="hard">KHÓ</string>
+
+    <!-- Detail -->
+    <string name="technique_guide">HƯỚNG DẪN KỸ THUẬT:</string>
+    <string name="exercise_desc_placeholder">Mô tả chi tiết cách thực hiện bài tập sẽ hiển thị ở đây...</string>
+
+    <!-- Review -->
+    <string name="excellent">TUYỆT VỜI!</string>
+    <string name="how_was_workout">Bạn cảm thấy buổi tập hôm nay thế nào?</string>
+    <string name="submit_review">GỬI ĐÁNH GIÁ &amp; KẾT THÚC</string>
+
+    <!-- Premium -->
+    <string name="unlimited_access">Truy cập không giới hạn\nvào Trenx</string>
+    <string name="cancel_anytime">Hủy bất cứ lúc nào</string>
+    <string name="yearly">Hàng năm</string>
+    <string name="monthly">Hàng tháng</string>
+    <string name="paid_monthly">Thanh toán hàng tháng</string>
+    <string name="restore_purchase">Khôi phục giao dịch</string>
+    <string name="upgrade_now">Nâng cấp ngay</string>
+    <string name="terms_conditions">Bằng cách đăng ký, bạn đồng ý với Điều khoản &amp; Điều kiện của chúng tôi</string>
+    <string name="save_yearly">TIẾT KIỆM ₫762.880 VNĐ / NÂM</string>
+    <string name="yearly_price">₫749.000 VNĐ</string>
+    <string name="monthly_price">₫125.990 VNĐ</string>
+    <string name="equivalent_monthly">Tương đương ₫62.416,67 / Tháng</string>
+    <string name="premium_feature_1">Hơn 250 bài tập và chương trình chuyên sâu</string>
+    <string name="premium_feature_2">Hơn 500 bài tập và hướng dẫn kỹ thuật</string>
+    <string name="premium_feature_3">Truy cập không giới hạn tất cả tính năng</string>
+
+    <!-- Other -->
+    <string name="nothing_here">Chưa có gì ở đây</string>
+    <string name="calisthenics">CALISTHENICS</string>
+    <string name="chest_circuit">Chest Circuit</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Cài đặt</string>
+    <string name="account_section">Tài khoản</string>
+    <string name="edit_profile">Chỉnh sửa hồ sơ</string>
+    <string name="preferences_section">Tùy chọn</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="dark_mode">Chế độ tối</string>
+    <string name="push_notifications">Thông báo đẩy</string>
+    <string name="about_section">Giới thiệu</string>
+    <string name="privacy_policy">Chính sách bảo mật</string>
+    <string name="app_version">Phiên bản ứng dụng</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="select_language">Chọn ngôn ngữ</string>
+    <string name="logout_confirm">Bạn có chắc chắn muốn đăng xuất không?</string>
+    <string name="notifications_enabled">Đã bật thông báo</string>
+    <string name="notifications_disabled">Đã tắt thông báo</string>
+    <string name="logged_out">Đã đăng xuất</string>
+    <string name="cancel">Hủy</string>
+    <string name="english">Tiếng Anh</string>
+    <string name="vietnamese">Tiếng Việt</string>
+
+    <!-- Navigation -->
+    <string name="nav_community">Cộng đồng</string>
+    <string name="nav_explore">Khám phá</string>
+    <string name="nav_dashboard">Bảng điều khiển</string>
+    <string name="nav_progress">Tiến độ</string>
+    <string name="nav_premium">Premium</string>
+</resources>

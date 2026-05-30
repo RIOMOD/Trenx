@@ -26,8 +26,9 @@ import java.util.Calendar;
 
 public class DashboardFragment extends Fragment {
 
-    private String currentDayName;
-    private String workoutTitle;
+    private int currentDayResId;
+    private int workoutTitleResId;
+    private String currentDbDayKey;
     private TextView tvTodayDay, tvTodayTitle;
     private ImageView ivTodayWorkout;
     private TextView[] dayViews;
@@ -53,8 +54,9 @@ public class DashboardFragment extends Fragment {
         if (cardWorkout != null) {
             cardWorkout.setOnClickListener(v -> {
                 Intent intent = new Intent(getContext(), ExerciseActivity.class);
-                intent.putExtra(IntentExtras.DAY_NAME, currentDayName);
-                intent.putExtra(IntentExtras.WORKOUT_TITLE, workoutTitle);
+                // Truyền key database tiếng Anh để tìm đúng dữ liệu
+                intent.putExtra(IntentExtras.DAY_NAME, currentDbDayKey);
+                intent.putExtra(IntentExtras.WORKOUT_TITLE, getString(workoutTitleResId));
                 startActivity(intent);
             });
         }
@@ -100,11 +102,12 @@ public class DashboardFragment extends Fragment {
         DaySelectorUiHelper.applySelectedDay(requireContext(), dayViews, dayOfWeek);
 
         WorkoutDayInfo schedule = WorkoutUtils.getScheduleFor(dayOfWeek);
-        currentDayName = schedule.getDayName();
-        workoutTitle = schedule.getWorkoutTitle();
+        currentDayResId = schedule.getDayNameResId();
+        workoutTitleResId = schedule.getWorkoutTitleResId();
+        currentDbDayKey = schedule.getDbDayKey();
 
-        tvTodayDay.setText(currentDayName.toUpperCase());
-        tvTodayTitle.setText(workoutTitle);
+        tvTodayDay.setText(getString(currentDayResId).toUpperCase());
+        tvTodayTitle.setText(getString(workoutTitleResId));
 
         if (ivTodayWorkout != null) {
             ImageUtils.loadExerciseThumb(this, ivTodayWorkout, schedule.getImageUrl(),

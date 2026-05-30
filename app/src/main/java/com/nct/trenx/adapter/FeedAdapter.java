@@ -1,5 +1,6 @@
 package com.nct.trenx.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
     @Override
     public void onBindViewHolder(@NonNull FeedViewHolder holder, int position) {
         FeedPost post = postList.get(position);
+        Context context = holder.itemView.getContext();
 
         holder.ivAvatar.setImageResource(post.getUserAvatarResId());
         holder.tvUserName.setText(post.getUserName());
@@ -50,8 +52,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
         holder.tvTimeStr.setText(post.getTimeStr());
         holder.tvLevel.setText(post.getLevel());
 
-        holder.tvLikesCount.setText(post.getLikesCount() + " Likes");
-        holder.tvCommentsCount.setText(post.getCommentsCount() + " Comments");
+        holder.tvLikesCount.setText(context.getString(R.string.likes_count_format, post.getLikesCount()));
+        holder.tvCommentsCount.setText(context.getString(R.string.comments_count_format, post.getCommentsCount()));
         holder.tvCaption.setText(post.getCaption());
 
         // Update like icon state

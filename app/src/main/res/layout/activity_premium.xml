@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EAEAEA">
+    android:background="?android:attr/windowBackground"
+    android:fitsSystemWindows="true">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/btnClose"
@@ -12,9 +13,9 @@
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="20dp"
-        app:cardBackgroundColor="#F5F5F5"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="20dp"
-        app:cardElevation="0dp"
+        app:cardElevation="2dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -26,7 +27,7 @@
             android:layout_height="24dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_close"
-            app:tint="#000000" />
+            app:tint="?android:attr/textColorPrimary" />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -35,8 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
-        android:text="Unlimited\nAccess To Thenx"
-        android:textColor="#000000"
+        android:text="@string/unlimited_access"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
-        android:text="Cancel Anytime"
-        android:textColor="#555555"
+        android:text="@string/cancel_anytime"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
@@ -71,7 +72,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            app:cardBackgroundColor="#FFFFFF"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="12dp"
             app:cardElevation="2dp"
             app:strokeColor="#108928"
@@ -83,12 +84,13 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvSaveTag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#108928"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="8dp"
-                    android:text="SAVE ₫762880 VND /\nYEAR"
+                    android:text="@string/save_yearly"
                     android:textColor="#FFFFFF"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -103,26 +105,27 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Yearly"
-                        android:textColor="#000000"
+                        android:text="@string/yearly"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="₫749000 VND"
+                        android:text="@string/yearly_price"
                         android:textColor="#108928"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvYearlyEquivalent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:gravity="center"
-                        android:text="Equivalent of ₫62416.67/\nMonth"
-                        android:textColor="#666666"
+                        android:text="@string/equivalent_monthly"
+                        android:textColor="?android:attr/textColorSecondary"
                         android:textSize="11sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -134,9 +137,9 @@
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            app:cardBackgroundColor="#F4F4F4"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="12dp"
-            app:cardElevation="0dp"
+            app:cardElevation="2dp"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -149,16 +152,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Monthly"
-                    android:textColor="#000000"
+                    android:text="@string/monthly"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="₫125990 VND"
-                    android:textColor="#000000"
+                    android:text="@string/monthly_price"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -166,8 +169,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Paid Monthly"
-                    android:textColor="#666666"
+                    android:text="@string/paid_monthly"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textSize="12sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -179,8 +182,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Restore Purchase"
-        android:textColor="#444444"
+        android:text="@string/restore_purchase"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -199,9 +202,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            app:cardBackgroundColor="#FFFFFF"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="24dp"
-            app:cardElevation="0dp">
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -215,14 +218,15 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_check"
-                    app:tint="#000000" />
+                    app:tint="?android:attr/textColorPrimary" />
 
                 <TextView
+                    android:id="@+id/tvFeature1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="Over 250 dedicated workouts and progra..."
-                    android:textColor="#000000"
+                    android:text="@string/premium_feature_1"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -231,9 +235,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            app:cardBackgroundColor="#FFFFFF"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="24dp"
-            app:cardElevation="0dp">
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -247,14 +251,15 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_check"
-                    app:tint="#000000" />
+                    app:tint="?android:attr/textColorPrimary" />
 
                 <TextView
+                    android:id="@+id/tvFeature2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="Over 500 exercises and technique guides"
-                    android:textColor="#000000"
+                    android:text="@string/premium_feature_2"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -262,9 +267,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#FFFFFF"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="24dp"
-            app:cardElevation="0dp">
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -278,14 +283,15 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_check"
-                    app:tint="#000000" />
+                    app:tint="?android:attr/textColorPrimary" />
 
                 <TextView
+                    android:id="@+id/tvFeature3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="Unlimited access to all features"
-                    android:textColor="#000000"
+                    android:text="@string/premium_feature_3"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -303,9 +309,9 @@
         android:layout_height="64dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="Upgrade Now"
-        android:textColor="#000000"
+        android:backgroundTint="?attr/colorPrimary"
+        android:text="@string/upgrade_now"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
         app:cornerRadius="32dp"
@@ -316,8 +322,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:text="By subscribing you agree to our Terms &amp; Conditions"
-        android:textColor="#EEEEEE"
+        android:text="@string/terms_conditions"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

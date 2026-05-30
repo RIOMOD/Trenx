@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="220dp"
     android:layout_marginHorizontal="16dp"
     android:layout_marginBottom="16dp"
     app:cardCornerRadius="16dp"
-    app:cardElevation="0dp"
-    app:cardBackgroundColor="@color/surface_dark">
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="?attr/colorSurface">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,12 +34,13 @@
             android:background="@drawable/bg_tag"
             android:paddingHorizontal="10dp"
             android:paddingVertical="6dp"
-            android:text="CALISTHENICS"
-            android:textColor="@color/text_white"
+            android:text="@string/calisthenics"
+            android:textColor="#FFFFFF"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="CALISTHENICS" />
 
         <ImageView
             android:id="@+id/iv_liked_muscle_map"
@@ -48,7 +50,7 @@
             android:layout_marginBottom="4dp"
             android:visibility="gone"
             android:src="@drawable/ic_muscle"
-            app:tint="@color/text_white"
+            app:tint="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@id/tv_liked_title"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -59,13 +61,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:text="Chest Circuit"
-            android:textColor="@color/text_white"
+            android:text="@string/chest_circuit"
+            android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tv_liked_stats"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Chest Circuit" />
 
         <TextView
             android:id="@+id/tv_liked_stats"
@@ -79,7 +82,7 @@
             android:paddingHorizontal="14dp"
             android:paddingVertical="10dp"
             android:text="+3"
-            android:textColor="@color/text_white"
+            android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

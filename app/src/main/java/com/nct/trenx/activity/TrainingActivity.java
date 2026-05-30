@@ -1,9 +1,11 @@
 package com.nct.trenx.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,8 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.AttrRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import com.nct.trenx.R;
 import com.nct.trenx.database.ExerciseRepository;
@@ -25,7 +28,7 @@ import com.nct.trenx.utils.TrainingTimerHelper;
 
 import java.util.List;
 
-public class TrainingActivity extends AppCompatActivity {
+public class TrainingActivity extends BaseActivity {
 
     private TextView tvTimer, tvCurrentExName, tvRepsCount, tvRoundInfo;
     private ImageView vvTrainingVideo, btnClose;
@@ -85,7 +88,7 @@ public class TrainingActivity extends AppCompatActivity {
         exerciseList = repository.getExercisesByDayAndDifficulty(day, difficulty);
 
         if (exerciseList == null || exerciseList.isEmpty()) {
-            Toast.makeText(this, "Chưa có bài tập!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.no_exercises_toast, Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -135,15 +138,11 @@ public class TrainingActivity extends AppCompatActivity {
 
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                if (e1 == null || e2 == null) {
-                    return false;
-                }
-
+                if (e1 == null || e2 == null) return false;
                 float diffX = e2.getX() - e1.getX();
                 if (Math.abs(diffX) > Math.abs(e2.getY() - e1.getY())
                         && Math.abs(diffX) > SWIPE_THRESHOLD
                         && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-
                     if (diffX > 0) {
                         if (viewingIndex > 0) {
                             viewingIndex--;
@@ -164,13 +163,8 @@ public class TrainingActivity extends AppCompatActivity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (layoutRest.getVisibility() == View.VISIBLE) {
-            return super.dispatchTouchEvent(ev);
-        }
-
-        if (gestureDetector != null && gestureDetector.onTouchEvent(ev)) {
-            return true;
-        }
+        if (layoutRest.getVisibility() == View.VISIBLE) return super.dispatchTouchEvent(ev);
+        if (gestureDetector != null && gestureDetector.onTouchEvent(ev)) return true;
         return super.dispatchTouchEvent(ev);
     }
 
@@ -178,7 +172,7 @@ public class TrainingActivity extends AppCompatActivity {
         Exercise currentEx = exerciseList.get(index);
         tvCurrentExName.setText(currentEx.getName());
         tvRepsCount.setText(currentEx.getReps().replaceAll("[^0-9]", ""));
-        tvRoundInfo.setText("Round 1  |  " + (index + 1) + "st exercise");
+        tvRoundInfo.setText(getString(R.string.round_info_format, 1, index + 1));
         ImageUtils.loadExerciseThumb(this, vvTrainingVideo, currentEx.getImageName());
 
         if (index < exerciseList.size() - 1) {
@@ -186,27 +180,26 @@ public class TrainingActivity extends AppCompatActivity {
             tvNextExDesc.setText(nextEx.getName());
             ImageUtils.loadExerciseThumb(this, ivNextExThumb, nextEx.getImageName());
         } else {
-            tvNextExDesc.setText("Workout Finished!");
+            tvNextExDesc.setText(R.string.workout_finished);
             ivNextExThumb.setImageDrawable(null);
         }
 
+        int primaryColor = getThemeColor(android.R.attr.colorPrimary);
+        int secondaryColor = getThemeColor(android.R.attr.textColorSecondary);
+
         if (viewingIndex == actualIndex) {
-            btnComplete.setText("Complete Exercise");
-            btnComplete.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#262626")));
+            btnComplete.setText(R.string.complete_exercise);
+            btnComplete.setBackgroundTintList(ColorStateList.valueOf(primaryColor));
             btnComplete.setOnClickListener(v -> {
                 actualIndex++;
                 viewingIndex = actualIndex;
                 updateProgressBar();
-
-                if (actualIndex < exerciseList.size()) {
-                    showRestScreen();
-                } else {
-                    finishWorkout();
-                }
+                if (actualIndex < exerciseList.size()) showRestScreen();
+                else finishWorkout();
             });
         } else {
-            btnComplete.setText("Back to Current");
-            btnComplete.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#555555")));
+            btnComplete.setText(R.string.back_to_current);
+            btnComplete.setBackgroundTintList(ColorStateList.valueOf(secondaryColor));
             btnComplete.setOnClickListener(v -> {
                 viewingIndex = actualIndex;
                 loadExerciseData(viewingIndex);
@@ -216,12 +209,15 @@ public class TrainingActivity extends AppCompatActivity {
 
     private void updateProgressBar() {
         layoutProgress.removeAllViews();
+        int accentColor = ContextCompat.getColor(this, R.color.accent_color);
+        int inactiveColor = Color.parseColor("#40888888"); // Semi-transparent grey
+
         for (int i = 0; i < exerciseList.size(); i++) {
             View segment = new View(this);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, 8, 1f);
             params.setMargins(6, 0, 6, 0);
             segment.setLayoutParams(params);
-            segment.setBackgroundColor(i < actualIndex ? Color.parseColor("#00C853") : Color.parseColor("#333333"));
+            segment.setBackgroundColor(i < actualIndex ? accentColor : inactiveColor);
             layoutProgress.addView(segment);
         }
     }
@@ -234,7 +230,7 @@ public class TrainingActivity extends AppCompatActivity {
 
         Exercise nextEx = exerciseList.get(actualIndex);
         tvRestNextName.setText(nextEx.getName());
-        tvRestNextInfo.setText(nextEx.getReps() + " • Rest 45 seconds");
+        tvRestNextInfo.setText(getString(R.string.rest_info_format, nextEx.getReps(), 45));
         ImageUtils.loadExerciseThumb(this, ivRestNextThumb, nextEx.getImageName());
 
         timerHelper.resetRestDuration();
@@ -243,12 +239,10 @@ public class TrainingActivity extends AppCompatActivity {
 
     private void finishRestAndNext() {
         timerHelper.cancelRestTimer();
-
         layoutRest.setVisibility(View.GONE);
         svMainContent.setVisibility(View.VISIBLE);
         btnComplete.setVisibility(View.VISIBLE);
         tvRoundInfo.setVisibility(View.VISIBLE);
-
         loadExerciseData(actualIndex);
     }
 
@@ -258,6 +252,12 @@ public class TrainingActivity extends AppCompatActivity {
         intent.putExtra(IntentExtras.TOTAL_TIME, tvTimer.getText().toString());
         startActivity(intent);
         finish();
+    }
+
+    private int getThemeColor(@AttrRes int attr) {
+        TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(attr, typedValue, true);
+        return typedValue.data;
     }
 
     @Override

@@ -2,24 +2,171 @@
     <string name="app_name">TRENX</string>
     <string name="rate_experience">Rate your experience</string>
     <string name="finish">Finish</string>
-    <string name="rating_thanks">Cảm ơn bạn đã đánh giá %1$.1f sao!</string>
+    <string name="rating_thanks">Thank you for rating %1$.1f stars!</string>
     <string name="author_credit">BY NGUYEN CONG TRU</string>
     <string name="liked_programs_title">Liked Programs</string>
     <string name="all_liked_workouts_title">All Liked Workouts</string>
 
-    <!-- Dashboard Strings -->
+    <!-- Dashboard -->
     <string name="dashboard_title">Dashboard</string>
-    <string name="notification_badge">9+</string>
     <string name="daily_workout">Daily Workout</string>
     <string name="calendar">Calendar</string>
     <string name="to_be_completed">To be Completed</string>
-    <string name="stats_likes">9.7k</string>
-    <string name="workout_name">Quad Crusher</string>
-    <string name="workout_date">May 13, 2026</string>
-    <string name="workout_duration">54 Minutes</string>
-    <string name="workout_level">For All Levels</string>
+    <string name="core_shredder">Core Shredder</string>
+    <string name="quad_crusher">Quad Crusher</string>
+    <string name="active_recovery">Active Recovery</string>
+    <string name="workout_date_default">May 13, 2026</string>
+    <string name="workout_duration_default">54 Minutes</string>
+    <string name="workout_level_default">For All Levels</string>
+    <string name="liked_workouts_card">Liked\nWorkouts</string>
+    <string name="liked_programs_card">Liked\nPrograms</string>
 
-    <!-- Bottom Nav -->
+    <!-- Explore & Community -->
+    <string name="explore_title">Explore</string>
+    <string name="community_title">Community</string>
+    <string name="community_feed">Community Feed</string>
+    <string name="personal_feed">Personal Feed</string>
+    <string name="likes_count_format">%1$d Likes</string>
+    <string name="comments_count_format">%1$d Comments</string>
+    <string name="feeling_pumped">Is feeling Pumped</string>
+    <string name="completed_workout">Completed a Workout</string>
+    <string name="minutes_ago_format">%1$d minutes ago</string>
+
+    <!-- Progress -->
+    <string name="progress_title">My Progress</string>
+    <string name="workouts_count_format">%1$d Workouts</string>
+    <string name="followers_count_format">%1$d Followers</string>
+    <string name="following_count_format">%1$d Following</string>
+    <string name="tab_previous_workouts">Previous Workouts</string>
+    <string name="tab_personal_heatmap">Personal Heatmap</string>
+    <string name="today">Today</string>
+    <string name="daily_streak">Daily Streak</string>
+    <string name="streak_current">Current</string>
+    <string name="streak_longest">Longest</string>
+    <string name="days_count_format">%1$d Days</string>
+    <string name="day_ago_format">%1$d day ago</string>
+    <string name="days_ago_format">%1$d days ago</string>
+    <string name="no_workouts_today">No workouts today</string>
+    <string name="progress_pct_format">%1$d%% Progress</string>
+    <string name="time_spent_format">%1$sm Time</string>
+    <string name="muscle_groups_title">Muscle Groups</string>
+    <string name="heatmap_recent">Recent</string>
+    <string name="heatmap_normal">Normal</string>
+    <string name="heatmap_inactive">Inactive</string>
+    <string name="not_trained">Not trained</string>
+    <string name="user_name_default">Nguyen Cong Tru</string>
+    <string name="user_level_format">%1$s • %2$s</string>
+
+    <!-- Muscles -->
+    <string name="muscle_abs">Abs (Core)</string>
+    <string name="muscle_chest">Chest</string>
+    <string name="muscle_legs">Legs</string>
+    <string name="muscle_shoulders">Shoulders</string>
+    <string name="muscle_back">Back</string>
+
+    <!-- Days of Week -->
+    <string name="day_mon">Mo</string>
+    <string name="day_tue">Tu</string>
+    <string name="day_wed">We</string>
+    <string name="day_thu">Th</string>
+    <string name="day_fri">Fr</string>
+    <string name="day_sat">Sa</string>
+    <string name="day_sun">Su</string>
+
+    <!-- Muscle Groups Selection -->
+    <string name="ready_to_breakout">READY TO BREAKOUT?</string>
+    <string name="choose_muscle_group">Choose the muscle group you want to train today</string>
+    <string name="chest_triceps">CHEST &amp; TRICEPS</string>
+    <string name="chest_triceps_desc">Push-ups, Dips...</string>
+    <string name="back_biceps">BACK &amp; BICEPS</string>
+    <string name="back_biceps_desc">Pull-ups, Chin-ups...</string>
+    <string name="core_abs">CORE (ABS)</string>
+    <string name="core_abs_desc">Crunches, Leg Raises...</string>
+
+    <!-- Exercise List -->
+    <string name="go_back">&lt; BACK</string>
+    <string name="exercise_list">EXERCISE LIST</string>
+    <string name="beginner">BEGINNER</string>
+    <string name="intermediate">INTERMEDIATE</string>
+    <string name="advanced">ADVANCED</string>
+    <string name="start_workout">START WORKOUT</string>
+    <string name="exercise_name_placeholder">Exercise Name</string>
+    <string name="exercise_reps_placeholder">3 Sets x 12 Reps</string>
+
+    <!-- Training -->
+    <string name="strength_building">Strength Building</string>
+    <string name="reps_each">Reps Each</string>
+    <string name="next_exercise">Next Exercise</string>
+    <string name="complete_exercise">Complete Exercise</string>
+    <string name="skip_rest">Skip Rest</string>
+    <string name="back_to_current">Back to Current</string>
+    <string name="workout_finished">Workout Finished!</string>
+    <string name="round_info_format">Round %1$d  |  %2$d exercise</string>
+    <string name="rest_info_format">%1$s • Rest %2$d seconds</string>
+    <string name="no_exercises_toast">No exercises available!</string>
+    <string name="plus_10">+ 10</string>
+    <string name="minus_10">- 10</string>
+
+    <!-- Level Selection -->
+    <string name="build_perfect_body">BUILD YOUR PERFECT BODY</string>
+    <string name="choose_level">choose training level</string>
+    <string name="easy">EASY</string>
+    <string name="medium">MEDIUM</string>
+    <string name="hard">HARD</string>
+
+    <!-- Detail -->
+    <string name="technique_guide">TECHNIQUE GUIDE:</string>
+    <string name="exercise_desc_placeholder">Detailed description of how to perform the exercise will be displayed here...</string>
+
+    <!-- Review -->
+    <string name="excellent">EXCELLENT!</string>
+    <string name="how_was_workout">How was your workout today?</string>
+    <string name="submit_review">SUBMIT &amp; FINISH</string>
+
+    <!-- Premium -->
+    <string name="unlimited_access">Unlimited\nAccess To Trenx</string>
+    <string name="cancel_anytime">Cancel Anytime</string>
+    <string name="yearly">Yearly</string>
+    <string name="monthly">Monthly</string>
+    <string name="paid_monthly">Paid Monthly</string>
+    <string name="restore_purchase">Restore Purchase</string>
+    <string name="upgrade_now">Upgrade Now</string>
+    <string name="terms_conditions">By subscribing you agree to our Terms &amp; Conditions</string>
+    <string name="save_yearly">SAVE ₫762,880 VND / YEAR</string>
+    <string name="yearly_price">₫749,000 VND</string>
+    <string name="monthly_price">₫125,990 VND</string>
+    <string name="equivalent_monthly">Equivalent of ₫62,416.67 / Month</string>
+    <string name="premium_feature_1">Over 250 dedicated workouts and programs</string>
+    <string name="premium_feature_2">Over 500 exercises and technique guides</string>
+    <string name="premium_feature_3">Unlimited access to all features</string>
+
+    <!-- Other -->
+    <string name="nothing_here">Nothing here yet</string>
+    <string name="calisthenics">CALISTHENICS</string>
+    <string name="chest_circuit">Chest Circuit</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="account_section">Account</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="preferences_section">Preferences</string>
+    <string name="language">Language</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="push_notifications">Push Notifications</string>
+    <string name="about_section">About</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="app_version">App Version</string>
+    <string name="logout">Logout</string>
+    <string name="select_language">Select Language</string>
+    <string name="logout_confirm">Are you sure you want to logout?</string>
+    <string name="notifications_enabled">Notifications Enabled</string>
+    <string name="notifications_disabled">Notifications Disabled</string>
+    <string name="logged_out">Logged out</string>
+    <string name="cancel">Cancel</string>
+    <string name="english">English</string>
+    <string name="vietnamese">Tiếng Việt</string>
+
+    <!-- Navigation -->
     <string name="nav_community">Community</string>
     <string name="nav_explore">Explore</string>
     <string name="nav_dashboard">Dashboard</string>

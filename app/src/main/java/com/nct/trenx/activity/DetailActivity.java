@@ -3,13 +3,12 @@ package com.nct.trenx.activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.nct.trenx.R;
 import com.nct.trenx.utils.IntentExtras;
 import com.nct.trenx.utils.NavigationUtils;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

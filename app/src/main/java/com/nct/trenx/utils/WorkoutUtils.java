@@ -1,5 +1,6 @@
 package com.nct.trenx.utils;
 
+import com.nct.trenx.R;
 import com.nct.trenx.model.WorkoutDayInfo;
 
 import java.util.Calendar;
@@ -17,20 +18,20 @@ public final class WorkoutUtils {
     public static WorkoutDayInfo getScheduleFor(int calendarDayOfWeek) {
         switch (calendarDayOfWeek) {
             case Calendar.MONDAY:
-                return new WorkoutDayInfo("Monday", "Core Shredder", IMG_CORE);
+                return new WorkoutDayInfo(R.string.day_mon, R.string.core_shredder, IMG_CORE, "Monday");
             case Calendar.TUESDAY:
-                return new WorkoutDayInfo("Tuesday", "Chest & Triceps", IMG_CHEST);
+                return new WorkoutDayInfo(R.string.day_tue, R.string.chest_triceps, IMG_CHEST, "Tuesday");
             case Calendar.WEDNESDAY:
-                return new WorkoutDayInfo("Wednesday", "Quad Crusher", IMG_LEGS);
+                return new WorkoutDayInfo(R.string.day_wed, R.string.quad_crusher, IMG_LEGS, "Wednesday");
             case Calendar.THURSDAY:
-                return new WorkoutDayInfo("Thursday", "Shoulder Power", IMG_CHEST);
+                return new WorkoutDayInfo(R.string.day_thu, R.string.chest_triceps, IMG_CHEST, "Thursday");
             case Calendar.FRIDAY:
-                return new WorkoutDayInfo("Friday", "Back & Biceps", IMG_FULL_BODY);
+                return new WorkoutDayInfo(R.string.day_fri, R.string.back_biceps, IMG_FULL_BODY, "Friday");
             case Calendar.SATURDAY:
-                return new WorkoutDayInfo("Saturday", "Active Recovery", IMG_FULL_BODY);
+                return new WorkoutDayInfo(R.string.day_sat, R.string.active_recovery, IMG_FULL_BODY, "Saturday");
             case Calendar.SUNDAY:
             default:
-                return new WorkoutDayInfo("Sunday", "Full Body Master", IMG_FULL_BODY);
+                return new WorkoutDayInfo(R.string.day_sun, R.string.strength_building, IMG_FULL_BODY, "Sunday");
         }
     }
 

@@ -3,7 +3,6 @@ package com.nct.trenx.activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +17,7 @@ import com.nct.trenx.utils.NavigationUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExerciseActivity extends AppCompatActivity {
+public class ExerciseActivity extends BaseActivity {
 
     private RecyclerView rvExercises;
     private ExerciseRepository repository;

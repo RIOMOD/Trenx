@@ -1,22 +1,40 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.Trenx" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@android:color/black</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorSecondary">@android:color/darker_gray</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+        <item name="colorSecondaryContainer">@android:color/transparent</item>
+        <item name="colorOnSecondaryContainer">@android:color/black</item>
+
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="colorSurface">@android:color/white</item>
+        <item name="colorOnSurface">@android:color/black</item>
+
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="android:textColorSecondary">@android:color/darker_gray</item>
+
+        <item name="colorAccent">@color/accent_color</item>
+
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
     </style>
 
     <style name="Theme.Trenx" parent="Base.Theme.Trenx" />
+
     <style name="DayTextStyle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/text_grey</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="DaySelectedStyle" parent="DayTextStyle">
         <item name="android:background">@drawable/bg_selected_day</item>
-        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
 </resources>

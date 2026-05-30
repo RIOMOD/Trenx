@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_black">
+    android:background="?android:attr/windowBackground"
+    android:fitsSystemWindows="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_header"
@@ -20,7 +21,7 @@
             android:src="@drawable/ic_close"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/text_white" />
+            app:tint="?android:attr/textColorPrimary" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -35,8 +36,8 @@
                 android:id="@+id/tv_training_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Strength Building"
-                android:textColor="@color/text_white"
+                android:text="@string/strength_building"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -44,8 +45,8 @@
                 android:id="@+id/tv_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00:06"
-                android:textColor="@color/text_grey"
+                android:text="00:00"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -55,7 +56,7 @@
             android:src="@drawable/ic_volume_up"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/text_white" />
+            app:tint="?android:attr/textColorPrimary" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -86,9 +87,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:cardBackgroundColor="#1A1A1A"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="30dp"
-                app:cardElevation="0dp">
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -102,8 +103,8 @@
                         android:id="@+id/tv_reps_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="8"
-                        android:textColor="@color/text_white"
+                        android:text="0"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="40sp"
                         android:textStyle="bold" />
 
@@ -112,8 +113,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Reps Each"
-                        android:textColor="@color/text_grey"
+                        android:text="@string/reps_each"
+                        android:textColor="?android:attr/textColorSecondary"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -127,13 +128,14 @@
                     android:id="@+id/tv_current_ex_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Assisted Pistol Squat"
-                    android:textColor="@color/text_white"
+                    android:text="@string/exercise_name_placeholder"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@id/layout_like"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Exercise Name" />
 
                 <LinearLayout
                     android:id="@+id/layout_like"
@@ -151,14 +153,15 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:src="@drawable/ic_heart"
-                        app:tint="@color/text_white" />
+                        app:tint="#FFFFFF" />
 
                     <TextView
+                        android:id="@+id/tv_likes_placeholder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="5.5k"
-                        android:textColor="@color/text_white"
+                        android:text="0"
+                        android:textColor="#FFFFFF"
                         android:textSize="12sp" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -168,15 +171,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
                 android:layout_margin="16dp"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="24dp"
-                app:cardElevation="0dp">
+                app:cardElevation="2dp">
 
                 <ImageView
                     android:id="@+id/vv_training_video"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@color/card_dark" />
+                    tools:src="@color/card_dark" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -185,9 +189,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="10dp"
-                app:cardBackgroundColor="#1A1A1A"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="0dp">
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -199,7 +203,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        app:cardCornerRadius="12dp">
+                        app:cardCornerRadius="12dp"
+                        app:cardBackgroundColor="#2A2A2A">
                         <ImageView
                             android:id="@+id/iv_next_ex_thumb"
                             android:layout_width="match_parent"
@@ -216,23 +221,26 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Next Exercise"
-                            android:textColor="@color/text_grey"
+                            android:text="@string/next_exercise"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:textSize="12sp" />
                         <TextView
                             android:id="@+id/tv_next_ex_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Alternating Side Lunges"
-                            android:textColor="@color/text_white"
+                            android:text="@string/exercise_name_placeholder"
+                            android:textColor="?android:attr/textColorPrimary"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:text="Exercise Name" />
                         <TextView
+                            android:id="@+id/tv_next_ex_info"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="15 reps each • Rest 45 seconds"
-                            android:textColor="@color/text_grey"
-                            android:textSize="12sp" />
+                            android:text="@string/exercise_reps_placeholder"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="12sp"
+                            tools:text="15 reps each" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -244,12 +252,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Round 1  |  1st set"
-        android:textColor="@color/text_grey"
+        android:text="@string/nothing_here"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/btn_complete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Round 1" />
 
     <Button
         android:id="@+id/btn_complete"
@@ -257,9 +266,9 @@
         android:layout_height="64dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="24dp"
-        android:backgroundTint="#262626"
-        android:text="Complete Exercise"
-        android:textColor="@color/text_white"
+        android:backgroundTint="?attr/colorPrimary"
+        android:text="@string/complete_exercise"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
         app:cornerRadius="32dp"
@@ -269,22 +278,23 @@
         android:id="@+id/layout_rest"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#333333"
+        android:background="?android:attr/windowBackground"
         android:visibility="gone"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_progress"> <TextView
-        android:id="@+id/tv_rest_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="42"
-        android:textColor="@color/text_white"
-        android:textSize="90sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/card_rest_next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/layout_progress">
+        <TextView
+            android:id="@+id/tv_rest_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="90sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/card_rest_next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_rest_next"
@@ -292,9 +302,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="32dp"
-            app:cardBackgroundColor="#1A1A1A"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="20dp"
-            app:cardElevation="0dp"
+            app:cardElevation="2dp"
             app:layout_constraintBottom_toTopOf="@id/layout_rest_buttons">
 
             <LinearLayout
@@ -307,7 +317,8 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    app:cardCornerRadius="12dp">
+                    app:cardCornerRadius="12dp"
+                    app:cardBackgroundColor="#2A2A2A">
                     <ImageView
                         android:id="@+id/iv_rest_next_thumb"
                         android:layout_width="match_parent"
@@ -324,24 +335,26 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Next Exercise"
-                        android:textColor="@color/text_grey"
+                        android:text="@string/next_exercise"
+                        android:textColor="?android:attr/textColorSecondary"
                         android:textSize="12sp" />
                     <TextView
                         android:id="@+id/tv_rest_next_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Alternating Side Lunges"
-                        android:textColor="@color/text_white"
+                        android:text="@string/exercise_name_placeholder"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:text="Exercise Name" />
                     <TextView
                         android:id="@+id/tv_rest_next_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="15 reps each • Rest 45 seconds"
-                        android:textColor="@color/text_grey"
-                        android:textSize="12sp" />
+                        android:text="@string/exercise_reps_placeholder"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="12sp"
+                        tools:text="15 reps each" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -360,11 +373,13 @@
                 android:id="@+id/btn_minus_10"
                 android:layout_width="74dp"
                 android:layout_height="74dp"
-                android:backgroundTint="#444444"
-                android:text="- 10"
-                android:textColor="@color/text_white"
+                android:backgroundTint="?attr/colorSurface"
+                android:text="@string/minus_10"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="12sp"
-                app:cornerRadius="37dp" />
+                app:cornerRadius="37dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="?android:attr/textColorSecondary" />
 
             <Button
                 android:id="@+id/btn_skip_rest"
@@ -372,22 +387,26 @@
                 android:layout_height="64dp"
                 android:layout_marginHorizontal="16dp"
                 android:layout_weight="1"
-                android:backgroundTint="#444444"
-                android:text="Skip Rest"
-                android:textColor="@color/text_white"
+                android:backgroundTint="?attr/colorSurface"
+                android:text="@string/skip_rest"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:cornerRadius="32dp" />
+                app:cornerRadius="32dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="?android:attr/textColorSecondary" />
 
             <Button
                 android:id="@+id/btn_plus_10"
                 android:layout_width="74dp"
                 android:layout_height="74dp"
-                android:backgroundTint="#444444"
-                android:text="+ 10"
-                android:textColor="@color/text_white"
+                android:backgroundTint="?attr/colorSurface"
+                android:text="@string/plus_10"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="12sp"
-                app:cornerRadius="37dp" />
+                app:cornerRadius="37dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="?android:attr/textColorSecondary" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

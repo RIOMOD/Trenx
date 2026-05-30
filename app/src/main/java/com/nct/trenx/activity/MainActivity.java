@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -15,7 +14,7 @@ import com.nct.trenx.fragment.MyProgressFragment;
 import com.nct.trenx.fragment.PlaceholderFragment;
 import com.nct.trenx.utils.IntentExtras;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static final String TAG_DASHBOARD = "tag_dashboard";
     private static final String TAG_COMMUNITY = "tag_community";

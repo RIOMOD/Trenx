@@ -2,19 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main" android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bg_dark"
-    tools:context=".LevelActivity">
+    android:background="?android:attr/windowBackground"
+    android:fitsSystemWindows="true"
+    tools:context=".activity.LevelActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TRENX"
+        android:text="@string/app_name"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="@color/text_white"
+        android:textColor="?android:attr/textColorPrimary"
         android:textAlignment="center"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
@@ -23,7 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SẴN SÀNG ĐỂ BỨT PHÁ?"
+        android:text="@string/ready_to_breakout"
         android:textSize="18sp"
         android:textColor="@color/accent_color"
         android:textStyle="bold"
@@ -33,7 +35,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="XÂY DỰNG CƠ THỂ HOÀN HẢO CỦA BẠN"
+        android:text="@string/build_perfect_body"
         android:textSize="18sp"
         android:textColor="@color/accent_color"
         android:textStyle="bold"
@@ -43,9 +45,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="chọn mức độ tập"
+        android:text="@string/choose_level"
         android:textSize="14sp"
-        android:textColor="@color/text_grey"
+        android:textColor="?android:attr/textColorSecondary"
         android:layout_marginStart="160dp"
         android:layout_marginBottom="24dp"/>
 
@@ -64,9 +66,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/card_dark"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                app:cardElevation="2dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground">
@@ -79,8 +81,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DỄ"
-                        android:textColor="@color/text_white"
+                        android:text="@string/easy"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
                 </LinearLayout>
@@ -91,9 +93,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/card_dark"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                app:cardElevation="2dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground">
@@ -106,8 +108,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TRUNG BÌNH"
-                        android:textColor="@color/text_white"
+                        android:text="@string/medium"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
                 </LinearLayout>
@@ -118,9 +120,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/card_dark"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                app:cardElevation="2dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground">
@@ -133,8 +135,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="KHÓ"
-                        android:textColor="@color/text_white"
+                        android:text="@string/hard"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
                 </LinearLayout>

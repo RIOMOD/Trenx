@@ -1,28 +1,42 @@
 package com.nct.trenx.utils;
 
-import android.graphics.Color;
+import android.content.Context;
+import android.util.TypedValue;
 import android.widget.Button;
 
-public final class DifficultyUiHelper {
+import androidx.annotation.AttrRes;
+import androidx.core.content.ContextCompat;
 
-    private static final int COLOR_INACTIVE = Color.parseColor("#888888");
-    private static final int COLOR_ACTIVE = Color.parseColor("#00FF00");
+import com.nct.trenx.R;
+
+public final class DifficultyUiHelper {
 
     private DifficultyUiHelper() {
     }
 
     public static void applySelection(Button btnBeginner, Button btnIntermediate, Button btnAdvanced,
                                       String selectedDifficulty) {
-        btnBeginner.setTextColor(COLOR_INACTIVE);
-        btnIntermediate.setTextColor(COLOR_INACTIVE);
-        btnAdvanced.setTextColor(COLOR_INACTIVE);
+        Context context = btnBeginner.getContext();
+        
+        int colorInactive = getThemeColor(context, android.R.attr.textColorSecondary);
+        int colorActive = ContextCompat.getColor(context, R.color.accent_color);
+
+        btnBeginner.setTextColor(colorInactive);
+        btnIntermediate.setTextColor(colorInactive);
+        btnAdvanced.setTextColor(colorInactive);
 
         if (IntentExtras.DIFFICULTY_BEGINNER.equals(selectedDifficulty)) {
-            btnBeginner.setTextColor(COLOR_ACTIVE);
+            btnBeginner.setTextColor(colorActive);
         } else if (IntentExtras.DIFFICULTY_INTERMEDIATE.equals(selectedDifficulty)) {
-            btnIntermediate.setTextColor(COLOR_ACTIVE);
+            btnIntermediate.setTextColor(colorActive);
         } else if (IntentExtras.DIFFICULTY_ADVANCED.equals(selectedDifficulty)) {
-            btnAdvanced.setTextColor(COLOR_ACTIVE);
+            btnAdvanced.setTextColor(colorActive);
         }
+    }
+
+    private static int getThemeColor(Context context, @AttrRes int attr) {
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(attr, typedValue, true);
+        return typedValue.data;
     }
 }

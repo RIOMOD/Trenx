@@ -2,7 +2,7 @@ package com.nct.trenx.activity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,7 +10,7 @@ import com.nct.trenx.R;
 import com.nct.trenx.adapter.LikedWorkoutAdapter;
 import com.nct.trenx.database.ExerciseRepository;
 
-public class LikedWorkoutsActivity extends AppCompatActivity {
+public class LikedWorkoutsActivity extends BaseActivity {
 
     private RecyclerView rvLikedWorkouts;
     private LikedWorkoutAdapter adapter;
@@ -26,7 +26,7 @@ public class LikedWorkoutsActivity extends AppCompatActivity {
             btnBack.setOnClickListener(v -> finish());
         }
 
-        android.widget.TextView tvTitle = findViewById(R.id.tv_toolbar_title);
+        TextView tvTitle = findViewById(R.id.tv_toolbar_title);
         if (tvTitle != null) {
             tvTitle.setText(R.string.all_liked_workouts_title);
         }

@@ -2,11 +2,13 @@ package com.nct.trenx.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -56,22 +58,39 @@ public class CommunityFragment extends Fragment {
             }
         });
 
+        updateTabUI(); // Initial UI update
+
         return view;
     }
 
     private void updateTabUI() {
+        // Sửa 3 dòng này lại cho gọn gàng:
+        int colorPrimary = getThemeColor(android.R.attr.colorPrimary);
+        int colorOnPrimary = getThemeColor(android.R.attr.colorBackground);
+        int textColorSecondary = getThemeColor(android.R.attr.textColorSecondary);
+
         if (isCommunityTabActive) {
             tvTabCommunity.setBackgroundResource(R.drawable.bg_tab_active);
-            tvTabCommunity.setTextColor(Color.parseColor("#000000"));
+            tvTabCommunity.setBackgroundTintList(android.content.res.ColorStateList.valueOf(colorPrimary));
+            tvTabCommunity.setTextColor(colorOnPrimary);
             
             tvTabPersonal.setBackgroundResource(android.R.color.transparent);
-            tvTabPersonal.setTextColor(Color.parseColor("#757575"));
+            tvTabPersonal.setTextColor(textColorSecondary);
         } else {
             tvTabPersonal.setBackgroundResource(R.drawable.bg_tab_active);
-            tvTabPersonal.setTextColor(Color.parseColor("#000000"));
+            tvTabPersonal.setBackgroundTintList(android.content.res.ColorStateList.valueOf(colorPrimary));
+            tvTabPersonal.setTextColor(colorOnPrimary);
             
             tvTabCommunity.setBackgroundResource(android.R.color.transparent);
-            tvTabCommunity.setTextColor(Color.parseColor("#757575"));
+            tvTabCommunity.setTextColor(textColorSecondary);
         }
+    }
+
+    private int getThemeColor(@AttrRes int attrRes) {
+        TypedValue typedValue = new TypedValue();
+        if (getContext() != null && getContext().getTheme().resolveAttribute(attrRes, typedValue, true)) {
+            return typedValue.data;
+        }
+        return Color.GRAY;
     }
 }
