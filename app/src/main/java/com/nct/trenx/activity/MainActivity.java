@@ -10,8 +10,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nct.trenx.R;
 import com.nct.trenx.fragment.DashboardFragment;
+import com.nct.trenx.fragment.ExploreFragment;
 import com.nct.trenx.fragment.MyProgressFragment;
-import com.nct.trenx.fragment.PlaceholderFragment;
 import com.nct.trenx.utils.IntentExtras;
 
 public class MainActivity extends BaseActivity {
@@ -109,7 +109,7 @@ public class MainActivity extends BaseActivity {
             return new com.nct.trenx.fragment.CommunityFragment();
         }
         if (navItemId == R.id.nav_explore) {
-            return PlaceholderFragment.newInstance(R.layout.fragment_explore);
+            return new ExploreFragment();
         }
         if (navItemId == R.id.nav_progress) {
             return new MyProgressFragment();
