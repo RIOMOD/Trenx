@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nct.trenx.R;
 import com.nct.trenx.adapter.LikedWorkoutAdapter;
 import com.nct.trenx.database.ExerciseRepository;
+import com.nct.trenx.utils.PreferenceUtils;
 
 public class LikedWorkoutsActivity extends BaseActivity {
 
@@ -35,7 +36,8 @@ public class LikedWorkoutsActivity extends BaseActivity {
         rvLikedWorkouts = findViewById(R.id.rv_liked_workouts);
         rvLikedWorkouts.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new LikedWorkoutAdapter(repository.getLikedExercises());
+        int userId = PreferenceUtils.getUserId(this);
+        adapter = new LikedWorkoutAdapter(repository.getLikedExercises(userId));
         rvLikedWorkouts.setAdapter(adapter);
     }
 
@@ -43,7 +45,8 @@ public class LikedWorkoutsActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         if (repository != null && adapter != null) {
-            adapter.updateData(repository.getLikedExercises());
+            int userId = PreferenceUtils.getUserId(this);
+            adapter.updateData(repository.getLikedExercises(userId));
         }
     }
 }

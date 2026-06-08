@@ -1,5 +1,6 @@
 package com.nct.trenx.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,117 +16,104 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nct.trenx.R;
+import com.nct.trenx.activity.LikedWorkoutsActivity;
+import com.nct.trenx.activity.MainActivity;
 import com.nct.trenx.adapter.WorkoutCardAdapter;
+import com.nct.trenx.database.DatabaseHelper;
 import com.nct.trenx.model.Exercise;
+import com.nct.trenx.utils.IntentExtras;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExploreFragment extends Fragment {
 
-    private AppCompatButton btnWorkouts;
-    private AppCompatButton btnPrograms;
-    private AppCompatButton btnTechniques;
-    private AppCompatButton btnExercises;
+    private AppCompatButton btnCatAll, btnCatAbs, btnCatChest, btnCatLegs, btnCatBack;
+    private RecyclerView rvFollowAlong, rvYoutubeWorkouts;
+    private DatabaseHelper dbHelper;
+    private List<AppCompatButton> tabButtons = new ArrayList<>();
 
-    private TextView txtCategory;
-    private TextView tvFollowTitle;
-    private TextView tvYoutubeTitle;
+    public ExploreFragment() {}
 
-    private RecyclerView rvFollowAlong;
-    private RecyclerView rvYoutubeWorkouts;
-
-    public ExploreFragment() {
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_explore, container, false);
     }
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState) {
-
-        return inflater.inflate(
-                R.layout.fragment_explore,
-                container,
-                false
-        );
-    }
-
-    @Override
-    public void onViewCreated(
-            @NonNull View view,
-            @Nullable Bundle savedInstanceState) {
-
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        dbHelper = new DatabaseHelper(requireContext());
 
-        btnWorkouts = view.findViewById(R.id.btnWorkouts);
-        btnPrograms = view.findViewById(R.id.btnPrograms);
-        btnTechniques = view.findViewById(R.id.btnTechniques);
-        btnExercises = view.findViewById(R.id.btnExercises);
+        btnCatAll = view.findViewById(R.id.btnCatAll);
+        btnCatAbs = view.findViewById(R.id.btnCatAbs);
+        btnCatChest = view.findViewById(R.id.btnCatChest);
+        btnCatLegs = view.findViewById(R.id.btnCatLegs);
+        btnCatBack = view.findViewById(R.id.btnCatBack);
 
-        txtCategory = view.findViewById(R.id.txtCategory);
-        tvFollowTitle = view.findViewById(R.id.tvFollowTitle);
-        tvYoutubeTitle = view.findViewById(R.id.tvYoutubeTitle);
+        tabButtons.add(btnCatAll);
+        tabButtons.add(btnCatAbs);
+        tabButtons.add(btnCatChest);
+        tabButtons.add(btnCatLegs);
+        tabButtons.add(btnCatBack);
 
         rvFollowAlong = view.findViewById(R.id.rvFollowAlong);
         rvYoutubeWorkouts = view.findViewById(R.id.rvYoutubeWorkouts);
 
-        setupRecyclerViews();
+        btnCatAll.setOnClickListener(v -> selectTab(btnCatAll, null));
+        btnCatAbs.setOnClickListener(v -> selectTab(btnCatAbs, "Bụng"));
+        btnCatChest.setOnClickListener(v -> selectTab(btnCatChest, "Ngực"));
+        btnCatLegs.setOnClickListener(v -> selectTab(btnCatLegs, "Chân"));
+        btnCatBack.setOnClickListener(v -> selectTab(btnCatBack, "Lưng"));
 
-        btnWorkouts.setOnClickListener(v ->
-                selectTab(btnWorkouts, "Workouts"));
+        view.findViewById(R.id.cardPrevious).setOnClickListener(v -> {
+            if (getActivity() instanceof MainActivity) {
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                intent.putExtra(IntentExtras.TARGET_FRAGMENT, R.id.nav_progress);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
-        btnPrograms.setOnClickListener(v ->
-                selectTab(btnPrograms, "Programs"));
+        view.findViewById(R.id.cardLiked).setOnClickListener(v -> 
+                startActivity(new Intent(getContext(), LikedWorkoutsActivity.class)));
 
-        btnTechniques.setOnClickListener(v ->
-                selectTab(btnTechniques, "Techniques"));
-
-        btnExercises.setOnClickListener(v ->
-                selectTab(btnExercises, "Exercises"));
-
-        // Set initial selected tab
-        selectTab(btnWorkouts, "Workouts");
+        // Initial load
+        selectTab(btnCatAll, null);
     }
 
-    private void setupRecyclerViews() {
-        List<Exercise> dummyList = new ArrayList<>();
-        dummyList.add(new Exercise("BIGGER ARMS", "15 mins", "Workouts", "", "https://i.ytimg.com/vi/pd3-q2U7JXk/maxresdefault.jpg", "", ""));
-        dummyList.add(new Exercise("DUMBBELLS ONLY", "20 mins", "Workouts", "", "https://i.ytimg.com/vi/srj94JCeuWw/maxresdefault.jpg", "", ""));
-        dummyList.add(new Exercise("CHEST PUMP", "12 mins", "Workouts", "", "https://thenx.com/cdn/shop/articles/legsandglutes.jpg", "", ""));
+    private void selectTab(AppCompatButton selected, String category) {
+        for (AppCompatButton btn : tabButtons) {
+            btn.setBackgroundResource(R.drawable.category_bg);
+            btn.setTextColor(Color.BLACK);
+        }
+        selected.setBackgroundResource(R.drawable.category_selected);
+        selected.setTextColor(Color.WHITE);
 
-        WorkoutCardAdapter adapter1 = new WorkoutCardAdapter(dummyList);
+        loadData(category);
+    }
+
+    private void loadData(String category) {
+        List<Exercise> exercises;
+        if (category == null) {
+            exercises = dbHelper.getAllExercises();
+        } else {
+            exercises = dbHelper.getExercisesByCategory(category);
+        }
+
+        if (exercises.isEmpty()) {
+            exercises = dbHelper.getAllExercises();
+        }
+
+        // Shuffle or split for variety
+        int size = exercises.size();
+        List<Exercise> list1 = new ArrayList<>(exercises.subList(0, size / 2));
+        List<Exercise> list2 = new ArrayList<>(exercises.subList(size / 2, size));
+
         rvFollowAlong.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        rvFollowAlong.setAdapter(adapter1);
+        rvFollowAlong.setAdapter(new WorkoutCardAdapter(list1));
 
-        WorkoutCardAdapter adapter2 = new WorkoutCardAdapter(dummyList);
         rvYoutubeWorkouts.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        rvYoutubeWorkouts.setAdapter(adapter2);
-    }
-
-    private void resetTabs() {
-        btnWorkouts.setBackgroundResource(R.drawable.category_bg);
-        btnPrograms.setBackgroundResource(R.drawable.category_bg);
-        btnTechniques.setBackgroundResource(R.drawable.category_bg);
-        btnExercises.setBackgroundResource(R.drawable.category_bg);
-
-        btnWorkouts.setTextColor(Color.BLACK);
-        btnPrograms.setTextColor(Color.BLACK);
-        btnTechniques.setTextColor(Color.BLACK);
-        btnExercises.setTextColor(Color.BLACK);
-    }
-
-    private void selectTab(AppCompatButton selectedButton,
-                           String categoryName) {
-        resetTabs();
-
-        selectedButton.setBackgroundResource(R.drawable.category_selected);
-        selectedButton.setTextColor(Color.WHITE);
-
-        if (txtCategory != null) txtCategory.setText(categoryName);
-        
-        // Update section titles based on tab
-        if (tvFollowTitle != null) tvFollowTitle.setText("Follow Along " + categoryName);
-        if (tvYoutubeTitle != null) tvYoutubeTitle.setText("YouTube " + categoryName);
+        rvYoutubeWorkouts.setAdapter(new WorkoutCardAdapter(list2));
     }
 }

@@ -47,10 +47,15 @@ public class SplashActivity extends BaseActivity {
         animatorSet.playTogether(fade, scaleX, scaleY, moveUp);
         animatorSet.start();
 
-        // Transition to MainActivity after 2 seconds
+        // Transition after 2 seconds
         handler = new Handler(android.os.Looper.getMainLooper());
         runnable = () -> {
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            Intent intent;
+            if (PreferenceUtils.isLoggedIn(this)) {
+                intent = new Intent(SplashActivity.this, MainActivity.class);
+            } else {
+                intent = new Intent(SplashActivity.this, AuthStartActivity.class);
+            }
             startActivity(intent);
             finish();
         };

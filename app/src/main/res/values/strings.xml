@@ -183,4 +183,36 @@
     <string name="mark_all_read">Read all</string>
     <string name="no_results_title">No results found</string>
     <string name="no_results_desc">We couldn\'t find any exercises matching your search. Try different keywords.</string>
+
+    <!-- Auth & Onboarding -->
+    <string name="get_started_free">GET STARTED FOR FREE</string>
+    <string name="auth_start_title">Millions Started Here:\nBegin Calisthenics\nWith TRENX\nToday!</string>
+    <string name="create_account">Create Account</string>
+    <string name="already_member">Already a member? </string>
+    <string name="sign_in">Sign in</string>
+    <string name="welcome_back">Welcome back,\nSign in into your account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="hint_email">Add your email address</string>
+    <string name="hint_password">Add your password</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="forgot_password_title">Forgot Your Password?</string>
+    <string name="forgot_password_desc">Enter your email and we\'ll send you\na link to reset it.</string>
+    <string name="recover_password">Recover Password</string>
+    <string name="continue_btn">Continue</string>
+    <string name="goals_title">Goals</string>
+    <string name="goals_subtitle">Choose as many as you like</string>
+    <string name="gender_title">Gender</string>
+    <string name="fitness_level_title">Fitness Level</string>
+    <string name="account_details_title">Account Details</string>
+    <string name="username">Username</string>
+    <string name="full_name">Full Name</string>
+    <string name="hint_username">Add your username</string>
+    <string name="hint_fullname">Add your full name</string>
+    <string name="terms_agreement">By subscribing you agree to our\nTerms and Conditions &amp; Privacy Policy</string>
+    <string name="test_it_btn">I am not sure, I want to test it</string>
+    <string name="unit_cm">cm</string>
+    <string name="unit_in">in</string>
+    <string name="unit_kg">kg</string>
+    <string name="unit_lbs">lbs</string>
 </resources>

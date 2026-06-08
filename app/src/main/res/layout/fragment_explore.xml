@@ -64,54 +64,68 @@
         app:layout_constraintTop_toBottomOf="@id/topBar">
 
         <LinearLayout
+            android:id="@+id/layoutTabs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp">
 
+            <!-- Tabs will be populated dynamically or fixed with real names -->
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnWorkouts"
+                android:id="@+id/btnCatAll"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:background="@drawable/category_selected"
                 android:paddingHorizontal="16dp"
-                android:text="Workouts"
+                android:text="Tất cả"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnPrograms"
+                android:id="@+id/btnCatAbs"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/category_bg"
                 android:paddingHorizontal="16dp"
-                android:text="Programs"
+                android:text="Bụng"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnTechniques"
+                android:id="@+id/btnCatChest"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/category_bg"
                 android:paddingHorizontal="16dp"
-                android:text="Techniques"
+                android:text="Ngực"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnExercises"
+                android:id="@+id/btnCatLegs"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/category_bg"
                 android:paddingHorizontal="16dp"
-                android:text="Exercises"
+                android:text="Chân"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnCatBack"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/category_bg"
+                android:paddingHorizontal="16dp"
+                android:text="Lưng"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
@@ -133,27 +147,15 @@
             android:orientation="vertical"
             android:paddingBottom="20dp">
 
-            <!-- Tab Indicator (Optional, but good for feedback as requested) -->
-            <TextView
-                android:id="@+id/txtCategory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Workouts"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <!-- Two Top Cards -->
+            <!-- Top Cards -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:orientation="horizontal"
                 android:padding="8dp">
 
-                <!-- Previous Workouts -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPrevious"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
@@ -170,7 +172,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Previous\nWorkouts"
+                            android:text="Lịch sử\nTập luyện"
                             android:textColor="@android:color/black"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -198,8 +200,8 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Liked Workouts -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardLiked"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
@@ -216,7 +218,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Liked\nWorkouts"
+                            android:text="Bài tập\nĐã thích"
                             android:textColor="@android:color/black"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -246,7 +248,7 @@
 
             </LinearLayout>
 
-            <!-- Follow Along Workouts Section -->
+            <!-- Popular Exercises Section -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -254,26 +256,15 @@
                 android:paddingHorizontal="16dp">
 
                 <TextView
-                    android:id="@+id/tvFollowTitle"
+                    android:id="@+id/tvSectionTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Follow Along Workouts"
+                    android:text="Khám phá bài tập"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/btnViewAllFollow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View All"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@id/tvFollowTitle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tvFollowTitle" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -288,7 +279,6 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_exercise" />
 
-            <!-- YouTube Workouts Section -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -296,26 +286,15 @@
                 android:paddingHorizontal="16dp">
 
                 <TextView
-                    android:id="@+id/tvYoutubeTitle"
+                    android:id="@+id/tvSectionTitle2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="YouTube Workouts"
+                    android:text="Gợi ý cho bạn"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/btnViewAllYoutube"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View All"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@id/tvYoutubeTitle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tvYoutubeTitle" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

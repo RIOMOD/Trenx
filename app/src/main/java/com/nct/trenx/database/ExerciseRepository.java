@@ -21,11 +21,19 @@ public class ExerciseRepository {
         return databaseHelper.getExercisesByDayAndDifficulty(day, difficulty);
     }
 
-    public List<Exercise> getLikedExercises() {
-        return databaseHelper.getLikedExercises();
+    public List<Exercise> getLikedExercises(int userId) {
+        return databaseHelper.getLikedExercises(userId);
     }
 
     public List<Exercise> searchExercises(String query) {
         return databaseHelper.searchExercises(query);
+    }
+
+    public void setExerciseLiked(int userId, String exerciseName, boolean liked) {
+        databaseHelper.setExerciseLiked(userId, exerciseName, liked);
+    }
+
+    public boolean isExerciseLiked(int userId, String exerciseName) {
+        return databaseHelper.isExerciseLiked(userId, exerciseName);
     }
 }

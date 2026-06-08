@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/tv_picker_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_tag"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/btn_unit_left"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_selected_day"
+            android:backgroundTint="?android:attr/textColorPrimary"
+            android:gravity="center"
+            android:text="cm"
+            android:textColor="?android:attr/colorBackground"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btn_unit_right"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="in"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <NumberPicker
+        android:id="@+id/number_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:theme="@style/Theme.Trenx" />
+
+</LinearLayout>

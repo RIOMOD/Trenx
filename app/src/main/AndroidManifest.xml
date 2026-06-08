@@ -36,6 +36,11 @@
         <activity android:name=".activity.SettingsActivity" android:exported="false" android:screenOrientation="portrait"/>
         <activity android:name=".activity.NotificationsActivity" android:exported="false" />
         <activity android:name=".activity.SearchActivity" android:exported="false" />
+        <activity android:name=".activity.AuthStartActivity" android:exported="false" />
+        <activity android:name=".activity.LoginActivity" android:exported="false" />
+        <activity android:name=".activity.ForgotPasswordActivity" android:exported="false" />
+        <activity android:name=".activity.OnboardingActivity" android:exported="false" />
+        <activity android:name=".activity.FitnessTestActivity" android:exported="false" />
 
         <activity
             android:name=".activity.PremiumActivity"

@@ -54,6 +54,7 @@
     <string name="heatmap_normal">Bình thường</string>
     <string name="heatmap_inactive">Không hoạt động</string>
     <string name="not_trained">Chưa tập luyện</string>
+    <string name="user_name_default">Nguyễn Công Trứ</string>
 
     <!-- Muscles -->
     <string name="muscle_abs">Cơ bụng (Core)</string>
@@ -106,7 +107,7 @@
     <string name="minus_10">- 10</string>
 
     <!-- Level Selection -->
-    <string name="build_perfect_body">XÂY DỰNG CƠ THỂ HOÀO HẢO</string>
+    <string name="build_perfect_body">XÂY DỰNG CƠ THỂ HOÀN HẢO</string>
     <string name="choose_level">chọn mức độ tập</string>
     <string name="easy">DỄ</string>
     <string name="medium">TRUNG BÌNH</string>
@@ -130,7 +131,7 @@
     <string name="restore_purchase">Khôi phục giao dịch</string>
     <string name="upgrade_now">Nâng cấp ngay</string>
     <string name="terms_conditions">Bằng cách đăng ký, bạn đồng ý với Điều khoản &amp; Điều kiện của chúng tôi</string>
-    <string name="save_yearly">TIẾT KIỆM ₫762.880 VNĐ / NÂM</string>
+    <string name="save_yearly">TIẾT KIỆM ₫762.880 VNĐ / NĂM</string>
     <string name="yearly_price">₫749.000 VNĐ</string>
     <string name="monthly_price">₫125.990 VNĐ</string>
     <string name="equivalent_monthly">Tương đương ₫62.416,67 / Tháng</string>
@@ -179,4 +180,38 @@
     <string name="start_searching_title">Bắt đầu tìm kiếm</string>
     <string name="start_searching_desc">Tìm các bài tập hoặc động tác yêu thích của bạn bằng cách nhập vào thanh tìm kiếm bên trên.</string>
     <string name="mark_all_read">Đọc tất cả</string>
+    <string name="no_results_title">Không tìm thấy kết quả</string>
+    <string name="no_results_desc">Chúng tôi không tìm thấy bài tập nào khớp với tìm kiếm của bạn. Hãy thử từ khóa khác.</string>
+
+    <!-- Auth & Onboarding -->
+    <string name="get_started_free">BẮT ĐẦU MIỄN PHÍ</string>
+    <string name="auth_start_title">Hàng triệu người đã bắt đầu tại đây:\nTập Calisthenics\ncùng TRENX\nNgay hôm nay!</string>
+    <string name="create_account">Tạo tài khoản</string>
+    <string name="already_member">Đã có tài khoản? </string>
+    <string name="sign_in">Đăng nhập</string>
+    <string name="welcome_back">Chào mừng quay lại,\nĐăng nhập vào tài khoản của bạn</string>
+    <string name="email">Email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="hint_email">Thêm địa chỉ email của bạn</string>
+    <string name="hint_password">Thêm mật khẩu của bạn</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+    <string name="forgot_password_title">Bạn quên mật khẩu?</string>
+    <string name="forgot_password_desc">Nhập email của bạn và chúng tôi sẽ gửi\nđường dẫn để đặt lại mật khẩu.</string>
+    <string name="recover_password">Khôi phục mật khẩu</string>
+    <string name="continue_btn">Tiếp tục</string>
+    <string name="goals_title">Mục tiêu</string>
+    <string name="goals_subtitle">Chọn bao nhiêu tùy thích</string>
+    <string name="gender_title">Giới tính</string>
+    <string name="fitness_level_title">Cấp độ thể chất</string>
+    <string name="account_details_title">Thông tin tài khoản</string>
+    <string name="username">Tên đăng nhập</string>
+    <string name="full_name">Họ và tên</string>
+    <string name="hint_username">Thêm tên đăng nhập</string>
+    <string name="hint_fullname">Thêm họ và tên</string>
+    <string name="terms_agreement">Bằng cách đăng ký, bạn đồng ý với\nĐiều khoản &amp; Chính sách bảo mật của chúng tôi</string>
+    <string name="test_it_btn">Tôi không chắc, tôi muốn thử</string>
+    <string name="unit_cm">cm</string>
+    <string name="unit_in">in</string>
+    <string name="unit_kg">kg</string>
+    <string name="unit_lbs">lbs</string>
 </resources>

@@ -22,9 +22,12 @@ import androidx.fragment.app.Fragment;
 
 import com.nct.trenx.R;
 import com.nct.trenx.activity.SettingsActivity;
+import com.nct.trenx.database.DatabaseHelper;
+import com.nct.trenx.model.User;
 import com.nct.trenx.model.WorkoutHistory;
 import com.nct.trenx.utils.DateUtils;
 import com.nct.trenx.utils.NavigationUtils;
+import com.nct.trenx.utils.PreferenceUtils;
 import com.nct.trenx.utils.ProgressDataProvider;
 
 import java.util.Calendar;
@@ -65,20 +68,26 @@ public class MyProgressFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_progress, container, false);
 
-        dataProvider = new ProgressDataProvider();
+        dataProvider = new ProgressDataProvider(requireContext());
         displayedMonth = Calendar.getInstance();
         selectedDate = Calendar.getInstance();
 
         initViews(view);
         setupTabSwitching();
         setupCalendarNavigation();
+        
+        refreshData();
+
+        return view;
+    }
+
+    private void refreshData() {
         setupStreaks();
         buildCalendar();
         updateActivitySection();
         buildMuscleList();
         updateUserStats();
-
-        return view;
+        updateHeatmapTints();
     }
 
     private void initViews(View view) {
@@ -268,83 +277,104 @@ public class MyProgressFragment extends Fragment {
         if (isToday || isSelected) tvDay.setTypeface(null, Typeface.BOLD);
         container.addView(tvDay);
 
+        if (hasWorkout) {
+            View dot = new View(requireContext());
+            FrameLayout.LayoutParams dotParams = new FrameLayout.LayoutParams(dpToPx(4), dpToPx(4), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
+            dotParams.bottomMargin = dpToPx(6);
+            dot.setLayoutParams(dotParams);
+            dot.setBackgroundResource(R.drawable.bg_circle_primary);
+            container.addView(dot);
+        }
+
         container.setOnClickListener(v -> {
             selectedDate.set(year, month, day);
-            buildCalendar(); 
+            buildCalendar();
             updateActivitySection();
         });
+
         return container;
     }
 
     private void updateActivitySection() {
-        tvDateTitle.setText(DateUtils.getDayDisplayText(getContext(), selectedDate));
-        List<WorkoutHistory> workouts = dataProvider.getWorkoutsByDate(DateUtils.formatDateKey(selectedDate));
+        String dateKey = ProgressDataProvider.formatDateKey(selectedDate);
+        tvDateTitle.setText(DateUtils.getDayDisplayText(requireContext(), selectedDate));
 
+        List<WorkoutHistory> workouts = dataProvider.getWorkoutsByDate(dateKey);
         if (workouts.isEmpty()) {
             layoutEmptyState.setVisibility(View.VISIBLE);
             layoutHistoryCard.setVisibility(View.GONE);
         } else {
             layoutEmptyState.setVisibility(View.GONE);
             layoutHistoryCard.setVisibility(View.VISIBLE);
+
             WorkoutHistory w = workouts.get(0);
             tvHistoryProgressPct.setText(w.getProgressPercent() + "%");
-            tvHistoryProgressText.setText(getString(R.string.progress_pct_format, w.getProgressPercent()));
-            tvHistoryTime.setText(getString(R.string.time_spent_format, w.getFormattedDuration()));
+            tvHistoryProgressText.setText(w.getDayName());
+            tvHistoryTime.setText(w.getFormattedDuration());
             tvHistoryDifficulty.setText(w.getDifficulty());
+            tvHistoryDaysAgo.setText(w.getDate());
         }
+    }
+
+    private void setupStreaks() {
+        tvCurrentStreak.setText(String.valueOf(dataProvider.getCurrentStreak()));
+        tvLongestStreak.setText(String.valueOf(dataProvider.getLongestStreak()));
     }
 
     private void buildMuscleList() {
         layoutMuscleList.removeAllViews();
-        Map<String, Integer> muscleRecency = dataProvider.getMuscleRecencyMap();
-        String[] muscleNames = {"Bụng", "Ngực", "Chân", "Vai", "Lưng"};
-        String[] muscleLabels = {getString(R.string.muscle_abs), getString(R.string.muscle_chest), getString(R.string.muscle_legs), getString(R.string.muscle_shoulders), getString(R.string.muscle_back)};
-
-        for (int i = 0; i < muscleNames.length; i++) {
-            String muscleName = muscleNames[i];
-            Integer daysAgo = muscleRecency.get(muscleName);
-            LinearLayout row = new LinearLayout(requireContext());
-            row.setOrientation(LinearLayout.HORIZONTAL);
-            row.setGravity(Gravity.CENTER_VERTICAL);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-1, -1);
-            lp.topMargin = dpToPx(12);
-            row.setLayoutParams(lp);
-            row.setPadding(dpToPx(12), dpToPx(12), dpToPx(12), dpToPx(12));
-            row.setBackgroundResource(R.drawable.bg_rounded_white);
-            row.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getThemeColor(android.R.attr.colorBackground)));
-
-            View dot = new View(requireContext());
-            dot.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(12), dpToPx(12)));
-            dot.setBackgroundResource(daysAgo != null && daysAgo <= 1 ? R.drawable.bg_dot_red : (daysAgo != null && daysAgo <= 3 ? R.drawable.bg_dot_orange : R.drawable.bg_dot_gray_dark));
-            row.addView(dot);
-
-            TextView tv = new TextView(requireContext());
-            tv.setLayoutParams(new LinearLayout.LayoutParams(0, -2, 1f));
-            tv.setPadding(dpToPx(12), 0, 0, 0);
-            tv.setText(muscleLabels[i]);
-            tv.setTextColor(getThemeColor(android.R.attr.textColorPrimary));
-            tv.setTextSize(15);
-            tv.setTypeface(null, Typeface.BOLD);
-            row.addView(tv);
-
-            layoutMuscleList.addView(row);
+        Map<String, Integer> muscleMap = dataProvider.getMuscleRecencyMap();
+        
+        for (Map.Entry<String, Integer> entry : muscleMap.entrySet()) {
+            View item = LayoutInflater.from(requireContext()).inflate(R.layout.item_muscle_row, layoutMuscleList, false);
+            TextView tvName = item.findViewById(R.id.tv_muscle_name);
+            TextView tvDays = item.findViewById(R.id.tv_muscle_days);
+            
+            tvName.setText(entry.getKey());
+            tvDays.setText(entry.getValue() == 0 ? "Today" : entry.getValue() + "d ago");
+            
+            layoutMuscleList.addView(item);
         }
     }
 
     private void updateUserStats() {
-        tvTotalWorkouts.setText(getString(R.string.workouts_count_format, 936));
-        tvFollowers.setText(getString(R.string.followers_count_format, 16));
-        tvFollowing.setText(getString(R.string.following_count_format, 7));
-        tvUserName.setText("Nguyen Cong Tru");
-        tvUserLevel.setText(getString(R.string.intermediate) + "  •  " + getString(R.string.strength_building));
+        DatabaseHelper db = new DatabaseHelper(requireContext());
+        User user = db.getUserByEmail(PreferenceUtils.getUserEmail(requireContext()));
+        if (user != null) {
+            tvUserName.setText(user.getFullName());
+            tvUserLevel.setText("Level 1");
+            tvTotalWorkouts.setText(String.valueOf(dataProvider.getTotalWorkouts()));
+            // Assuming followers/following stored somewhere or hardcoded for now
+            tvFollowers.setText("0");
+            tvFollowing.setText("0");
+        }
     }
 
-    private void setupStreaks() {
-        tvCurrentStreak.setText(getString(R.string.days_count_format, dataProvider.getCurrentStreak()));
-        tvLongestStreak.setText(getString(R.string.days_count_format, dataProvider.getLongestStreak()));
+    private void updateHeatmapTints() {
+        Map<String, Integer> muscleMap = dataProvider.getMuscleRecencyMap();
+        tintMuscle(maskChest, muscleMap.get("Chest"));
+        tintMuscle(maskAbs, muscleMap.get("Abs"));
+        tintMuscle(maskLegs, muscleMap.get("Legs"));
+        tintMuscle(maskBack, muscleMap.get("Back"));
+        tintMuscle(maskShoulders, muscleMap.get("Shoulders"));
+    }
+
+    private void tintMuscle(ImageView view, Integer daysAgo) {
+        if (view == null) return;
+        if (daysAgo == null) {
+            view.setImageAlpha(0);
+        } else {
+            view.setImageAlpha(255);
+            int color;
+            if (daysAgo == 0) color = Color.parseColor("#FFD700"); // Gold for today
+            else if (daysAgo <= 2) color = Color.parseColor("#4CAF50"); // Green
+            else if (daysAgo <= 5) color = Color.parseColor("#FFEB3B"); // Yellow
+            else color = Color.parseColor("#F44336"); // Red
+            view.setColorFilter(color);
+        }
     }
 
     private int dpToPx(int dp) {
-        return Math.round(dp * getResources().getDisplayMetrics().density);
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
     }
 }
