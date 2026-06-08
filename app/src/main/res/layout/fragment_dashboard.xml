@@ -12,6 +12,7 @@
         android:layout_height="28dp"
         android:layout_margin="16dp"
         android:src="@drawable/ic_search"
+        android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="?android:attr/textColorPrimary" />
@@ -29,9 +30,13 @@
         app:layout_constraintTop_toTopOf="@id/ivSearch" />
 
     <FrameLayout
+        android:id="@+id/btn_notifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintBottom_toBottomOf="@id/ivSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/ivSearch">
@@ -41,13 +46,14 @@
             android:src="@drawable/ic_notification"
             app:tint="?android:attr/textColorPrimary" />
         <TextView
+            android:id="@+id/tv_notification_badge"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_gravity="end|top"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
             android:background="@drawable/bg_selected_day"
-            android:backgroundTint="#444444"
+            android:backgroundTint="#FF5252"
             android:gravity="center"
             android:text="2"
             android:textColor="#FFFFFF"
@@ -87,6 +93,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_tag"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
                     android:text="@string/calendar"

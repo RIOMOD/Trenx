@@ -16,10 +16,14 @@ import com.nct.trenx.R;
 import com.nct.trenx.activity.ExerciseActivity;
 import com.nct.trenx.activity.LikedProgramsActivity;
 import com.nct.trenx.activity.LikedWorkoutsActivity;
+import com.nct.trenx.activity.MainActivity;
+import com.nct.trenx.activity.NotificationsActivity;
+import com.nct.trenx.activity.SearchActivity;
 import com.nct.trenx.model.WorkoutDayInfo;
 import com.nct.trenx.utils.DaySelectorUiHelper;
 import com.nct.trenx.utils.ImageUtils;
 import com.nct.trenx.utils.IntentExtras;
+import com.nct.trenx.utils.NotificationStore;
 import com.nct.trenx.utils.WorkoutUtils;
 
 import java.util.Calendar;
@@ -32,6 +36,7 @@ public class DashboardFragment extends Fragment {
     private TextView tvTodayDay, tvTodayTitle;
     private ImageView ivTodayWorkout;
     private TextView[] dayViews;
+    private TextView tvNotificationBadge;
 
     @Nullable
     @Override
@@ -45,6 +50,11 @@ public class DashboardFragment extends Fragment {
         CardView cardWorkout = view.findViewById(R.id.card_today_workout);
         CardView cardLikedWorkouts = view.findViewById(R.id.card_liked_workouts);
         CardView cardLikedPrograms = view.findViewById(R.id.card_liked_programs);
+        
+        ImageView ivSearch = view.findViewById(R.id.ivSearch);
+        View btnNotifications = view.findViewById(R.id.btn_notifications);
+        tvNotificationBadge = view.findViewById(R.id.tv_notification_badge);
+        TextView btnCalendar = view.findViewById(R.id.btn_calendar);
 
         initDaySelector(view);
 
@@ -54,7 +64,6 @@ public class DashboardFragment extends Fragment {
         if (cardWorkout != null) {
             cardWorkout.setOnClickListener(v -> {
                 Intent intent = new Intent(getContext(), ExerciseActivity.class);
-                // Truyền key database tiếng Anh để tìm đúng dữ liệu
                 intent.putExtra(IntentExtras.DAY_NAME, currentDbDayKey);
                 intent.putExtra(IntentExtras.WORKOUT_TITLE, getString(workoutTitleResId));
                 startActivity(intent);
@@ -71,7 +80,44 @@ public class DashboardFragment extends Fragment {
                     startActivity(new Intent(getContext(), LikedProgramsActivity.class)));
         }
 
+        if (ivSearch != null) {
+            ivSearch.setOnClickListener(v -> 
+                    startActivity(new Intent(getContext(), SearchActivity.class)));
+        }
+
+        if (btnNotifications != null) {
+            btnNotifications.setOnClickListener(v -> 
+                    startActivity(new Intent(getContext(), NotificationsActivity.class)));
+        }
+
+        if (btnCalendar != null) {
+            btnCalendar.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                intent.putExtra(IntentExtras.TARGET_FRAGMENT, R.id.nav_progress);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            });
+        }
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateNotificationBadge();
+    }
+
+    private void updateNotificationBadge() {
+        if (tvNotificationBadge == null) return;
+        
+        int unreadCount = NotificationStore.getUnreadCount();
+        if (unreadCount > 0) {
+            tvNotificationBadge.setVisibility(View.VISIBLE);
+            tvNotificationBadge.setText(String.valueOf(unreadCount));
+        } else {
+            tvNotificationBadge.setVisibility(View.GONE);
+        }
     }
 
     private void initDaySelector(View view) {

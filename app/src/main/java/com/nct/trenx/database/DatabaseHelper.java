@@ -14,9 +14,10 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
-    // Đổi tên database mới nhất để xóa sạch dữ liệu cũ lỗi
+    // Tên database chính thức của ứng dụng
     private static final String DATABASE_NAME = "Trenx_Data_Production";
-    private static final int DATABASE_VERSION = 1;
+    // Tăng version lên 2 để cập nhật toàn bộ bài tập mới từ DatabaseSeeder
+    private static final int DATABASE_VERSION = 2;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -71,6 +72,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
+    public List<Exercise> searchExercises(String query) {
+        List<Exercise> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        
+        // Tìm kiếm theo tên hoặc danh mục (category)
+        String sql = "SELECT * FROM exercises WHERE name LIKE ? OR category LIKE ?";
+        String wildCardQuery = "%" + query + "%";
+        
+        Cursor cursor = db.rawQuery(sql, new String[]{wildCardQuery, wildCardQuery});
+        try {
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    list.add(new Exercise(
+                            cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                            cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7)
+                    ));
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+        return list;
+    }
+
     public List<Exercise> getLikedExercises() {
         List<Exercise> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -92,6 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
+        // Xóa bảng cũ và tạo lại để cập nhật toàn bộ danh sách bài tập mới
         db.execSQL("DROP TABLE IF EXISTS exercises");
         onCreate(db);
     }

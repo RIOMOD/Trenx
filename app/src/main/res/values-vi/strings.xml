@@ -170,4 +170,13 @@
     <string name="nav_dashboard">Bảng điều khiển</string>
     <string name="nav_progress">Tiến độ</string>
     <string name="nav_premium">Premium</string>
+
+    <!-- Notifications & Search -->
+    <string name="notifications_title">Thông báo</string>
+    <string name="no_notifications_title">Chưa có thông báo nào</string>
+    <string name="no_notifications_desc">Hãy chú ý theo dõi! Chúng tôi sẽ thông báo cho bạn khi có bản cập nhật mới hoặc lời khuyên dành riêng cho bạn.</string>
+    <string name="search_hint">Tìm kiếm bài tập, động tác...</string>
+    <string name="start_searching_title">Bắt đầu tìm kiếm</string>
+    <string name="start_searching_desc">Tìm các bài tập hoặc động tác yêu thích của bạn bằng cách nhập vào thanh tìm kiếm bên trên.</string>
+    <string name="mark_all_read">Đọc tất cả</string>
 </resources>

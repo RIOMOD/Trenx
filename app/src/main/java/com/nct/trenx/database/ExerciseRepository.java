@@ -24,4 +24,8 @@ public class ExerciseRepository {
     public List<Exercise> getLikedExercises() {
         return databaseHelper.getLikedExercises();
     }
+
+    public List<Exercise> searchExercises(String query) {
+        return databaseHelper.searchExercises(query);
+    }
 }

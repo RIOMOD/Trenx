@@ -34,6 +34,8 @@
         <activity android:name=".activity.LikedWorkoutsActivity" android:exported="false" />
         <activity android:name=".activity.LikedProgramsActivity" android:exported="false" />
         <activity android:name=".activity.SettingsActivity" android:exported="false" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.NotificationsActivity" android:exported="false" />
+        <activity android:name=".activity.SearchActivity" android:exported="false" />
 
         <activity
             android:name=".activity.PremiumActivity"
