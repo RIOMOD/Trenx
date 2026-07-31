@@ -51,17 +51,28 @@ public class DetailActivity extends BaseActivity {
             });
         }
 
-        // Nhận dữ liệu truyền từ Dashboard/Search
+        // Nhận dữ liệu truyền từ Dashboard/Search/LevelActivity
         String nameExtra = getIntent().getStringExtra(IntentExtras.EXERCISE_NAME);
         String dayNameExtra = getIntent().getStringExtra(IntentExtras.DAY_NAME);
+        String nhomCoExtra = getIntent().getStringExtra(IntentExtras.NHOM_CO);
+        String muscleExtra = getIntent().getStringExtra("MUSCLE_GROUP");
+        String eqExtra = getIntent().getStringExtra("EQUIPMENT");
         String diffExtra = getIntent().getStringExtra(IntentExtras.DIFFICULTY);
 
         if (nameExtra != null && !nameExtra.isEmpty()) {
             currentDayName = nameExtra;
-            if (tvName != null) tvName.setText(nameExtra);
         } else if (dayNameExtra != null && !dayNameExtra.isEmpty()) {
             currentDayName = dayNameExtra;
-            if (tvName != null) tvName.setText(dayNameExtra);
+        } else if (nhomCoExtra != null && !nhomCoExtra.isEmpty()) {
+            currentDayName = nhomCoExtra;
+        } else if (muscleExtra != null && !muscleExtra.isEmpty()) {
+            currentDayName = muscleExtra;
+        } else if (eqExtra != null && !eqExtra.isEmpty()) {
+            currentDayName = eqExtra + " Workout";
+        }
+
+        if (tvName != null) {
+            tvName.setText(currentDayName);
         }
 
         if (diffExtra != null && !diffExtra.isEmpty()) {

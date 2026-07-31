@@ -1,12 +1,8 @@
 package com.nct.trenx.activity;
 
-import android.os.Bundle;
-import com.nct.trenx.R;
-
-public class ExrciselistActivity extends BaseActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exlist);
-    }
+/**
+ * Forwarding class cho ExrciselistActivity legacy.
+ * Hiển thị giao diện DetailActivity (activity_detail.xml) khớp 100% hình tham chiếu.
+ */
+public class ExrciselistActivity extends DetailActivity {
 }
