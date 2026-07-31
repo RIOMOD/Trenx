@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trenx - Reset Your Password</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Firebase App & Auth SDK v10 -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, verifyPasswordResetCode, confirmPasswordReset } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    // Extract query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const mode = urlParams.get('mode');
+    const oobCode = urlParams.get('oobCode');
+    const apiKey = urlParams.get('apiKey') || "";
+
+    const firebaseConfig = {
+      apiKey: apiKey || "AIzaSyDBEfZwFYxOcKU9ZqTt9MoqOpBvKob3SIA",
+      authDomain: "trenx-d1fd1.firebaseapp.com",
+      projectId: "trenx-d1fd1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      const emailDisplay = document.getElementById('user-email');
+      const cardState = document.getElementById('card-state');
+      const errorMsg = document.getElementById('error-msg');
+
+      if (!oobCode || mode !== 'resetPassword') {
+        showError("Invalid or missing password reset code.");
+        return;
+      }
+
+      try {
+        const email = await verifyPasswordResetCode(auth, oobCode);
+        emailDisplay.textContent = email;
+      } catch (err) {
+        showError("The password reset link has expired or already been used.");
+      }
+
+      document.getElementById('reset-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const pwd = document.getElementById('new-password').value;
+        const confirmPwd = document.getElementById('confirm-password').value;
+        const saveBtn = document.getElementById('save-btn');
+
+        if (pwd.length < 6) {
+          showError("Password must be at least 6 characters.");
+          return;
+        }
+
+        if (pwd !== confirmPwd) {
+          showError("Passwords do not match.");
+          return;
+        }
+
+        saveBtn.disabled = true;
+        saveBtn.textContent = "Updating...";
+
+        try {
+          await confirmPasswordReset(auth, oobCode, pwd);
+          document.getElementById('form-container').style.display = 'none';
+          document.getElementById('success-container').style.display = 'block';
+        } catch (err) {
+          saveBtn.disabled = false;
+          saveBtn.textContent = "SAVE NEW PASSWORD";
+          showError(err.message || "Failed to reset password.");
+        }
+      });
+    });
+
+    function showError(msg) {
+      const errorEl = document.getElementById('error-msg');
+      errorEl.textContent = msg;
+      errorEl.style.display = 'block';
+    }
+
+    window.togglePwd = function(id, btn) {
+      const input = document.getElementById(id);
+      if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "👁️";
+      } else {
+        input.type = "password";
+        btn.textContent = "🙈";
+      }
+    };
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+    body {
+      background: #0d0d11;
+      background: radial-gradient(circle at top, #1e1e28 0%, #0d0d11 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: rgba(28, 28, 36, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(20px);
+      border-radius: 28px;
+      width: 100%;
+      max-width: 440px;
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+    }
+    .logo {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+    .logo-sub {
+      font-size: 12px;
+      color: #FFD700;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .user-badge {
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid rgba(255, 215, 0, 0.25);
+      color: #FFD700;
+      padding: 8px 16px;
+      border-radius: 20px;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      word-break: break-all;
+    }
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .input-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #aaaaaa;
+      margin-bottom: 8px;
+    }
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .input-wrapper input {
+      width: 100%;
+      background: #121217;
+      border: 1px solid #333340;
+      border-radius: 14px;
+      padding: 16px 48px 16px 16px;
+      color: #ffffff;
+      font-size: 16px;
+      outline: none;
+      transition: border 0.3s;
+    }
+    .input-wrapper input:focus {
+      border-color: #FFD700;
+    }
+    .toggle-btn {
+      position: absolute;
+      right: 14px;
+      background: none;
+      border: none;
+      color: #aaaaaa;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .submit-btn {
+      width: 100%;
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      border-radius: 28px;
+      padding: 18px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 10px;
+    }
+    .submit-btn:hover {
+      background: #FFD700;
+      transform: translateY(-2px);
+    }
+    .submit-btn:disabled {
+      background: #444444;
+      color: #888888;
+      cursor: not-allowed;
+    }
+    .error-box {
+      background: rgba(255, 82, 82, 0.15);
+      border: 1px solid #FF5252;
+      color: #FF5252;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      display: none;
+    }
+    .success-icon {
+      font-size: 64px;
+      color: #4CAF50;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="card-state">
+    <div class="logo">T R E N X</div>
+    <div class="logo-sub">Fitness &amp; Calisthenics</div>
+
+    <div id="form-container">
+      <h2>Reset Your Password</h2>
+      <div class="user-badge" id="user-email">Loading...</div>
+
+      <div class="error-box" id="error-msg"></div>
+
+      <form id="reset-form">
+        <div class="input-group">
+          <label>New Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="new-password" placeholder="Enter new password" required minlength="6">
+            <button type="button" class="toggle-btn" onclick="togglePwd('new-password', this)">🙈</button>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Confirm Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="confirm-password" placeholder="Re-enter new password" required minlength="6">
+            <button type="button" class="toggle-btn" onclick="togglePwd('confirm-password', this)">🙈</button>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="save-btn">SAVE NEW PASSWORD</button>
+      </form>
+    </div>
+
+    <div id="success-container" style="display: none;">
+      <div class="success-icon">✓</div>
+      <h2>Password Updated!</h2>
+      <p style="color: #aaaaaa; font-size: 14px; margin-top: 8px; margin-bottom: 24px;">Your password has been changed successfully. You can now open your Trenx app and log in.</p>
+    </div>
+  </div>
+</body>
+</html>
