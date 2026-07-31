@@ -32,6 +32,15 @@ public class DatabaseSeeder {
         insertEx(db, "Windshield Wipers", "3 Sets x 12 Reps", "Bụng", "Treo xà, đưa chân sang hai bên như gạt nước.", imgAbs, "Monday", "Advanced", 0);
         insertEx(db, "Ab Wheel Rollouts", "3 Sets x 10 Reps", "Bụng", "Sử dụng con lăn bụng nâng cao.", imgAbs, "Monday", "Advanced", 0);
 
+        // === CHEST CRUSHER / NGỰC & TAY SAU ===
+        insertEx(db, "Handstand Push Ups (Against Wall)", "4 Sets x 8 Reps", "Chest Crusher", "Trồng chuối chống đẩy áp tường.", imgPushup, "Chest Crusher", "Intermediate", 1);
+        insertEx(db, "Negative Handstand Push Ups", "3 Sets x 5 Reps", "Chest Crusher", "Hạ người chậm từ tư thế trồng chuối.", imgPushup, "Chest Crusher", "Intermediate", 0);
+        insertEx(db, "Handstand Kick Ups", "3 Sets x 35 Seconds", "Chest Crusher", "Bật người trồng chuối cân bằng.", imgPushup, "Chest Crusher", "Intermediate", 0);
+        insertEx(db, "Wall Walks", "3 Sets x 4 Reps", "Chest Crusher", "Bò người áp tường.", imgPushup, "Chest Crusher", "Intermediate", 0);
+        insertEx(db, "Elevated Pike Push Up", "4 Sets x 15 Reps", "Chest Crusher", "Chống đẩy Pike trên ghế.", imgPushup, "Chest Crusher", "Intermediate", 1);
+        insertEx(db, "Pseudo Push Ups", "3 Sets x 10 Reps", "Chest Crusher", "Chống đẩy đổ vai về trước.", imgPushup, "Chest Crusher", "Intermediate", 0);
+        insertEx(db, "Planche Lean Hold", "3 Sets x Max Hold", "Chest Crusher", "Giữ tư thế Planche Lean.", imgPushup, "Chest Crusher", "Intermediate", 1);
+
         // === TUESDAY - CHEST & TRICEPS (Ngực & Tay sau) ===
         // Beginner
         insertEx(db, "Incline Push-ups", "3 Sets x 15 Reps", "Ngực", "Chống đẩy trên ghế hoặc bục cao.", imgPushup, "Tuesday", "Beginner", 0);

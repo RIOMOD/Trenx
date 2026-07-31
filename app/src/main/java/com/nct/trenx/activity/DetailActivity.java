@@ -113,6 +113,17 @@ public class DetailActivity extends BaseActivity {
         }
     }
 
+    private static final int[] EXERCISE_DRAWABLES = new int[]{
+            R.drawable.feed_workout_1,
+            R.drawable.feed_workout_2,
+            R.drawable.age18_29,
+            R.drawable.age30_39,
+            R.drawable.age40_49,
+            R.drawable.age50,
+            R.drawable.avatar_dan,
+            R.drawable.avatar_steffchen
+    };
+
     private void loadDynamicExercises() {
         LinearLayout container = findViewById(R.id.layout_dynamic_exercise_list);
         if (container == null) return;
@@ -134,8 +145,18 @@ public class DetailActivity extends BaseActivity {
 
                 if (tvTitle != null) tvTitle.setText(ex.getName());
                 if (tvSub != null) tvSub.setText(ex.getReps() + " • Rest 45 seconds");
+
                 if (imgEx != null) {
-                    imgEx.setImageResource(R.drawable.feed_workout_1);
+                    String imgUrl = ex.getImageName();
+                    if (imgUrl != null && imgUrl.startsWith("http")) {
+                        com.bumptech.glide.Glide.with(this)
+                                .load(imgUrl)
+                                .placeholder(EXERCISE_DRAWABLES[i % EXERCISE_DRAWABLES.length])
+                                .error(EXERCISE_DRAWABLES[i % EXERCISE_DRAWABLES.length])
+                                .into(imgEx);
+                    } else {
+                        imgEx.setImageResource(EXERCISE_DRAWABLES[i % EXERCISE_DRAWABLES.length]);
+                    }
                 }
 
                 int pos = i;
