@@ -51,7 +51,8 @@ public class DetailActivity extends BaseActivity {
             });
         }
 
-        // Nhận dữ liệu truyền từ Dashboard/Search/LevelActivity
+        // Nhận dữ liệu truyền từ Dashboard/Search/LevelActivity/ExerciseActivity
+        String titleFromIntent = getIntent().getStringExtra(IntentExtras.WORKOUT_TITLE);
         String nameExtra = getIntent().getStringExtra(IntentExtras.EXERCISE_NAME);
         String dayNameExtra = getIntent().getStringExtra(IntentExtras.DAY_NAME);
         String nhomCoExtra = getIntent().getStringExtra(IntentExtras.NHOM_CO);
@@ -59,7 +60,9 @@ public class DetailActivity extends BaseActivity {
         String eqExtra = getIntent().getStringExtra("EQUIPMENT");
         String diffExtra = getIntent().getStringExtra(IntentExtras.DIFFICULTY);
 
-        if (nameExtra != null && !nameExtra.isEmpty()) {
+        if (titleFromIntent != null && !titleFromIntent.isEmpty()) {
+            currentDayName = titleFromIntent;
+        } else if (nameExtra != null && !nameExtra.isEmpty()) {
             currentDayName = nameExtra;
         } else if (dayNameExtra != null && !dayNameExtra.isEmpty()) {
             currentDayName = dayNameExtra;
