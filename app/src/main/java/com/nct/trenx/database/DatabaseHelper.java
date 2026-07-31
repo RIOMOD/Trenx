@@ -319,10 +319,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = null;
         try {
             SQLiteDatabase db = this.getReadableDatabase();
-            String sanitizedDay = com.nct.trenx.utils.ResilienceLayer.sanitizeString(day, 20);
+            String sanitizedDay = com.nct.trenx.utils.ResilienceLayer.sanitizeString(day, 50);
             String sanitizedDiff = com.nct.trenx.utils.ResilienceLayer.sanitizeString(difficulty, 20);
-            cursor = db.rawQuery("SELECT * FROM exercises WHERE day = ? AND difficulty = ?", 
-                    new String[]{sanitizedDay, sanitizedDiff});
+
+            cursor = db.rawQuery("SELECT * FROM exercises WHERE (day LIKE ? OR category LIKE ?) AND difficulty = ?", 
+                    new String[]{"%" + sanitizedDay + "%", "%" + sanitizedDay + "%", sanitizedDiff});
+            if (cursor == null || !cursor.moveToFirst()) {
+                com.nct.trenx.utils.ResilienceLayer.safeCloseCursor(cursor);
+                cursor = db.rawQuery("SELECT * FROM exercises WHERE day LIKE ? OR category LIKE ?", 
+                        new String[]{"%" + sanitizedDay + "%", "%" + sanitizedDay + "%"});
+            }
+            if (cursor == null || !cursor.moveToFirst()) {
+                com.nct.trenx.utils.ResilienceLayer.safeCloseCursor(cursor);
+                cursor = db.rawQuery("SELECT * FROM exercises LIMIT 7", null);
+            }
+
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     list.add(new Exercise(cursor.getString(1), cursor.getString(2), cursor.getString(3),

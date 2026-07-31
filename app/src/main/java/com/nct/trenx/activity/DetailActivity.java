@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 import androidx.cardview.widget.CardView;
 
@@ -100,6 +103,9 @@ public class DetailActivity extends BaseActivity {
             });
         }
 
+        // Tải danh sách bài tập động tương ứng bài tập & cấp độ được chọn
+        loadDynamicExercises();
+
         // Nút Start Workout floating ở đáy màn hình
         if (btnStart != null) {
             btnStart.setOnClickListener(v ->
@@ -107,8 +113,50 @@ public class DetailActivity extends BaseActivity {
         }
     }
 
+    private void loadDynamicExercises() {
+        LinearLayout container = findViewById(R.id.layout_dynamic_exercise_list);
+        if (container == null) return;
+
+        com.nct.trenx.database.ExerciseRepository repository = new com.nct.trenx.database.ExerciseRepository(this);
+        List<com.nct.trenx.model.Exercise> exercises = repository.getExercisesByDayAndDifficulty(currentDayName, currentDifficulty);
+
+        if (exercises != null && !exercises.isEmpty()) {
+            container.removeAllViews();
+            android.view.LayoutInflater inflater = android.view.LayoutInflater.from(this);
+
+            for (int i = 0; i < exercises.size(); i++) {
+                com.nct.trenx.model.Exercise ex = exercises.get(i);
+                View itemView = inflater.inflate(R.layout.item_exercise_detail_row, container, false);
+
+                ImageView imgEx = itemView.findViewById(R.id.iv_exercise_thumb);
+                TextView tvTitle = itemView.findViewById(R.id.tv_exercise_title);
+                TextView tvSub = itemView.findViewById(R.id.tv_exercise_sub);
+
+                if (tvTitle != null) tvTitle.setText(ex.getName());
+                if (tvSub != null) tvSub.setText(ex.getReps() + " • Rest 45 seconds");
+                if (imgEx != null) {
+                    imgEx.setImageResource(R.drawable.feed_workout_1);
+                }
+
+                int pos = i;
+                itemView.setOnClickListener(v ->
+                        NavigationUtils.startTraining(DetailActivity.this, currentDayName, currentDifficulty, pos));
+
+                container.addView(itemView);
+
+                if (i < exercises.size() - 1) {
+                    View divider = new View(this);
+                    divider.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1));
+                    divider.setBackgroundColor(0xFFE0E0E0);
+                    container.addView(divider);
+                }
+            }
+        }
+    }
+
     private void selectDifficultyTab(String level) {
         currentDifficulty = level;
+        loadDynamicExercises();
 
         if (tabBeginner != null) {
             tabBeginner.setBackground(null);
