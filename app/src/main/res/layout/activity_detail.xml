@@ -250,7 +250,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_equipment_vest" />
+                    android:src="@drawable/feed_workout_1" />
             </androidx.cardview.widget.CardView>
 
             <!-- Required Equipment Row -->
@@ -268,16 +268,20 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/iv_equipment_icon"
+                <androidx.cardview.widget.CardView
                     android:layout_width="44dp"
                     android:layout_height="44dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/bg_pill_badge"
-                    android:backgroundTint="#DDDDDD"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_equipment_parallettes" />
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="1dp">
+                    <ImageView
+                        android:id="@+id/iv_equipment_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/feed_workout_2" />
+                </androidx.cardview.widget.CardView>
             </RelativeLayout>
 
             <!-- Personal Heatmap Card -->

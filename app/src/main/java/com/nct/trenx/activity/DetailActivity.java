@@ -81,6 +81,15 @@ public class DetailActivity extends BaseActivity {
             tvName.setText(currentDayName);
         }
 
+        ImageView ivHero = findViewById(R.id.iv_hero_media);
+        if (ivHero != null) {
+            com.bumptech.glide.Glide.with(this)
+                    .load("https://chrisheria.com/cdn/shop/articles/main-qimg-84869695d7b5d92823071857945d812d.jpg?v=1555624187")
+                    .placeholder(R.drawable.feed_workout_1)
+                    .error(R.drawable.feed_workout_1)
+                    .into(ivHero);
+        }
+
         if (diffExtra != null && !diffExtra.isEmpty()) {
             currentDifficulty = diffExtra;
             selectDifficultyTab(currentDifficulty);
