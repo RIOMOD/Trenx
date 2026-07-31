@@ -15,6 +15,7 @@ public class PreferenceUtils {
     private static final String KEY_DARK_MODE = "dark_mode";
     private static final String KEY_LANGUAGE = "language";
     private static final String KEY_NOTIFICATIONS = "notifications_enabled";
+    private static final String KEY_AVATAR_URI = "avatar_uri";
 
     private static SharedPreferences getPrefs(Context context) {
         return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
@@ -88,6 +89,14 @@ public class PreferenceUtils {
         Configuration config = new Configuration(res.getConfiguration());
         config.setLocale(locale);
         return context.createConfigurationContext(config);
+    }
+
+    public static void saveAvatarUri(Context context, String uri) {
+        getPrefs(context).edit().putString(KEY_AVATAR_URI, uri).apply();
+    }
+
+    public static String getAvatarUri(Context context) {
+        return getPrefs(context).getString(KEY_AVATAR_URI, null);
     }
 
     public static void logout(Context context) {

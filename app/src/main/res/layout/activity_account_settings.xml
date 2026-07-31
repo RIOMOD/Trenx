@@ -100,7 +100,7 @@
                     android:background="@drawable/bg_circle_white"
                     android:elevation="3dp"
                     android:padding="6dp"
-                    android:src="@drawable/ic_close"
+                    android:src="@drawable/ic_camera"
                     app:tint="#000000" />
             </RelativeLayout>
 

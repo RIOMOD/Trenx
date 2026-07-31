@@ -61,6 +61,7 @@ public class MyProgressFragment extends Fragment {
     private CardView cardWorkoutHistory;
 
     private TextView tvTotalWorkouts, tvFollowers, tvFollowing, tvUserName, tvUserLevel;
+    private ImageView ivAvatar;
 
     private LinearLayout layoutMuscleList;
     private ImageView maskChest, maskAbs, maskLegs, maskBack, maskShoulders;
@@ -71,7 +72,6 @@ public class MyProgressFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_progress, container, false);
 
         firebaseRepo = new FirebaseRepository();
-        // Cần khởi tạo giá trị mặc định tránh NullPointerException khi chưa tải xong dữ liệu online
         dataProvider = new ProgressDataProvider(requireContext());
         displayedMonth = Calendar.getInstance();
         selectedDate = Calendar.getInstance();
@@ -83,6 +83,12 @@ public class MyProgressFragment extends Fragment {
         fetchOnlineHistoryAndRefresh();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshData();
     }
 
     private void fetchOnlineHistoryAndRefresh() {
@@ -146,6 +152,7 @@ public class MyProgressFragment extends Fragment {
         tvFollowing = view.findViewById(R.id.tvFollowing);
         tvUserName = view.findViewById(R.id.tvUserName);
         tvUserLevel = view.findViewById(R.id.tvUserLevel);
+        ivAvatar = view.findViewById(R.id.ivAvatar);
 
         layoutMuscleList = view.findViewById(R.id.layout_muscle_list);
         maskChest = view.findViewById(R.id.iv_mask_chest);
@@ -376,6 +383,18 @@ public class MyProgressFragment extends Fragment {
         } else if (currentEmail != null && !currentEmail.isEmpty()) {
             String fallbackName = currentEmail.contains("@") ? currentEmail.split("@")[0] : currentEmail;
             tvUserName.setText(fallbackName);
+        }
+
+        // Tải và hiển thị ảnh đại diện (Avatar) của người dùng
+        String avatarUriStr = PreferenceUtils.getAvatarUri(requireContext());
+        if (avatarUriStr != null && !avatarUriStr.isEmpty() && ivAvatar != null) {
+            try {
+                ivAvatar.setImageURI(android.net.Uri.parse(avatarUriStr));
+            } catch (Exception e) {
+                ivAvatar.setImageResource(R.drawable.avatar_dan);
+            }
+        } else if (ivAvatar != null) {
+            ivAvatar.setImageResource(R.drawable.avatar_dan);
         }
     }
 

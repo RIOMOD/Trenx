@@ -1,13 +1,18 @@
 package com.nct.trenx.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -17,14 +22,38 @@ import com.nct.trenx.model.User;
 import com.nct.trenx.utils.PreferenceUtils;
 
 /**
- * Màn hình Cài đặt tài khoản (Account Settings).
+ * Màn hình Cài đặt tài khoản (Account Settings) có tính năng Đổi Ảnh Đại Diện trực tiếp.
  */
 public class AccountSettingsActivity extends BaseActivity {
 
+    private ImageView ivProfileAvatar, ivEditAvatar;
     private EditText etUsername, etEmail, etFullName, etCity, etState, etBio;
     private Button btnSaveChanges, btnDeleteAccount;
     private DatabaseHelper dbHelper;
     private User currentUser;
+
+    // ActivityResultLauncher mở bộ sưu tập ảnh để chọn Avatar mới
+    private final ActivityResultLauncher<Intent> avatarPickerLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Uri selectedImageUri = result.getData().getData();
+                    if (selectedImageUri != null) {
+                        try {
+                            // Cấp quyền đọc URI lâu dài
+                            getContentResolver().takePersistableUriPermission(selectedImageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        } catch (Exception ignored) {}
+
+                        String uriString = selectedImageUri.toString();
+                        if (ivProfileAvatar != null) {
+                            ivProfileAvatar.setImageURI(selectedImageUri);
+                        }
+
+                        // Lưu URI ảnh đại diện vào PreferenceUtils
+                        PreferenceUtils.saveAvatarUri(AccountSettingsActivity.this, uriString);
+                        Toast.makeText(AccountSettingsActivity.this, "Profile picture updated!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +64,9 @@ public class AccountSettingsActivity extends BaseActivity {
 
         ImageView btnBack = findViewById(R.id.btnBack);
         if (btnBack != null) btnBack.setOnClickListener(v -> finish());
+
+        ivProfileAvatar = findViewById(R.id.ivProfileAvatar);
+        ivEditAvatar = findViewById(R.id.ivEditAvatar);
 
         etUsername = findViewById(R.id.etUsername);
         etEmail = findViewById(R.id.etEmail);
@@ -47,6 +79,12 @@ public class AccountSettingsActivity extends BaseActivity {
         btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
 
         loadUserData();
+        loadAvatarImage();
+
+        // Sự kiện bấm chọn đổi ảnh đại diện
+        View.OnClickListener changeAvatarListener = v -> openImagePicker();
+        if (ivProfileAvatar != null) ivProfileAvatar.setOnClickListener(changeAvatarListener);
+        if (ivEditAvatar != null) ivEditAvatar.setOnClickListener(changeAvatarListener);
 
         if (btnSaveChanges != null) {
             btnSaveChanges.setOnClickListener(v -> saveUserData());
@@ -59,6 +97,22 @@ public class AccountSettingsActivity extends BaseActivity {
         View btnChangePwd = findViewById(R.id.btnChangePassword);
         if (btnChangePwd != null) {
             btnChangePwd.setOnClickListener(v -> showChangePasswordBottomSheet());
+        }
+    }
+
+    private void openImagePicker() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        avatarPickerLauncher.launch(intent);
+    }
+
+    private void loadAvatarImage() {
+        String savedAvatarUri = PreferenceUtils.getAvatarUri(this);
+        if (savedAvatarUri != null && !savedAvatarUri.isEmpty() && ivProfileAvatar != null) {
+            try {
+                ivProfileAvatar.setImageURI(Uri.parse(savedAvatarUri));
+            } catch (Exception e) {
+                ivProfileAvatar.setImageResource(R.drawable.avatar_dan);
+            }
         }
     }
 
@@ -101,7 +155,6 @@ public class AccountSettingsActivity extends BaseActivity {
             btnConfirm.setTextColor(getResources().getColor(android.R.color.black));
             btnConfirm.setOnClickListener(v -> {
                 String newPwd = etNewPwd != null ? etNewPwd.getText().toString().trim() : "";
-                String oldPwd = etOldPwd != null ? etOldPwd.getText().toString().trim() : "";
 
                 if (newPwd.length() < 6) {
                     Toast.makeText(this, "New password must be at least 6 characters", Toast.LENGTH_SHORT).show();
@@ -111,6 +164,7 @@ public class AccountSettingsActivity extends BaseActivity {
                 if (currentUser != null) {
                     currentUser.setPassword(newPwd);
                     dbHelper.updateUserProfile(currentUser);
+                    dbHelper.updateUserPassword(currentUser.getEmail(), newPwd);
                 }
                 
                 Toast.makeText(this, "Password updated successfully!", Toast.LENGTH_SHORT).show();
