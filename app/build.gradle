@@ -50,6 +50,7 @@ dependencies {
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.auth
     implementation libs.firebase.firestore
+    implementation 'com.google.firebase:firebase-storage'
 
     // JavaMail API for sending professional HTML OTP Emails
     implementation 'com.sun.mail:android-mail:1.6.7'

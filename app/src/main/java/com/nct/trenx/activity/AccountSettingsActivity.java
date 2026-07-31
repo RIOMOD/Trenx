@@ -18,6 +18,7 @@ import androidx.cardview.widget.CardView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.nct.trenx.R;
 import com.nct.trenx.database.DatabaseHelper;
+import com.nct.trenx.database.FirebaseRepository;
 import com.nct.trenx.model.User;
 import com.nct.trenx.utils.PreferenceUtils;
 
@@ -30,6 +31,7 @@ public class AccountSettingsActivity extends BaseActivity {
     private EditText etUsername, etEmail, etFullName, etCity, etState, etBio;
     private Button btnSaveChanges, btnDeleteAccount;
     private DatabaseHelper dbHelper;
+    private FirebaseRepository firebaseRepo;
     private User currentUser;
 
     // Launcher mở thư viện ảnh thiết bị
@@ -48,7 +50,23 @@ public class AccountSettingsActivity extends BaseActivity {
                         }
 
                         PreferenceUtils.saveAvatarUri(AccountSettingsActivity.this, uriString);
-                        Toast.makeText(AccountSettingsActivity.this, "Profile picture updated!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AccountSettingsActivity.this, "Uploading avatar photo...", Toast.LENGTH_SHORT).show();
+
+                        // Tải ảnh đại diện lên Firebase Storage đám mây
+                        if (firebaseRepo != null) {
+                            firebaseRepo.uploadAvatar(selectedImageUri, new FirebaseRepository.UploadCallback() {
+                                @Override
+                                public void onSuccess(String downloadUrl) {
+                                    PreferenceUtils.saveAvatarUri(AccountSettingsActivity.this, downloadUrl);
+                                    Toast.makeText(AccountSettingsActivity.this, "Avatar photo uploaded to cloud!", Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onFailure(String errorMsg) {
+                                    // Đã lưu URI local thành công
+                                }
+                            });
+                        }
                     }
                 }
             });
@@ -59,6 +77,7 @@ public class AccountSettingsActivity extends BaseActivity {
         setContentView(R.layout.activity_account_settings);
 
         dbHelper = new DatabaseHelper(this);
+        firebaseRepo = new FirebaseRepository();
 
         ImageView btnBack = findViewById(R.id.btnBack);
         if (btnBack != null) btnBack.setOnClickListener(v -> finish());

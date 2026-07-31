@@ -22,10 +22,12 @@ public class FirebaseRepository {
 
     private final FirebaseAuth mAuth;
     private final FirebaseFirestore mDb;
+    private final com.google.firebase.storage.FirebaseStorage mStorage;
 
     public FirebaseRepository() {
         mAuth = FirebaseAuth.getInstance();
         mDb = FirebaseFirestore.getInstance();
+        mStorage = com.google.firebase.storage.FirebaseStorage.getInstance();
     }
 
     public interface AuthCallback {
@@ -35,6 +37,11 @@ public class FirebaseRepository {
 
     public interface SimpleCallback {
         void onSuccess();
+        void onFailure(String errorMsg);
+    }
+
+    public interface UploadCallback {
+        void onSuccess(String downloadUrl);
         void onFailure(String errorMsg);
     }
 
@@ -310,6 +317,55 @@ public class FirebaseRepository {
      */
     public void logout() {
         mAuth.signOut();
+    }
+
+    /**
+     * Tải ảnh đại diện (Avatar) lên Firebase Storage và cập nhật URL vào Firestore.
+     */
+    public void uploadAvatar(android.net.Uri imageUri, UploadCallback callback) {
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        if (firebaseUser == null || imageUri == null) {
+            if (callback != null) callback.onFailure("Vui lòng đăng nhập trước.");
+            return;
+        }
+
+        String uid = firebaseUser.getUid();
+        com.google.firebase.storage.StorageReference ref = mStorage.getReference().child("avatars/" + uid + ".jpg");
+
+        ref.putFile(imageUri)
+                .addOnSuccessListener(taskSnapshot -> ref.getDownloadUrl().addOnSuccessListener(uri -> {
+                    String url = uri.toString();
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("avatarUrl", url);
+                    mDb.collection("users").document(uid).update(map);
+                    if (callback != null) callback.onSuccess(url);
+                }))
+                .addOnFailureListener(e -> {
+                    if (callback != null) callback.onFailure(e.getMessage());
+                });
+    }
+
+    /**
+     * Tải ảnh hoàn thành buổi tập lên Firebase Storage.
+     */
+    public void uploadWorkoutPhoto(android.net.Uri imageUri, UploadCallback callback) {
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        if (firebaseUser == null || imageUri == null) {
+            if (callback != null) callback.onFailure("Vui lòng đăng nhập trước.");
+            return;
+        }
+
+        String uid = firebaseUser.getUid();
+        String filename = System.currentTimeMillis() + ".jpg";
+        com.google.firebase.storage.StorageReference ref = mStorage.getReference().child("workout_photos/" + uid + "/" + filename);
+
+        ref.putFile(imageUri)
+                .addOnSuccessListener(taskSnapshot -> ref.getDownloadUrl().addOnSuccessListener(uri -> {
+                    if (callback != null) callback.onSuccess(uri.toString());
+                }))
+                .addOnFailureListener(e -> {
+                    if (callback != null) callback.onFailure(e.getMessage());
+                });
     }
 
     private User mapFirestoreToUser(DocumentSnapshot doc) {
