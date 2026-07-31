@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "494405356911",
+    "project_id": "trenx-d1f01",
+    "storage_bucket": "trenx-d1f01.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494405356911:android:d98685e3edc088e1e52c9a",
+        "android_client_info": {
+          "package_name": "com.nct.trenx"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBEfZwFYxOcKU9ZqTt9MoqOpBvKob3SLA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

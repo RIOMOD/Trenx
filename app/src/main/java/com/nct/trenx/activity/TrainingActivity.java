@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import androidx.annotation.AttrRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.nct.trenx.R;
 import com.nct.trenx.database.ExerciseRepository;
 import com.nct.trenx.model.Exercise;
@@ -104,7 +106,7 @@ public class TrainingActivity extends BaseActivity {
         btnMinus10.setOnClickListener(v -> timerHelper.adjustRestTime(-10_000));
 
         if (btnClose != null) {
-            btnClose.setOnClickListener(v -> finish());
+            btnClose.setOnClickListener(v -> showPauseWorkoutDialog());
         }
     }
 
@@ -252,6 +254,49 @@ public class TrainingActivity extends BaseActivity {
         intent.putExtra(IntentExtras.TOTAL_TIME, tvTimer.getText().toString());
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        showPauseWorkoutDialog();
+    }
+
+    private void showPauseWorkoutDialog() {
+        BottomSheetDialog dialog = new BottomSheetDialog(this);
+        View view = getLayoutInflater().inflate(R.layout.bottom_sheet_pause_workout, null);
+        dialog.setContentView(view);
+
+        TextView tvPauseTimer = view.findViewById(R.id.tv_pause_timer);
+        ProgressBar pbPauseProgress = view.findViewById(R.id.pb_pause_progress);
+        TextView tvPauseCompletionPct = view.findViewById(R.id.tv_pause_completion_pct);
+        Button btnContinue = view.findViewById(R.id.btn_continue_workout);
+        Button btnExitDiscard = view.findViewById(R.id.btn_exit_discard);
+        Button btnFinishWorkoutEarly = view.findViewById(R.id.btn_finish_workout_early);
+
+        if (tvTimer != null) {
+            tvPauseTimer.setText(tvTimer.getText());
+        }
+
+        int totalEx = (exerciseList != null && !exerciseList.isEmpty()) ? exerciseList.size() : 1;
+        int pct = Math.min(100, (actualIndex * 100) / totalEx);
+
+        pbPauseProgress.setProgress(pct);
+        tvPauseCompletionPct.setText(pct + "% COMPLETED");
+
+        btnContinue.setOnClickListener(v -> dialog.dismiss());
+
+        btnExitDiscard.setOnClickListener(v -> {
+            dialog.dismiss();
+            timerHelper.stopElapsedTimer();
+            finish();
+        });
+
+        btnFinishWorkoutEarly.setOnClickListener(v -> {
+            dialog.dismiss();
+            finishWorkout();
+        });
+
+        dialog.show();
     }
 
     private int getThemeColor(@AttrRes int attr) {

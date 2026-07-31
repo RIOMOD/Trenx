@@ -70,35 +70,82 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public long registerUser(User user) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues v = new ContentValues();
-        v.put("username", user.getUsername());
-        v.put("fullName", user.getFullName());
-        v.put("email", user.getEmail());
-        v.put("password", user.getPassword());
-        v.put("goals", user.getGoals());
-        v.put("gender", user.getGender());
-        v.put("fitnessLevel", user.getFitnessLevel());
-        v.put("height", user.getHeight());
-        v.put("weight", user.getWeight());
-        v.put("weightGoal", user.getWeightGoal());
-        v.put("maxPushups", user.getMaxPushups());
-        v.put("maxPullups", user.getMaxPullups());
-        v.put("maxDips", user.getMaxDips());
-        v.put("maxSquats", user.getMaxSquats());
-        return db.insert("users", null, v);
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues v = new ContentValues();
+            v.put("username", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getUsername(), 50));
+            v.put("fullName", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getFullName(), 100));
+            v.put("email", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getEmail(), 100));
+            v.put("password", user.getPassword());
+            v.put("goals", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getGoals(), 200));
+            v.put("gender", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getGender(), 20));
+            v.put("fitnessLevel", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getFitnessLevel(), 50));
+            v.put("height", user.getHeight());
+            v.put("weight", user.getWeight());
+            v.put("weightGoal", user.getWeightGoal());
+            v.put("maxPushups", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getMaxPushups(), 20));
+            v.put("maxPullups", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getMaxPullups(), 20));
+            v.put("maxDips", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getMaxDips(), 20));
+            v.put("maxSquats", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getMaxSquats(), 20));
+            return db.insert("users", null, v);
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi đăng ký user: " + (user != null ? user.getEmail() : "null"), e);
+            return -1;
+        }
     }
 
     public User getUserByEmail(String email) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM users WHERE email=?", new String[]{email});
-        if (c != null && c.moveToFirst()) {
-            User user = mapCursorToUser(c);
-            c.close();
-            return user;
+        Cursor c = null;
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            String sanitizedEmail = com.nct.trenx.utils.ResilienceLayer.sanitizeString(email, 100);
+            c = db.rawQuery("SELECT * FROM users WHERE email=?", new String[]{sanitizedEmail});
+            if (c != null && c.moveToFirst()) {
+                return mapCursorToUser(c);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi lấy user bằng email: " + email, e);
+        } finally {
+            com.nct.trenx.utils.ResilienceLayer.safeCloseCursor(c);
         }
-        if (c != null) c.close();
         return null;
+    }
+
+    public User getUserById(int id) {
+        Cursor c = null;
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            c = db.rawQuery("SELECT * FROM users WHERE id=?", new String[]{String.valueOf(id)});
+            if (c != null && c.moveToFirst()) {
+                return mapCursorToUser(c);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi lấy user bằng id: " + id, e);
+        } finally {
+            com.nct.trenx.utils.ResilienceLayer.safeCloseCursor(c);
+        }
+        return null;
+    }
+
+    public boolean updateUserProfile(User user) {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues v = new ContentValues();
+            v.put("username", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getUsername(), 50));
+            v.put("fullName", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getFullName(), 100));
+            v.put("email", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getEmail(), 100));
+            if (user.getGoals() != null) v.put("goals", user.getGoals());
+            if (user.getGender() != null) v.put("gender", user.getGender());
+            if (user.getFitnessLevel() != null) v.put("fitnessLevel", user.getFitnessLevel());
+            v.put("height", user.getHeight());
+            v.put("weight", user.getWeight());
+            v.put("weightGoal", user.getWeightGoal());
+            int rows = db.update("users", v, "id=?", new String[]{String.valueOf(user.getId())});
+            return rows > 0;
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi cập nhật thông tin user: " + (user != null ? user.getId() : "null"), e);
+            return false;
+        }
     }
 
     private User mapCursorToUser(Cursor c) {
@@ -122,151 +169,197 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void addWorkoutHistory(int userId, WorkoutHistory h) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues v = new ContentValues();
-        v.put("user_id", userId);
-        v.put("date", h.getDate());
-        v.put("day_name", h.getDayName());
-        v.put("difficulty", h.getDifficulty());
-        v.put("progress_percent", h.getProgressPercent());
-        v.put("duration_seconds", h.getDurationSeconds());
-        v.put("muscle_groups", h.getMuscleGroups());
-        db.insert("workout_history", null, v);
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues v = new ContentValues();
+            v.put("user_id", userId);
+            v.put("date", com.nct.trenx.utils.ResilienceLayer.sanitizeString(h.getDate(), 50));
+            v.put("day_name", com.nct.trenx.utils.ResilienceLayer.sanitizeString(h.getDayName(), 30));
+            v.put("difficulty", com.nct.trenx.utils.ResilienceLayer.sanitizeString(h.getDifficulty(), 30));
+            v.put("progress_percent", h.getProgressPercent());
+            v.put("duration_seconds", h.getDurationSeconds());
+            v.put("muscle_groups", com.nct.trenx.utils.ResilienceLayer.sanitizeString(h.getMuscleGroups(), 200));
+            db.insert("workout_history", null, v);
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi thêm lịch sử tập cho user " + userId, e);
+        }
     }
 
     public List<WorkoutHistory> getWorkoutHistory(int userId) {
         List<WorkoutHistory> list = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM workout_history WHERE user_id=? ORDER BY date DESC", 
-                new String[]{String.valueOf(userId)});
-        if (c != null && c.moveToFirst()) {
-            do {
-                list.add(new WorkoutHistory(c.getString(2), c.getString(3), c.getString(4),
-                        c.getInt(5), 5, c.getInt(6), c.getString(7)));
-            } while (c.moveToNext());
-            c.close();
+        Cursor c = null;
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            c = db.rawQuery("SELECT * FROM workout_history WHERE user_id=? ORDER BY date DESC", 
+                    new String[]{String.valueOf(userId)});
+            if (c != null && c.moveToFirst()) {
+                do {
+                    list.add(new WorkoutHistory(c.getString(2), c.getString(3), c.getString(4),
+                            c.getInt(5), 5, c.getInt(6), c.getString(7)));
+                } while (c.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi lấy lịch sử tập cho user: " + userId, e);
+        } finally {
+            com.nct.trenx.utils.ResilienceLayer.safeCloseCursor(c);
         }
         return list;
     }
 
     public User login(String email, String password) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM users WHERE email=? AND password=?", new String[]{email, password});
-        if (c != null && c.moveToFirst()) {
-            User user = mapCursorToUser(c);
-            c.close();
-            return user;
+        Cursor c = null;
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            String sanitizedEmail = com.nct.trenx.utils.ResilienceLayer.sanitizeString(email, 100);
+            c = db.rawQuery("SELECT * FROM users WHERE email=? AND password=?", new String[]{sanitizedEmail, password});
+            if (c != null && c.moveToFirst()) {
+                return mapCursorToUser(c);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi đăng nhập: " + email, e);
+        } finally {
+            com.nct.trenx.utils.ResilienceLayer.safeCloseCursor(c);
         }
-        if (c != null) c.close();
         return null;
     }
 
     public List<Exercise> getAllExercises() {
         List<Exercise> list = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM exercises", null);
+        Cursor cursor = null;
         try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            cursor = db.rawQuery("SELECT * FROM exercises", null);
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     list.add(new Exercise(cursor.getString(1), cursor.getString(2), cursor.getString(3),
                             cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7)));
                 } while (cursor.moveToNext());
             }
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi lấy danh sách tất cả bài tập", e);
         } finally {
-            if (cursor != null) cursor.close();
+            com.nct.trenx.utils.ResilienceLayer.safeCloseCursor(cursor);
         }
         return list;
     }
 
     public List<Exercise> getExercisesByCategory(String category) {
         List<Exercise> list = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM exercises WHERE category = ?", new String[]{category});
+        Cursor cursor = null;
         try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            String sanitizedCategory = com.nct.trenx.utils.ResilienceLayer.sanitizeString(category, 50);
+            cursor = db.rawQuery("SELECT * FROM exercises WHERE category = ?", new String[]{sanitizedCategory});
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     list.add(new Exercise(cursor.getString(1), cursor.getString(2), cursor.getString(3),
                             cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7)));
                 } while (cursor.moveToNext());
             }
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi lấy danh sách bài tập theo category: " + category, e);
         } finally {
-            if (cursor != null) cursor.close();
+            com.nct.trenx.utils.ResilienceLayer.safeCloseCursor(cursor);
         }
         return list;
     }
 
     public void setExerciseLiked(int userId, String exerciseName, boolean liked) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        if (liked) {
-            ContentValues v = new ContentValues();
-            v.put("user_id", userId);
-            v.put("exercise_name", exerciseName);
-            db.insertWithOnConflict("user_likes", null, v, SQLiteDatabase.CONFLICT_REPLACE);
-        } else {
-            db.delete("user_likes", "user_id=? AND exercise_name=?", new String[]{String.valueOf(userId), exerciseName});
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            String sanitizedName = com.nct.trenx.utils.ResilienceLayer.sanitizeString(exerciseName, 100);
+            if (liked) {
+                ContentValues v = new ContentValues();
+                v.put("user_id", userId);
+                v.put("exercise_name", sanitizedName);
+                db.insertWithOnConflict("user_likes", null, v, SQLiteDatabase.CONFLICT_REPLACE);
+            } else {
+                db.delete("user_likes", "user_id=? AND exercise_name=?", new String[]{String.valueOf(userId), sanitizedName});
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi thích/bỏ thích bài tập: " + exerciseName, e);
         }
     }
 
     public boolean isExerciseLiked(int userId, String exerciseName) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT 1 FROM user_likes WHERE user_id=? AND exercise_name=?", 
-                new String[]{String.valueOf(userId), exerciseName});
-        boolean exists = c.getCount() > 0;
-        c.close();
-        return exists;
+        Cursor c = null;
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            String sanitizedName = com.nct.trenx.utils.ResilienceLayer.sanitizeString(exerciseName, 100);
+            c = db.rawQuery("SELECT 1 FROM user_likes WHERE user_id=? AND exercise_name=?", 
+                    new String[]{String.valueOf(userId), sanitizedName});
+            return c != null && c.getCount() > 0;
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi kiểm tra thích bài tập: " + exerciseName, e);
+            return false;
+        } finally {
+            com.nct.trenx.utils.ResilienceLayer.safeCloseCursor(c);
+        }
     }
 
     public List<Exercise> getExercisesByDayAndDifficulty(String day, String difficulty) {
         List<Exercise> list = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM exercises WHERE day = ? AND difficulty = ?", 
-                new String[]{day, difficulty});
+        Cursor cursor = null;
         try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            String sanitizedDay = com.nct.trenx.utils.ResilienceLayer.sanitizeString(day, 20);
+            String sanitizedDiff = com.nct.trenx.utils.ResilienceLayer.sanitizeString(difficulty, 20);
+            cursor = db.rawQuery("SELECT * FROM exercises WHERE day = ? AND difficulty = ?", 
+                    new String[]{sanitizedDay, sanitizedDiff});
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     list.add(new Exercise(cursor.getString(1), cursor.getString(2), cursor.getString(3),
                             cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7)));
                 } while (cursor.moveToNext());
             }
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi lấy bài tập theo ngày và độ khó", e);
         } finally {
-            if (cursor != null) cursor.close();
+            com.nct.trenx.utils.ResilienceLayer.safeCloseCursor(cursor);
         }
         return list;
     }
 
     public List<Exercise> searchExercises(String query) {
         List<Exercise> list = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String wildCardQuery = "%" + query + "%";
-        Cursor cursor = db.rawQuery("SELECT * FROM exercises WHERE name LIKE ? OR category LIKE ?", 
-                new String[]{wildCardQuery, wildCardQuery});
+        Cursor cursor = null;
         try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            String sanitizedQuery = com.nct.trenx.utils.ResilienceLayer.sanitizeSearchQuery(query);
+            String wildCardQuery = "%" + sanitizedQuery + "%";
+            cursor = db.rawQuery("SELECT * FROM exercises WHERE name LIKE ? OR category LIKE ?", 
+                    new String[]{wildCardQuery, wildCardQuery});
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     list.add(new Exercise(cursor.getString(1), cursor.getString(2), cursor.getString(3),
                             cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7)));
                 } while (cursor.moveToNext());
             }
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi tìm kiếm bài tập với query: " + query, e);
         } finally {
-            if (cursor != null) cursor.close();
+            com.nct.trenx.utils.ResilienceLayer.safeCloseCursor(cursor);
         }
         return list;
     }
 
     public List<Exercise> getLikedExercises(int userId) {
         List<Exercise> list = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT e.* FROM exercises e INNER JOIN user_likes l ON e.name = l.exercise_name WHERE l.user_id = ?", 
-                new String[]{String.valueOf(userId)});
+        Cursor cursor = null;
         try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            cursor = db.rawQuery("SELECT e.* FROM exercises e INNER JOIN user_likes l ON e.name = l.exercise_name WHERE l.user_id = ?", 
+                    new String[]{String.valueOf(userId)});
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     list.add(new Exercise(cursor.getString(1), cursor.getString(2), cursor.getString(3),
                             cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7)));
                 } while (cursor.moveToNext());
             }
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi lấy danh sách bài tập đã thích", e);
         } finally {
-            if (cursor != null) cursor.close();
+            com.nct.trenx.utils.ResilienceLayer.safeCloseCursor(cursor);
         }
         return list;
     }

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.nct.trenx.R;
 import com.nct.trenx.database.DatabaseHelper;
+import com.nct.trenx.database.FirebaseRepository;
 import com.nct.trenx.model.User;
 import com.nct.trenx.utils.PreferenceUtils;
 
@@ -24,6 +25,7 @@ public class LoginActivity extends BaseActivity {
     private ImageView ivTogglePassword;
     private boolean isPasswordVisible = false;
     private DatabaseHelper dbHelper;
+    private FirebaseRepository firebaseRepo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
 
         dbHelper = new DatabaseHelper(this);
+        firebaseRepo = new FirebaseRepository();
 
         etEmail = findViewById(R.id.et_email);
         etPassword = findViewById(R.id.et_password);
@@ -71,15 +74,44 @@ public class LoginActivity extends BaseActivity {
             String email = etEmail.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
 
-            User user = dbHelper.login(email, password);
-            if (user != null) {
-                PreferenceUtils.saveUserSession(this, user.getId(), user.getEmail());
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+            // Áp dụng lớp Resilience để chặn và lọc dữ liệu đầu vào ngay tại UI
+            if (!com.nct.trenx.utils.ResilienceLayer.isValidEmail(email)) {
+                Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show();
+                return;
             }
+            if (!com.nct.trenx.utils.ResilienceLayer.isValidPassword(password)) {
+                Toast.makeText(this, "Password must be between 6 and 64 characters", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Làm sạch email trước khi chuyển vào câu truy vấn
+            String sanitizedEmail = com.nct.trenx.utils.ResilienceLayer.sanitizeString(email, 100);
+
+            btnSignIn.setEnabled(false);
+            Toast.makeText(this, "Signing in online...", Toast.LENGTH_SHORT).show();
+
+            firebaseRepo.login(sanitizedEmail, password, new FirebaseRepository.AuthCallback() {
+                @Override
+                public void onSuccess(User user) {
+                    btnSignIn.setEnabled(true);
+                    DatabaseHelper db = new DatabaseHelper(LoginActivity.this);
+                    if (db.getUserByEmail(user.getEmail()) == null) {
+                        db.registerUser(user);
+                    } else {
+                        db.updateUserProfile(user);
+                    }
+                    PreferenceUtils.saveUserSession(LoginActivity.this, user.getId(), user.getEmail());
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onFailure(String errorMsg) {
+                    btnSignIn.setEnabled(true);
+                    Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                }
+            });
         });
 
         tvForgotPassword.setOnClickListener(v -> {

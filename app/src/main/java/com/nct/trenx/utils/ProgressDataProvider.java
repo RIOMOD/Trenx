@@ -27,6 +27,10 @@ public class ProgressDataProvider {
         this.allWorkouts = db.getWorkoutHistory(userId);
     }
 
+    public ProgressDataProvider(List<WorkoutHistory> workouts) {
+        this.allWorkouts = workouts != null ? workouts : new ArrayList<>();
+    }
+
     public List<WorkoutHistory> getWorkoutsByDate(String dateKey) {
         List<WorkoutHistory> result = new ArrayList<>();
         for (WorkoutHistory w : allWorkouts) {

@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import com.nct.trenx.R;
 import com.nct.trenx.activity.SettingsActivity;
 import com.nct.trenx.database.DatabaseHelper;
+import com.nct.trenx.database.FirebaseRepository;
 import com.nct.trenx.model.User;
 import com.nct.trenx.model.WorkoutHistory;
 import com.nct.trenx.utils.DateUtils;
@@ -40,6 +41,7 @@ public class MyProgressFragment extends Fragment {
     private ProgressDataProvider dataProvider;
     private Calendar displayedMonth; 
     private Calendar selectedDate;   
+    private FirebaseRepository firebaseRepo;
 
     private ImageView btnSettings;
     private CardView tabPreviousWorkouts, tabPersonalHeatmap;
@@ -68,6 +70,8 @@ public class MyProgressFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_progress, container, false);
 
+        firebaseRepo = new FirebaseRepository();
+        // Cần khởi tạo giá trị mặc định tránh NullPointerException khi chưa tải xong dữ liệu online
         dataProvider = new ProgressDataProvider(requireContext());
         displayedMonth = Calendar.getInstance();
         selectedDate = Calendar.getInstance();
@@ -76,9 +80,28 @@ public class MyProgressFragment extends Fragment {
         setupTabSwitching();
         setupCalendarNavigation();
         
-        refreshData();
+        fetchOnlineHistoryAndRefresh();
 
         return view;
+    }
+
+    private void fetchOnlineHistoryAndRefresh() {
+        firebaseRepo.getWorkoutHistory(new FirebaseRepository.HistoryCallback() {
+            @Override
+            public void onSuccess(List<WorkoutHistory> historyList) {
+                if (!isAdded()) return;
+                dataProvider = new ProgressDataProvider(historyList);
+                refreshData();
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+                if (!isAdded()) return;
+                // Fallback về database SQLite offline nếu load online thất bại
+                dataProvider = new ProgressDataProvider(requireContext());
+                refreshData();
+            }
+        });
     }
 
     private void refreshData() {
@@ -339,14 +362,20 @@ public class MyProgressFragment extends Fragment {
 
     private void updateUserStats() {
         DatabaseHelper db = new DatabaseHelper(requireContext());
-        User user = db.getUserByEmail(PreferenceUtils.getUserEmail(requireContext()));
+        String currentEmail = PreferenceUtils.getUserEmail(requireContext());
+        User user = db.getUserByEmail(currentEmail);
         if (user != null) {
-            tvUserName.setText(user.getFullName());
+            String nameToDisplay = user.getFullName() != null && !user.getFullName().trim().isEmpty() 
+                    ? user.getFullName() 
+                    : (user.getUsername() != null && !user.getUsername().trim().isEmpty() ? user.getUsername() : currentEmail);
+            tvUserName.setText(nameToDisplay);
             tvUserLevel.setText("Level 1");
             tvTotalWorkouts.setText(String.valueOf(dataProvider.getTotalWorkouts()));
-            // Assuming followers/following stored somewhere or hardcoded for now
             tvFollowers.setText("0");
             tvFollowing.setText("0");
+        } else if (currentEmail != null && !currentEmail.isEmpty()) {
+            String fallbackName = currentEmail.contains("@") ? currentEmail.split("@")[0] : currentEmail;
+            tvUserName.setText(fallbackName);
         }
     }
 

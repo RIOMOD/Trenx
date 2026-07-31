@@ -326,13 +326,24 @@ public class OnboardingStepFragment extends Fragment {
                 String email = etEmail.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
 
-                if (username.isEmpty() || fullName.isEmpty() || email.isEmpty() || password.length() < 6) {
-                    Toast.makeText(getContext(), "Please fill all details correctly", Toast.LENGTH_SHORT).show();
+                // Áp dụng lớp kiểm tra của ResilienceLayer
+                if (username.isEmpty() || fullName.isEmpty() || email.isEmpty()) {
+                    Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                     return false;
                 }
-                user.setUsername(username);
-                user.setFullName(fullName);
-                user.setEmail(email);
+                if (!com.nct.trenx.utils.ResilienceLayer.isValidEmail(email)) {
+                    Toast.makeText(getContext(), "Invalid email format", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                if (!com.nct.trenx.utils.ResilienceLayer.isValidPassword(password)) {
+                    Toast.makeText(getContext(), "Password must be 6-64 characters", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+
+                // Làm sạch các chuỗi trước khi lưu vào thực thể User
+                user.setUsername(com.nct.trenx.utils.ResilienceLayer.sanitizeString(username, 50));
+                user.setFullName(com.nct.trenx.utils.ResilienceLayer.sanitizeString(fullName, 100));
+                user.setEmail(com.nct.trenx.utils.ResilienceLayer.sanitizeString(email, 100));
                 user.setPassword(password);
                 return true;
         }

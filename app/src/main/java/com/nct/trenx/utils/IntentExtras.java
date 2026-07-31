@@ -39,11 +39,11 @@ public final class IntentExtras {
         if (intent == null) {
             return DEFAULT_DAY;
         }
-        String day = intent.getStringExtra(DAY_NAME);
-        if (day == null || day.isEmpty()) {
-            day = intent.getStringExtra(DAY_LEGACY);
+        String day = com.nct.trenx.utils.ResilienceLayer.getSafeStringExtra(intent, DAY_NAME, "");
+        if (day.isEmpty()) {
+            day = com.nct.trenx.utils.ResilienceLayer.getSafeStringExtra(intent, DAY_LEGACY, "");
         }
-        if (day == null || day.isEmpty()) {
+        if (day.isEmpty()) {
             return DEFAULT_DAY;
         }
         return day;
@@ -53,8 +53,8 @@ public final class IntentExtras {
         if (intent == null) {
             return DEFAULT_DIFFICULTY;
         }
-        String difficulty = intent.getStringExtra(DIFFICULTY);
-        if (difficulty == null || difficulty.isEmpty()) {
+        String difficulty = com.nct.trenx.utils.ResilienceLayer.getSafeStringExtra(intent, DIFFICULTY, "");
+        if (difficulty.isEmpty()) {
             return DEFAULT_DIFFICULTY;
         }
         return difficulty;

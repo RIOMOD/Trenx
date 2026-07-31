@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
@@ -14,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.nct.trenx.R;
 import com.nct.trenx.activity.ExerciseActivity;
+import com.nct.trenx.activity.ExrciselistActivity;
 import com.nct.trenx.activity.LikedProgramsActivity;
 import com.nct.trenx.activity.LikedWorkoutsActivity;
 import com.nct.trenx.activity.MainActivity;
@@ -99,7 +102,84 @@ public class DashboardFragment extends Fragment {
             });
         }
 
+        setupNewSectionsListeners(view);
+
         return view;
+    }
+
+    private void setupNewSectionsListeners(View view) {
+        // Goals
+        Button btnAddGoal = view.findViewById(R.id.btnAddGoal);
+        if (btnAddGoal != null) {
+            btnAddGoal.setOnClickListener(v -> 
+                Toast.makeText(getContext(), "Add New Goal coming soon!", Toast.LENGTH_SHORT).show()
+            );
+        }
+
+        Button btnSeeAllGoals = view.findViewById(R.id.btnSeeAllGoals);
+        if (btnSeeAllGoals != null) {
+            btnSeeAllGoals.setOnClickListener(v -> 
+                Toast.makeText(getContext(), "Goal History coming soon!", Toast.LENGTH_SHORT).show()
+            );
+        }
+
+        // Workouts Library
+        Button btnExploreWorkouts = view.findViewById(R.id.btn_explore_workouts);
+        if (btnExploreWorkouts != null) {
+            btnExploreWorkouts.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), ExrciselistActivity.class);
+                startActivity(intent);
+            });
+        }
+
+        // Equipment search
+        View cardWeightVest = view.findViewById(R.id.card_eq_weight_vest);
+        if (cardWeightVest != null) {
+            cardWeightVest.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), ExrciselistActivity.class);
+                intent.putExtra("EQUIPMENT", "Weight Vest");
+                startActivity(intent);
+            });
+        }
+
+        View cardParallettes = view.findViewById(R.id.card_eq_parallettes);
+        if (cardParallettes != null) {
+            cardParallettes.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), ExrciselistActivity.class);
+                intent.putExtra("EQUIPMENT", "Parallettes");
+                startActivity(intent);
+            });
+        }
+
+        // Muscle Group search
+        View cardWholeBody = view.findViewById(R.id.card_mg_whole_body);
+        if (cardWholeBody != null) {
+            cardWholeBody.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), ExrciselistActivity.class);
+                intent.putExtra("MUSCLE_GROUP", "Whole Body");
+                startActivity(intent);
+            });
+        }
+
+        View cardBack = view.findViewById(R.id.card_mg_back);
+        if (cardBack != null) {
+            cardBack.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), ExrciselistActivity.class);
+                intent.putExtra("MUSCLE_GROUP", "Back");
+                startActivity(intent);
+            });
+        }
+
+        // Community
+        Button btnExploreCommunity = view.findViewById(R.id.btn_explore_community);
+        if (btnExploreCommunity != null) {
+            btnExploreCommunity.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                intent.putExtra(IntentExtras.TARGET_FRAGMENT, R.id.nav_community);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            });
+        }
     }
 
     @Override

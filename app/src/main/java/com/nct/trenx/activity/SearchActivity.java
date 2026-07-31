@@ -115,7 +115,10 @@ public class SearchActivity extends BaseActivity {
             return;
         }
 
-        List<Exercise> results = repository.searchExercises(query);
+        // Áp dụng lớp làm sạch câu truy vấn của ResilienceLayer
+        String sanitizedQuery = com.nct.trenx.utils.ResilienceLayer.sanitizeSearchQuery(query);
+
+        List<Exercise> results = repository.searchExercises(sanitizedQuery);
         adapter.updateData(results);
 
         if (results.isEmpty()) {

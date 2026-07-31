@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.nct.trenx.R;
 import com.nct.trenx.database.DatabaseHelper;
+import com.nct.trenx.database.FirebaseRepository;
 import com.nct.trenx.fragment.OnboardingStepFragment;
 import com.nct.trenx.model.User;
 import com.nct.trenx.utils.PreferenceUtils;
@@ -82,16 +83,32 @@ public class OnboardingActivity extends BaseActivity {
     }
 
     private void registerUser() {
-        DatabaseHelper db = new DatabaseHelper(this);
-        long id = db.registerUser(tempUser);
-        if (id > 0) {
-            PreferenceUtils.saveUserSession(this, (int) id, tempUser.getEmail());
-            // Sau khi đăng ký xong -> Vào thẳng Premium như yêu cầu
-            Intent intent = new Intent(this, PremiumActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "Registration failed. Email might already exist.", Toast.LENGTH_SHORT).show();
-        }
+        FirebaseRepository firebaseRepo = new FirebaseRepository();
+        Toast.makeText(this, "Registering online...", Toast.LENGTH_SHORT).show();
+        btnContinue.setEnabled(false);
+
+        firebaseRepo.registerUser(tempUser, new FirebaseRepository.AuthCallback() {
+            @Override
+            public void onSuccess(User user) {
+                btnContinue.setEnabled(true);
+                DatabaseHelper db = new DatabaseHelper(OnboardingActivity.this);
+                if (db.getUserByEmail(user.getEmail()) == null) {
+                    db.registerUser(user);
+                } else {
+                    db.updateUserProfile(user);
+                }
+                PreferenceUtils.saveUserSession(OnboardingActivity.this, user.getId(), user.getEmail());
+                // Sau khi đăng ký xong -> Vào thẳng Premium như yêu cầu
+                Intent intent = new Intent(OnboardingActivity.this, PremiumActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+                btnContinue.setEnabled(true);
+                Toast.makeText(OnboardingActivity.this, "Registration failed: " + errorMsg, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

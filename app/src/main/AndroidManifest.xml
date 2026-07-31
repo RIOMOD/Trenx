@@ -47,6 +47,11 @@
             android:exported="false"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".activity.AccountSettingsActivity" android:exported="false" />
+        <activity android:name=".activity.FitnessProfileActivity" android:exported="false" />
+        <activity android:name=".activity.BlockedUsersActivity" android:exported="false" />
+        <activity android:name=".activity.AppearanceActivity" android:exported="false" />
+
     </application>
 
 </manifest>
