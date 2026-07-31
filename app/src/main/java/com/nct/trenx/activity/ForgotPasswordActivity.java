@@ -140,6 +140,7 @@ public class ForgotPasswordActivity extends BaseActivity {
 
                 if (isValidOtp) {
                     // Cập nhật mật khẩu mới vào SQLite local
+                    dbHelper.updateUserPassword(emailToVerify, newPassword);
                     User user = dbHelper.getUserByEmail(emailToVerify);
                     if (user != null) {
                         user.setPassword(newPassword);
@@ -164,6 +165,7 @@ public class ForgotPasswordActivity extends BaseActivity {
                 firebaseRepo.confirmPasswordReset(enteredCode, newPassword, new FirebaseRepository.SimpleCallback() {
                     @Override
                     public void onSuccess() {
+                        dbHelper.updateUserPassword(emailToVerify, newPassword);
                         User user = dbHelper.getUserByEmail(emailToVerify);
                         if (user != null) {
                             user.setPassword(newPassword);

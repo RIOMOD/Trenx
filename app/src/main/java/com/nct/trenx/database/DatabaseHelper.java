@@ -134,6 +134,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             v.put("username", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getUsername(), 50));
             v.put("fullName", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getFullName(), 100));
             v.put("email", com.nct.trenx.utils.ResilienceLayer.sanitizeString(user.getEmail(), 100));
+            if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+                v.put("password", user.getPassword());
+            }
             if (user.getGoals() != null) v.put("goals", user.getGoals());
             if (user.getGender() != null) v.put("gender", user.getGender());
             if (user.getFitnessLevel() != null) v.put("fitnessLevel", user.getFitnessLevel());
@@ -144,6 +147,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return rows > 0;
         } catch (Exception e) {
             Log.e(TAG, "Lỗi khi cập nhật thông tin user: " + (user != null ? user.getId() : "null"), e);
+            return false;
+        }
+    }
+
+    public boolean updateUserPassword(String email, String newPassword) {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues v = new ContentValues();
+            v.put("password", newPassword);
+            String sanitizedEmail = com.nct.trenx.utils.ResilienceLayer.sanitizeString(email, 100);
+            int rows = db.update("users", v, "email=?", new String[]{sanitizedEmail});
+            return rows > 0;
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi cập nhật mật khẩu user: " + email, e);
             return false;
         }
     }
