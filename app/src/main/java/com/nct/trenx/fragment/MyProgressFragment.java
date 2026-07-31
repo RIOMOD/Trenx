@@ -388,10 +388,20 @@ public class MyProgressFragment extends Fragment {
         // Tải và hiển thị ảnh đại diện (Avatar) của người dùng
         String avatarUriStr = PreferenceUtils.getAvatarUri(requireContext());
         if (avatarUriStr != null && !avatarUriStr.isEmpty() && ivAvatar != null) {
-            try {
-                ivAvatar.setImageURI(android.net.Uri.parse(avatarUriStr));
-            } catch (Exception e) {
-                ivAvatar.setImageResource(R.drawable.avatar_dan);
+            if (avatarUriStr.startsWith("res:")) {
+                String drawableName = avatarUriStr.substring(4);
+                int resId = requireContext().getResources().getIdentifier(drawableName, "drawable", requireContext().getPackageName());
+                if (resId != 0) {
+                    ivAvatar.setImageResource(resId);
+                } else {
+                    ivAvatar.setImageResource(R.drawable.avatar_dan);
+                }
+            } else {
+                try {
+                    ivAvatar.setImageURI(android.net.Uri.parse(avatarUriStr));
+                } catch (Exception e) {
+                    ivAvatar.setImageResource(R.drawable.avatar_dan);
+                }
             }
         } else if (ivAvatar != null) {
             ivAvatar.setImageResource(R.drawable.avatar_dan);

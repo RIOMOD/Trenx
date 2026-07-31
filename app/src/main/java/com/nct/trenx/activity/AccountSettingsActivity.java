@@ -3,7 +3,6 @@ package com.nct.trenx.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.nct.trenx.R;
@@ -22,7 +22,7 @@ import com.nct.trenx.model.User;
 import com.nct.trenx.utils.PreferenceUtils;
 
 /**
- * Màn hình Cài đặt tài khoản (Account Settings) có tính năng Đổi Ảnh Đại Diện trực tiếp.
+ * Màn hình Cài đặt tài khoản (Account Settings) có tính năng Chọn Ảnh Đại Diện linh hoạt.
  */
 public class AccountSettingsActivity extends BaseActivity {
 
@@ -32,14 +32,13 @@ public class AccountSettingsActivity extends BaseActivity {
     private DatabaseHelper dbHelper;
     private User currentUser;
 
-    // ActivityResultLauncher mở bộ sưu tập ảnh để chọn Avatar mới
+    // Launcher mở thư viện ảnh thiết bị
     private final ActivityResultLauncher<Intent> avatarPickerLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     Uri selectedImageUri = result.getData().getData();
                     if (selectedImageUri != null) {
                         try {
-                            // Cấp quyền đọc URI lâu dài
                             getContentResolver().takePersistableUriPermission(selectedImageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
                         } catch (Exception ignored) {}
 
@@ -48,7 +47,6 @@ public class AccountSettingsActivity extends BaseActivity {
                             ivProfileAvatar.setImageURI(selectedImageUri);
                         }
 
-                        // Lưu URI ảnh đại diện vào PreferenceUtils
                         PreferenceUtils.saveAvatarUri(AccountSettingsActivity.this, uriString);
                         Toast.makeText(AccountSettingsActivity.this, "Profile picture updated!", Toast.LENGTH_SHORT).show();
                     }
@@ -81,8 +79,7 @@ public class AccountSettingsActivity extends BaseActivity {
         loadUserData();
         loadAvatarImage();
 
-        // Sự kiện bấm chọn đổi ảnh đại diện
-        View.OnClickListener changeAvatarListener = v -> openImagePicker();
+        View.OnClickListener changeAvatarListener = v -> showAvatarChooserBottomSheet();
         if (ivProfileAvatar != null) ivProfileAvatar.setOnClickListener(changeAvatarListener);
         if (ivEditAvatar != null) ivEditAvatar.setOnClickListener(changeAvatarListener);
 
@@ -100,18 +97,90 @@ public class AccountSettingsActivity extends BaseActivity {
         }
     }
 
+    private void showAvatarChooserBottomSheet() {
+        BottomSheetDialog dialog = new BottomSheetDialog(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.bottom_sheet_choose_avatar, null);
+        dialog.setContentView(dialogView);
+
+        CardView cardDan = dialogView.findViewById(R.id.card_avatar_dan);
+        CardView cardSteffchen = dialogView.findViewById(R.id.card_avatar_steffchen);
+        CardView cardAge18 = dialogView.findViewById(R.id.card_avatar_age18);
+        CardView cardAge30 = dialogView.findViewById(R.id.card_avatar_age30);
+        CardView cardAge40 = dialogView.findViewById(R.id.card_avatar_age40);
+        CardView cardAge50 = dialogView.findViewById(R.id.card_avatar_age50);
+        Button btnBrowseGallery = dialogView.findViewById(R.id.btn_browse_gallery);
+
+        View.OnClickListener presetListener = v -> {
+            int id = v.getId();
+            String resName = "avatar_dan";
+            int resId = R.drawable.avatar_dan;
+
+            if (id == R.id.card_avatar_steffchen) {
+                resName = "avatar_steffchen";
+                resId = R.drawable.avatar_steffchen;
+            } else if (id == R.id.card_avatar_age18) {
+                resName = "age18_29";
+                resId = R.drawable.age18_29;
+            } else if (id == R.id.card_avatar_age30) {
+                resName = "age30_39";
+                resId = R.drawable.age30_39;
+            } else if (id == R.id.card_avatar_age40) {
+                resName = "age40_49";
+                resId = R.drawable.age40_49;
+            } else if (id == R.id.card_avatar_age50) {
+                resName = "age50";
+                resId = R.drawable.age50;
+            }
+
+            PreferenceUtils.saveAvatarUri(AccountSettingsActivity.this, "res:" + resName);
+            if (ivProfileAvatar != null) {
+                ivProfileAvatar.setImageResource(resId);
+            }
+            Toast.makeText(AccountSettingsActivity.this, "Profile picture updated!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        };
+
+        if (cardDan != null) cardDan.setOnClickListener(presetListener);
+        if (cardSteffchen != null) cardSteffchen.setOnClickListener(presetListener);
+        if (cardAge18 != null) cardAge18.setOnClickListener(presetListener);
+        if (cardAge30 != null) cardAge30.setOnClickListener(presetListener);
+        if (cardAge40 != null) cardAge40.setOnClickListener(presetListener);
+        if (cardAge50 != null) cardAge50.setOnClickListener(presetListener);
+
+        if (btnBrowseGallery != null) {
+            btnBrowseGallery.setOnClickListener(v -> {
+                dialog.dismiss();
+                openImagePicker();
+            });
+        }
+
+        dialog.show();
+    }
+
     private void openImagePicker() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        avatarPickerLauncher.launch(intent);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        avatarPickerLauncher.launch(Intent.createChooser(intent, "Select Profile Picture"));
     }
 
     private void loadAvatarImage() {
         String savedAvatarUri = PreferenceUtils.getAvatarUri(this);
         if (savedAvatarUri != null && !savedAvatarUri.isEmpty() && ivProfileAvatar != null) {
-            try {
-                ivProfileAvatar.setImageURI(Uri.parse(savedAvatarUri));
-            } catch (Exception e) {
-                ivProfileAvatar.setImageResource(R.drawable.avatar_dan);
+            if (savedAvatarUri.startsWith("res:")) {
+                String drawableName = savedAvatarUri.substring(4);
+                int resId = getResources().getIdentifier(drawableName, "drawable", getPackageName());
+                if (resId != 0) {
+                    ivProfileAvatar.setImageResource(resId);
+                } else {
+                    ivProfileAvatar.setImageResource(R.drawable.avatar_dan);
+                }
+            } else {
+                try {
+                    ivProfileAvatar.setImageURI(Uri.parse(savedAvatarUri));
+                } catch (Exception e) {
+                    ivProfileAvatar.setImageResource(R.drawable.avatar_dan);
+                }
             }
         }
     }
